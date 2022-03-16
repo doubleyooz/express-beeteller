@@ -28,7 +28,7 @@ async function store(req: Request, res: Response) {
                 });
             }
             return res.status(400).json({
-                message: getMessage('badRequest'),
+                message: getMessage('default.badRequest'),
                 data: { err },
             });
         });

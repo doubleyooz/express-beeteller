@@ -1,6 +1,6 @@
 {
-    "badRequest": "You didn't give us what we want!",
-    "helloWorld": "Hello World!",
+    "default.badRequest": "You didn't give us what we want!",
+    "default.helloWorld": "Hello World!",
 
     "user.notfound": "user not found or already removed.",
     "user.invalid.email.duplicate": "Email already in use.",
