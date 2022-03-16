@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import User, { IUser } from '../models/user.model';
 import { hashPassword } from '../utils/password.util';
+import { getMessage } from '../utils/message.util';
 
 async function store(req: Request, res: Response) {
     const { email, password }: IUser = req.body;
@@ -13,25 +14,23 @@ async function store(req: Request, res: Response) {
     newUser
         .save()
         .then(result => {
-            return res
-                .status(201)
-                .json({ message: 'user saved', data: { email: result.email } });
+            return res.status(201).json({
+                message: getMessage('user.valid.sign_up.sucess'),
+                data: { email: result.email },
+            });
         })
-        .catch((err)=> {
-            console.log(err);
-            if (err.name === 'MongoError' && err.code === 11000) {
-                //next(new Error("There was a duplicate key error"));
+        .catch(err => {
+            if (err.name === 'MongoServerError' && err.code === 11000) {
+                //There was a duplicate key error
                 return res.status(400).json({
-                    message: 'duplicatekey',
+                    message: getMessage('user.invalid.email.duplicate'),
                     data: { err },
                 });
             }
-            return res
-                .status(400)
-                .json({
-                    message: "you didn't gave what we want",
-                    data: { err },
-                });
+            return res.status(400).json({
+                message: getMessage('badRequest'),
+                data: { err },
+            });
         });
 }
 
