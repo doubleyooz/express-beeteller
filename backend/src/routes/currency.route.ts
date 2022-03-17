@@ -5,5 +5,6 @@ import CurrencyController from '../controllers/currency.controller';
 const routes = Router();
 
 routes.get('/currencies', CurrencyController.getCurrency);
+routes.get('/currencies/now', CurrencyController.currentPrice);
 
 export default routes;
