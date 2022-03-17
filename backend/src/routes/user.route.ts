@@ -5,5 +5,6 @@ import UserMiddleware from '../middlewares/user.middleware';
 const routes = Router();
 
 routes.post('/users', UserMiddleware.store, UserController.store);
+routes.get('/users', UserController.list);
 
 export default routes;

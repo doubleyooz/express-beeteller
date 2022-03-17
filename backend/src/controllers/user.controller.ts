@@ -34,4 +34,27 @@ async function store(req: Request, res: Response) {
         });
 }
 
-export default { store };
+async function list(req: Request, res: Response) {
+    const { skip } = req.body;
+
+    User.find()
+        .sort('updatedAt')
+        .skip(skip)
+        .limit(10)
+        .then(doc => {
+            return res.status(201).json({
+                data: doc,
+                message: getMessage('user.list.success'),
+            });
+        })
+        .catch(err => {
+            return res
+                .status(500)
+                .json({
+                    data: err,
+                    message: getMessage('default.serverError'),
+                });
+        });
+}
+
+export default { store, list };
