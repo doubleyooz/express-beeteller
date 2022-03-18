@@ -98,7 +98,7 @@ async function currentPrice(req: Request, res: Response) {
                     ),
                 );
                 arr.push(chew('BTCEUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
-                arr.push(chew('USDBRL', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
+                arr.push(chew('BTCUSD', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
 
                 return res
                     .status(201)
