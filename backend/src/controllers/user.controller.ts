@@ -24,12 +24,12 @@ async function store(req: Request, res: Response) {
                 //There was a duplicate key error
                 return res.status(400).json({
                     message: getMessage('user.invalid.email.duplicate'),
-                    data: { err },
+                    err: err,
                 });
             }
             return res.status(400).json({
                 message: getMessage('default.badRequest'),
-                data: { err },
+                err:  err,
             });
         });
 }
@@ -51,7 +51,7 @@ async function list(req: Request, res: Response) {
             return res
                 .status(500)
                 .json({
-                    data: err,
+                    err: err,
                     message: getMessage('default.serverError'),
                 });
         });

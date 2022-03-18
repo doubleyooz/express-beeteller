@@ -10,7 +10,11 @@
     "user.invalid.password.weak": "the password must contain at least 1 number, at least 1 lower case letter, at least 1 upper case and at least 1 special character.",
     "user.valid.sign_in.success": "Successful login.",
     "user.valid.sign_up.success": "Successful registration.",
-    "user.list.success": "User list retrieved successfully!"
+    "user.list.success": "User list retrieved successfully!",
+
+    "currency.lately.prices": "Prices from the period returned",
+    "currency.current.prices": "Current prices returned.",
+    "currency.get.price": "Prices from the specified currency returned."
 }
 
 

@@ -16,7 +16,7 @@ async function latelyPrice(req: Request, res: Response) {
         varBid: string;
         timestamp: string;
     }
-   
+
     const chew: {
         (high: string, low: string, varBid: string, timestamp: string): chewed;
     } = (high, low, varBid, timestamp) => {
@@ -24,22 +24,33 @@ async function latelyPrice(req: Request, res: Response) {
             high: high,
             low: low,
             varBid: varBid,
-            timestamp: new Intl.DateTimeFormat('pt-BR').format(new Date(parseInt(timestamp) * 1e3)),
+            timestamp: new Intl.DateTimeFormat('pt-BR').format(
+                new Date(parseInt(timestamp) * 1e3),
+            ),
         };
     };
 
     axios
         .get(url + 'daily/' + currency + '/' + days)
         .then(json => {
-           
             let arr = json.data.map((item: chewed) => {
                 return chew(item.high, item.low, item.varBid, item.timestamp);
             });
 
-            return res.status(201).json(arr);
+            return res
+                .status(201)
+                .json({
+                    data: arr,
+                    message: getMessage('currency.lately.prices'),
+                });
         })
         .catch(err => {
-            return res.status(400).json({ error: err });
+            return res
+                .status(400)
+                .json({
+                    error: err,
+                    message: getMessage('default.badRequest'),
+                });
         });
 }
 
@@ -89,12 +100,22 @@ async function currentPrice(req: Request, res: Response) {
                 arr.push(chew('BTCEUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
                 arr.push(chew('USDBRL', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
 
-                return res.status(201).json(arr);
+                return res
+                    .status(201)
+                    .json({
+                        data: arr,
+                        message: getMessage('currency.current.prices'),
+                    });
             }),
         )
         .catch(err => {
             console.log(err);
-            return res.status(400).json({ error: err });
+            return res
+                .status(400)
+                .json({
+                    error: err,
+                    message: getMessage('default.badRequest'),
+                });
         });
 }
 
@@ -104,10 +125,20 @@ async function getCurrency(req: Request, res: Response) {
     axios
         .get(url + 'last/' + currency)
         .then(json => {
-            return res.status(201).json(json.data);
+            return res
+                .status(201)
+                .json({
+                    data: json.data,
+                    message: getMessage('currency.get.price'),
+                });
         })
         .catch(err => {
-            return res.status(400).json({ error: err });
+            return res
+                .status(400)
+                .json({
+                    error: err,
+                    message: getMessage('default.badRequest'),
+                });
         });
 }
 
