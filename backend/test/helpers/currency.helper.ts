@@ -78,4 +78,39 @@ const currentPrice = () => {
     });
 };
 
-export { latelyPrice, currentPrice };
+const getCurrency = (currency: string) => {
+    it('GET /currencies', async () => {
+        await supertest(app)
+            .get(`/currencies?currency=${currency}`)
+            .expect(201)
+            .then(response => {
+                expect(
+                    typeof response.body === 'object' &&
+                        !Array.isArray(response.body) &&
+                        response.body !== null,
+                ).toBeTruthy();
+
+                console.log(response.body.data);
+                expect(response.body).toEqual({
+                    message: getMessage('currency.get.price'),
+                    data: expect.objectContaining({
+                        [currency.replace("-", "")]: {
+                            ask: expect.any(String),
+                            bid: expect.any(String),
+                            code: 'USD',
+                            codein: 'BRL',
+                            create_date: expect.any(String),
+                            high: expect.any(String),
+                            low: expect.any(String),
+                            name: expect.any(String),
+                            pctChange: expect.any(String),
+                            timestamp: expect.any(String),
+                            varBid: expect.any(String),
+                        },
+                    }),
+                });
+            });
+    });
+};
+
+export { latelyPrice, currentPrice, getCurrency };

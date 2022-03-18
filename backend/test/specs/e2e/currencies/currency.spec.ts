@@ -1,9 +1,12 @@
-import { currentPrice, latelyPrice } from '../../../helpers/currency.helper';
+import { currentPrice, getCurrency, latelyPrice } from '../../../helpers/currency.helper';
 
 const itif = (condition: boolean) => (condition ? it : it.skip);
 
 describe('Currencies', () => {
-   
-    latelyPrice('USD-BRL', 20);
-    currentPrice();
+    describe('should work', () => {
+        latelyPrice('USD-BRL', 20);
+        currentPrice();
+        getCurrency('USD-BRL');
+    })
+  
 });
