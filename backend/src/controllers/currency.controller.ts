@@ -3,16 +3,17 @@ import axios from 'axios';
 import { getMessage } from '../utils/message.util';
 
 // "https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL";
-const url = 'https://economia.awesomeapi.com.br/json/last/';
+const url = 'https://economia.awesomeapi.com.br/json/';
 const url2 = 'https://api.kraken.com/0/public/Ticker?pair=XBTeur';
 const url3 = 'https://api.kraken.com/0/public/Ticker?pair=XBTusd';
+
 
 async function currentPrice(req: Request, res: Response) {
     axios
         .all([axios.get(url + 'USD-BRL'), axios.get(url2), axios.get(url3)])
         .then(
             axios.spread((...responses) => {
-                const response1 = responses[0].data.USDBRL;
+                const response1 = responses[0].data[0];
                 const response2 = responses[1].data.result;
                 const response3 = responses[2].data.result;
 
@@ -42,6 +43,7 @@ async function currentPrice(req: Request, res: Response) {
                 
                 let arr: any[] = [];
 
+               
                 arr.push(chew('USDBRL', response1.code, response1.codein, response1.bid));
                 arr.push(chew('BTCEUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
                 arr.push(chew('USDBRL', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
@@ -59,7 +61,7 @@ async function getCurrency(req: Request, res: Response) {
     const { currency } = req.query;
 
     axios
-        .get(url + currency)
+        .get(url + 'last/' + currency)
         .then(json => {
             return res.status(201).json(json.data);
         })
