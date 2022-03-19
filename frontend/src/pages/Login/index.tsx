@@ -8,13 +8,24 @@ const LoginPage = () => {
             <div className="card">
                 <div className="header">
                     <h3>Olá! Bem vindo de volta.</h3>
-                    <h5>Faça Login com seus dados inseridos durante o registro</h5>
+                    <h5>
+                        Faça Login com seus dados inseridos durante o registro
+                    </h5>
                 </div>
                 <form action="">
-                    <label htmlFor="email">email</label>
-                    <input type="email" name="email" placeholder="email" />
-                    <label htmlFor="password">password</label>
-                    <input type="password" name="password" placeholder="password" />
+                    <div className="field">
+                        <label htmlFor="email">E-mail</label>
+                        <input type="email" name="email" placeholder="Example@email.com" />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="password">Senha</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter password"
+                        />
+                    </div>
+
                     <input type="submit" value="Login" />
                 </form>
             </div>
