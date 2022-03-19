@@ -7,10 +7,11 @@ const LoginPage = () => {
             <div className="image"></div>
             <div className="card">
                 <div className="header">
-                    <h3>Olá! Bem vindo de volta.</h3>
-                    <h5>
-                        Faça Login com seus dados inseridos durante o registro
-                    </h5>
+                    <span className="title">Olá! Bem vindo de volta.</span>
+                    <br/>
+                    <span className="description">
+                        Faça Login com seus dados inseridos durante o registro.
+                    </span>
                 </div>
                 <form action="">
                     <div className="field">
