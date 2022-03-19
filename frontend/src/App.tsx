@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.scss';
+import './global.scss';
 import Paths from './routes';
 
 function App() {
-  return (
-    <div className="App">
-      <Paths/>
-    </div>
-  );
+   return (
+      <div className="app">
+         <Paths />
+      </div>
+   );
 }
 
 export default App;
