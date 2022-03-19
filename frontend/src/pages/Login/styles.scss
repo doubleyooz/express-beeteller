@@ -84,9 +84,24 @@
                 flex-direction: column;
                 padding: 0px 0px 10px 0px;    
 
+                .up {                   
+                    flex-direction: row;
+
+                    justify-content: space-between;
+
+                    padding: 0px;
+
+                    .forgot {
+                        color: #F4C23B;
+                    }
+                }
+
                 label {
-                    height: 16px;
                     font: 14px 'Roboto', sans-serif;       
+                    line-height: 16px;
+                    color: #333333;
+                    margin: 8px 0px;
+
                 }
 
                 input {
@@ -94,10 +109,20 @@
                     
                     background-color: #FFFFFF;
                     border-radius: 8px;
+                    border: 1px solid #E0E0E0;
+                    box-sizing: border-box;
+                    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
 
                     font: 14px 'Roboto', sans-serif;    
-                    
+
+                   
+                    margin-bottom: 8px;
                     padding: 0px 16px 0px 16px;
+
+                    &::placeholder { 
+                        color: #BDBDBD;
+                        
+                    }
                 }
             }
         }

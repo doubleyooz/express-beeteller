@@ -19,7 +19,11 @@ const LoginPage = () => {
                         <input type="email" name="email" placeholder="Example@email.com" />
                     </div>
                     <div className="field">
-                        <label htmlFor="password">Senha</label>
+                        <div className="field up">
+                            <label htmlFor="password">Senha</label>
+                            <label className="forgot">Esqueceu a senha</label>
+                        </div>
+                        
                         <input
                             type="password"
                             name="password"
