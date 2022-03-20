@@ -8,7 +8,7 @@ const LoginPage = () => {
             <div className="card">
                 <div className="header">
                     <span className="title">Olá! Bem vindo de volta.</span>
-                    <br/>
+                    <br />
                     <span className="description">
                         Faça Login com seus dados inseridos durante o registro.
                     </span>
@@ -16,14 +16,18 @@ const LoginPage = () => {
                 <form action="">
                     <div className="field">
                         <label htmlFor="email">E-mail</label>
-                        <input type="email" name="email" placeholder="Example@email.com" />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Example@email.com"
+                        />
                     </div>
                     <div className="field">
                         <div className="field up">
                             <label htmlFor="password">Senha</label>
                             <label className="forgot">Esqueceu a senha</label>
                         </div>
-                        
+
                         <input
                             type="password"
                             name="password"
