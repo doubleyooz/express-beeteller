@@ -1,40 +1,55 @@
+$bar-height: calc(8500vh / 1024);
+$text-size: calc(600vh / 1024 + 12px);
+$text-width: calc(400vh / 1024 + 10px);
+$delimiter-height: calc(450vh / 1024 + 30px);
+
 .bar-container {
         
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: space-between;
+    align-items: center;
+ 
 
-   
+    height: $bar-height;
+    padding: 20px 135px;
     background-color: #FFFFFF;
     
     .logo-container {
         display: flex;
         flex-direction: row;
-            
-        .beeteller {
-            svg {
-                g {
-                    --darkreader-inline-fill:#0F0F0F;    
-                        background: #0F0F0F;          
+        align-items: center;
 
-                }    
-            }
+        margin: 10px 0px;
         
-        }
-
         .delimiter {
             width: 1px;
-            height: 45px;
+            height: $delimiter-height;
             background-color: #BDBDBD;
+            margin: 0px 20px;
 
         }
 
-        span {
-            font: 18px 'Roboto', sans-serif;      
-            line-height: 21px;
-            color: #BDBDBD;
+        .activity {
+            span {
+                font: $text-size 'Roboto', sans-serif;
+                font-variant: small-caps;                  
+                line-height: 21px;
+                letter-spacing: 0.15em;
+                color: #BDBDBD;
+
+                margin: 0px 8px 0px 0px;
+            }
+
+            svg {
+                width: $text-width;
+                height: $text-size;
+               
+
+                
+            }
         }
+        
     }    
 }
     
