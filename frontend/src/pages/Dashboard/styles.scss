@@ -1,0 +1,20 @@
+$bar-padding: calc(10500vw / 1440 + 30px); 
+    
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+
+   
+    padding: 20px $bar-padding;
+
+    .card-container {
+        display: flex;
+        flex-direction: column;   
+
+        .cards {
+            display: flex;
+            flex-direction: row;   
+        } 
+    }
+
+}
