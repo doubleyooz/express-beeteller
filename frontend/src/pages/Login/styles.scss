@@ -1,70 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+$title-1: calc(2400vw / 1440 + 12px);
+$title-2: calc(1600vw / 1440 + 8px);
+$label-size: calc(400vw / 1440 + 10px);
+$card-padding: calc(13400vw / 1440);
+$form-width: calc(6550vw / 1440 + 200px);
 
-@media screen and (max-width: 700px){
-    .login-container {
-        
-        .image {      
-            display: none !important;
-        
-        }
+$title-margin: calc(1400vw / 1440 + 6px);
+$title-1-line: calc(2800vw / 1440 + 14px);
+$title-2-line: calc(1600vw / 1440 + 12px);
 
-        .card {
 
-        }
-    }
-      
-}
-    
 .login-container {
-    display: grid;
-    
-    max-height: 100vh;
-    height: 100vh;
+    display: flex;   
+    flex-grow: 1;
    
-    grid-template-columns: 1fr 1fr;
-   
+      
   
     .image {
-         
-            background-color: #55dbec;
-            max-height: 100%;
-      
-        }
+        background-color: #55dbec;
+        min-width: 50%;        
+    
+    }
 
     .card {
-     
-        background-color: #FFFFFF;
         display: flex;
-        flex-direction: column;
-        max-height: 100%;
-        width: 100%;
+        flex-direction: column;        
+        align-items: center;
+        
+        background-color: #FFFFFF;
+        max-width: 50%;       
+        
        
 
-        padding: 80px 18% 20px 18%;
+        padding: 80px $card-padding 20px $card-padding;
 
         .header {                        
-            margin: 20px 0px 20px 0px;
+            margin: $title-margin 0px $title-margin 0px;
 
             display: inline-block;
 
             .title {             
                 text-align: center;     
-                font: 36px 'Roboto';
-                line-height: 42px;
+                font: $title-1 'Roboto';
+                line-height: $title-1-line;
                 color: #333333;
 
                 width: 100%;
                 display:inline-block;
 
-                margin-bottom: 16px; 
+                margin-bottom: $title-margin; 
                
             }
 
             .description {
                 text-align: center;  
-                font: 24px 'Roboto'; 
+                font: $title-2  'Roboto'; 
                 color: #828282;
-                line-height: 28px;
+                line-height: $title-2-line;
 
                 width: 100%;
                 display: inline-block;
@@ -76,8 +68,10 @@
         form {
             display: flex;
             flex-direction: column;
+           
 
-            padding: 8px 10% 0px 10%;
+            width: $form-width;
+            padding: 8px 0px 0px 0px;
 
             .field {
                 display: flex;
@@ -97,7 +91,7 @@
                 }
 
                 label {
-                    font: 14px 'Roboto', sans-serif;       
+                    font: $label-size 'Roboto', sans-serif;       
                     line-height: 16px;
                     color: #333333;
                     margin: 8px 0px;
@@ -127,6 +121,8 @@
             }
 
             input {
+                font: $label-size 'Roboto', sans-serif;   
+
                 height: 56px;
 
                 background-color: #F4C23B;
@@ -137,5 +133,17 @@
     }
 }
 
-
-                      
+@media screen and (max-width: 700px){
+    .login-container { 
+        justify-content: center;       
+        .image {      
+            display: none !important;
+        
+        }
+        .card {    
+            padding: 80px 0 20px 0; 
+        }
+    }
+      
+}
+    
