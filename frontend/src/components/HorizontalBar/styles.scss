@@ -1,0 +1,40 @@
+.bar-container {
+        
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+
+   
+    background-color: #FFFFFF;
+    
+    .logo-container {
+        display: flex;
+        flex-direction: row;
+            
+        .beeteller {
+            svg {
+                g {
+                    --darkreader-inline-fill:#0F0F0F;    
+                        background: #0F0F0F;          
+
+                }    
+            }
+        
+        }
+
+        .delimiter {
+            width: 1px;
+            height: 45px;
+            background-color: #BDBDBD;
+
+        }
+
+        span {
+            font: 18px 'Roboto', sans-serif;      
+            line-height: 21px;
+            color: #BDBDBD;
+        }
+    }    
+}
+    
