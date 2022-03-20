@@ -9,7 +9,7 @@ const LoginPage = () => {
                 <div className="header">
                     <span className="title">Olá! Bem vindo de volta.</span>
                     <br />
-                    <span className="description">
+                    <span className="subtitle">
                         Faça Login com seus dados inseridos durante o registro.
                     </span>
                 </div>
