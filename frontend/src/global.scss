@@ -1,9 +1,30 @@
-body, html {
-    background-color: #daadad;
-    overflow-x: hidden;
+html {
+   
+}
+body {
+    background-color: #FFFFFF;
+    overflow-x: hidden;   
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;   
+   
+    
+}
+
+* {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
-* {
-    box-sizing: border-box;
+
+#root, .app, .routes-container {
+    display: flex;
+    flex-grow: 1;
+        
+}
+
+.routes-container {
+    height: 100%;
+    flex-direction: column; 
+    
 }
