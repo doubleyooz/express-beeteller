@@ -2,8 +2,10 @@
 $title-1: calc(2400vw / 1440 + 12px);
 $title-2: calc(1600vw / 1440 + 8px);
 $label-size: calc(400vw / 1440 + 10px);
-$card-padding: calc(13400vw / 1440);
+$card-hpadding: calc(13400vw / 1440);
+$card-vpadding: calc(7000vh / 1024 + 10px);
 $form-width: calc(6550vw / 1440 + 200px);
+$input-height: calc(3000vh / 1440 + 26px);
 
 $title-margin: calc(1400vw / 1440 + 6px);
 $title-1-line: calc(2800vw / 1440 + 14px);
@@ -32,7 +34,7 @@ $title-2-line: calc(1600vw / 1440 + 12px);
         
        
 
-        padding: 80px $card-padding 20px $card-padding;
+        padding: $card-vpadding $card-hpadding 20px $card-hpadding;
 
         .header {                        
             margin: $title-margin 0px $title-margin 0px;
@@ -99,7 +101,7 @@ $title-2-line: calc(1600vw / 1440 + 12px);
                 }
 
                 input {
-                    height: 56px;
+                    height: $input-height;
                     
                     background-color: #FFFFFF;
                     border-radius: 8px;
@@ -123,7 +125,7 @@ $title-2-line: calc(1600vw / 1440 + 12px);
             input {
                 font: $label-size 'Roboto', sans-serif;   
 
-                height: 56px;
+                height: $input-height;
 
                 background-color: #F4C23B;
                 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
@@ -141,7 +143,7 @@ $title-2-line: calc(1600vw / 1440 + 12px);
         
         }
         .card {    
-            padding: 80px 0 20px 0; 
+            padding: $card-vpadding 0 20px 0; 
         }
     }
       
