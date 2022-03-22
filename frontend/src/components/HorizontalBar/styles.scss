@@ -78,3 +78,33 @@ $header-hmarging: calc(1200vw / 1440 + 8px);
     }
 }
     
+
+@media screen and (max-width: 769px){
+
+   .bar-container {
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        position: relative;
+        z-index: 10;
+
+        width: 100vw;
+        height: $bar-height;
+        padding: 20px $bar-padding;
+        background-color: #FFFFFF;
+
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+
+        
+        .lang {            
+            
+            margin: 0;
+        
+        }
+    }
+
+
+}
