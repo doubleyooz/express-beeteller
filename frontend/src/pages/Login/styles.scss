@@ -72,7 +72,8 @@ $title-2-line: calc(1600vw / 1440 + 12px);
             flex-direction: column;
            
 
-            width: $form-width;
+            width: 100%;
+            min-width: 200px;
             padding: 8px 0px 0px 0px;
 
             .field {
