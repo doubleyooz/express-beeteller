@@ -8,6 +8,7 @@ $title-size: calc(1600vw / 1440 + 20px);
 .dashboard-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 
     width: 100vw;
     padding: $dashboard-vpadding $bar-hpadding;
@@ -16,25 +17,32 @@ $title-size: calc(1600vw / 1440 + 20px);
         display: flex;
         flex-direction: column;   
         width: 100%;
+
+        margin: 0 0 0 0;
         .header {
             display: flex;
             justify-content: space-between;    
-            margin: 0 $header-hmarging $dashboard-vpadding $header-hmarging ;
-
+            margin: 0 0 $dashboard-vpadding 0;
+ 
             span {
                 font-size: $title-size;    
+            }
+
+            svg {
+                margin: 0 $header-hmarging 0 0px;    
             }
         }
         .cards {
             display: flex;
             flex-direction: row;   
+            align-items: center;
             width: 100%;
         } 
     }
 
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 769px){
 
    .dashboard-container {
         display: flex;
@@ -52,10 +60,13 @@ $title-size: calc(1600vw / 1440 + 20px);
             .header {
                 display: flex;
                 justify-content: space-between;    
-                margin: 0 $header-hmarging $dashboard-vpadding $header-hmarging ;
+                margin: 0 0 $dashboard-vpadding 0;
 
                 span {
                     font-size: $title-size;    
+                }
+                svg {
+                    margin: 0 0 0 0px;    
                 }
             }
             .cards {

@@ -1,10 +1,11 @@
 $box-height: calc(6900vw / 1440 + 138px);
-$box-hmarging: calc(1600vw / 1440 + 4px);
+$box-width: calc(16900vw / 1440 + 200px);
+$box-hmarging: calc(2000vw / 1440 + 12px);
 $box-padding: calc(1800vw / 1440 + 6px);
 
 
 $icon-size: calc(1600vw / 1440 + 8px);
-$icon-padding: calc(1200vw / 1440 + 8px);
+$icon-padding: calc(1000vw / 1440 + 10px);
 $value-size: calc(2800vw / 1440 + 20px);
     
 .box-container {
@@ -14,12 +15,14 @@ $value-size: calc(2800vw / 1440 + 20px);
     align-items: flex-start;
 
     height: $box-height;
-    width: 100%;
+    width: $box-width;
     
 
-    margin: 0 $box-hmarging;
+    margin: 0 $box-hmarging 0 0;
     padding: $box-padding;    
     
+    transition: ease all .9s;
+
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
@@ -91,11 +94,11 @@ $value-size: calc(2800vw / 1440 + 20px);
 }
 
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 950px){
 
     .box-container {
         
-        margin: 0px $box-hmarging 10px $box-hmarging;
+        margin: 0px calc($box-hmarging / 3) 10px calc($box-hmarging / 3);
        
         
         
@@ -103,4 +106,29 @@ $value-size: calc(2800vw / 1440 + 20px);
 
 
 }
-    
+
+@media screen and (max-width: 800px){
+
+    .box-container {
+        
+        margin: 10px 0px 0px 0px;
+       
+        
+        
+    }
+
+
+}
+
+@media screen and (max-width: 769px){
+
+    .box-container {
+        
+        width: 100%;
+       
+        
+        
+    }
+
+
+}
