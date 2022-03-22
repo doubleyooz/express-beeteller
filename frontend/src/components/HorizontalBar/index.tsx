@@ -79,7 +79,7 @@ const HorizontalBar = () => {
                 </div>
             </div>
 
-            <span>EN</span>
+            <span className='lang'>EN</span>
         </div>
     );
 };
