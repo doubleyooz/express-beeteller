@@ -1,16 +1,26 @@
-$bar-padding: calc(10500vw / 1440 + 30px); 
-    
+$bar-hpadding: calc(10500vw / 1440 + 30px); 
+$dashboard-vpadding: calc(3000vh / 1024 + 10px);
+$header-hmarging: calc(1200vw / 1440 + 8px);    
 .dashboard-container {
     display: flex;
     flex-direction: row;
 
    
-    padding: 20px $bar-padding;
+    padding: $dashboard-vpadding $bar-hpadding;
 
     .card-container {
         display: flex;
         flex-direction: column;   
 
+        .header {
+            display: flex;
+            justify-content: space-between;    
+            margin: 0 $header-hmarging $dashboard-vpadding $header-hmarging ;
+
+            span {
+                font-size: 46px;    
+            }
+        }
         .cards {
             display: flex;
             flex-direction: row;   
