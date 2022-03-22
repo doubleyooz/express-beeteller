@@ -1,12 +1,16 @@
 $bar-height: calc(8500vh / 1024);
-$delimiter-height: calc(450vh / 1024 + 30px);
-
 $bar-padding: calc(11500vw / 1440 + 20px); 
 $bar-marging: calc(100vw / 1440 + 10px); 
 $bar-marging-2: calc(600vw / 1440 + 2px); 
+
+$delimiter-height: calc(450vh / 1024 + 30px);
+
 $text-size: calc(900vw / 1440 + 9px);
+
 $svg-width: calc(400vw / 1440 + 10px);
 $svg-height: calc(1400vw / 1440 + 7px);
+
+$header-hmarging: calc(1200vw / 1440 + 8px);   
 
 .bar-container {
         
@@ -67,6 +71,7 @@ $svg-height: calc(1400vw / 1440 + 7px);
         line-height: 21px;
         letter-spacing: -0.04em;
         color: #333333;
+        margin: 0 $header-hmarging 0 0;
        
     }
 }
