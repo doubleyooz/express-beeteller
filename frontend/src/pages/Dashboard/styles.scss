@@ -1,30 +1,72 @@
-$bar-hpadding: calc(10500vw / 1440 + 30px); 
+$bar-hpadding: calc(11500vw / 1440 + 20px); 
 $dashboard-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(1200vw / 1440 + 8px);    
+$title-size: calc(1600vw / 1440 + 20px);
+
+
+
 .dashboard-container {
     display: flex;
     flex-direction: row;
 
-   
+    width: 100vw;
     padding: $dashboard-vpadding $bar-hpadding;
 
     .card-container {
         display: flex;
         flex-direction: column;   
-
+        width: 100%;
         .header {
             display: flex;
             justify-content: space-between;    
             margin: 0 $header-hmarging $dashboard-vpadding $header-hmarging ;
 
             span {
-                font-size: 46px;    
+                font-size: $title-size;    
             }
         }
         .cards {
             display: flex;
             flex-direction: row;   
+            width: 100%;
         } 
     }
 
 }
+
+@media screen and (max-width: 700px){
+
+   .dashboard-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    
+        padding: $dashboard-vpadding $bar-hpadding;
+
+        .card-container {
+            display: flex;
+            flex-direction: column;   
+            justify-content: center;
+            width: 100%;
+
+            .header {
+                display: flex;
+                justify-content: space-between;    
+                margin: 0 $header-hmarging $dashboard-vpadding $header-hmarging ;
+
+                span {
+                    font-size: $title-size;    
+                }
+            }
+            .cards {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+ 
+            } 
+        }
+
+    }
+      
+}
+    

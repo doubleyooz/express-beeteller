@@ -1,5 +1,10 @@
-$box-width: calc(30000vw / 1440 + 69px);
-$box-hmarging: calc(1200vw / 1440 + 8px);
+$box-height: calc(6900vw / 1440 + 138px);
+$box-hmarging: calc(1600vw / 1440 + 4px);
+$box-padding: calc(1800vw / 1440 + 6px);
+
+
+$icon-size: calc(1600vw / 1440 + 8px);
+$icon-padding: calc(1200vw / 1440 + 8px);
 $value-size: calc(2800vw / 1440 + 20px);
     
 .box-container {
@@ -8,10 +13,12 @@ $value-size: calc(2800vw / 1440 + 20px);
     justify-content: space-between;
     align-items: flex-start;
 
-    width: $box-width;
+    height: $box-height;
+    width: 100%;
+    
 
     margin: 0 $box-hmarging;
-    padding: 24px;    
+    padding: $box-padding;    
     
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
@@ -19,10 +26,11 @@ $value-size: calc(2800vw / 1440 + 20px);
 
     .info {
         display: flex;
-        flex-direction: column;  
-        justify-content: space-between; 
-        align-items: flex-start;
-        order: 0; 
+        flex-direction: column;         
+        justify-content: space-between;
+        
+
+        height: 100%;
 
         span {
             letter-spacing: -0.04em;
@@ -68,15 +76,31 @@ $value-size: calc(2800vw / 1440 + 20px);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px;
+        padding: $icon-padding;
 
         background: #F4C23B;
         border-radius: 99px;  
     }
     svg {
-      
+        width: $icon-size;
+        height: $icon-size
         
                
     }
     
 }
+
+
+@media screen and (max-width: 700px){
+
+    .box-container {
+        
+        margin: 0px $box-hmarging 10px $box-hmarging;
+       
+        
+        
+    }
+
+
+}
+    
