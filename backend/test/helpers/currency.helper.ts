@@ -18,7 +18,7 @@ const latelyPrice = (currency: string, days: number) => {
                 ).toBeTruthy();
 
                 expect(response.body.data.length === days).toBeTruthy();
-
+                
                 expect(response.body).toEqual({
                     message: getMessage('currency.lately.prices'),
                     data: expect.arrayContaining([
@@ -47,7 +47,7 @@ const currentPrice = () => {
                 ).toBeTruthy();
 
                 expect(response.body.data.length === 3).toBeTruthy();
-                console.log(response.body.data);
+               
                 expect(response.body).toEqual({
                     message: getMessage('currency.current.prices'),
                     data: expect.arrayContaining([
