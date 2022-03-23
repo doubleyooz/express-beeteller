@@ -1,3 +1,5 @@
+$margin-right: calc(2000vw / 1440 + 12px);  ;
+
 html {
    
 }
@@ -28,4 +30,14 @@ body {
     height: 100%;
     flex-direction: column; 
     
+}
+
+.r-mrg {
+    margin: 0 $margin-right 0 0px;
+}
+
+@media screen and (max-width: 780px){
+    .r-mrg {
+        margin: 0;    
+    }
 }

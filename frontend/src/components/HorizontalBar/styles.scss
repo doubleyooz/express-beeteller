@@ -73,13 +73,13 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
         line-height: 21px;
         letter-spacing: -0.04em;
         color: #333333;
-        margin: 0 $header-hmarging 0 0px;
+        
        
     }
 }
     
 
-@media screen and (max-width: 769px){
+@media screen and (max-width: 780px){
 
    .bar-container {
         

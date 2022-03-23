@@ -9,6 +9,7 @@ const Home = () => {
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
+                        className='r-mrg'
                         width="24"
                         height="20"
                         viewBox="0 0 24 20"

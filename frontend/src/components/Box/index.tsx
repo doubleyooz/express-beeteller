@@ -3,7 +3,7 @@ import './styles.scss';
 
 const Box = (props: {name: string, value: string, description: string}) => {
     return (
-        <div className="box-container">
+        <div className="box-container r-mrg">
             <div className="info">
                 <span className="name">{props.name}</span>
                 <div className="price">

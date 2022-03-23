@@ -29,11 +29,7 @@ $title-size: calc(1600vw / 1440 + 20px);
         width: 100%;
 
         margin: 0 0 $home-vpadding 0;
-        .header {          
-            svg {
-                margin: 0 $header-hmarging 0 0px;    
-            }
-        }
+       
         .cards {
             display: flex;
             flex-direction: row;   
@@ -44,44 +40,17 @@ $title-size: calc(1600vw / 1440 + 20px);
 
 }
 
-@media screen and (max-width: 769px){
-    
-
-   .home-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-
-        
-        padding: $home-vpadding $bar-hpadding;
-
-        .dashboard {
-            display: flex;
-            flex-direction: column;   
+@media screen and (max-width: 780px){    
+   .home-container {   
+        .dashboard {             
             justify-content: center;
             width: 100%;
 
-            .header {
-                display: flex;
-                justify-content: space-between;    
-                margin: 0 0 $home-vpadding 0;
-
-                span {
-                    font-size: $title-size;    
-                }
-                svg {
-                    margin: 0 0 0 0px;    
-                }
-            }
-            .cards {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
+            .cards {                
+                flex-direction: column;               
  
             } 
         }
-
-    }
-      
+    }      
 }
     

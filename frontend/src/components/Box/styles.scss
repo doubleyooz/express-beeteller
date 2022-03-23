@@ -17,8 +17,6 @@ $value-size: calc(2800vw / 1440 + 20px);
     height: $box-height;
     width: $box-width;
     
-
-    margin: 0 $box-hmarging 0 0;
     padding: $box-padding;    
     
     transition: ease all .9s;
@@ -32,7 +30,6 @@ $value-size: calc(2800vw / 1440 + 20px);
         flex-direction: column;         
         justify-content: space-between;
         
-
         height: 100%;
 
         span {
@@ -56,7 +53,6 @@ $value-size: calc(2800vw / 1440 + 20px);
                 
                 color: #828282;             
                 margin: 0px 8px;
-
 
             }
 
@@ -86,8 +82,7 @@ $value-size: calc(2800vw / 1440 + 20px);
     }
     svg {
         width: $icon-size;
-        height: $icon-size
-        
+        height: $icon-size;        
                
     }
     
@@ -95,40 +90,26 @@ $value-size: calc(2800vw / 1440 + 20px);
 
 
 @media screen and (max-width: 950px){
-
-    .box-container {
-        
-        margin: 0px calc($box-hmarging / 3) 10px calc($box-hmarging / 3);
-       
-        
+    .box-container {        
+        margin: 0px calc($box-hmarging / 3) 10px calc($box-hmarging / 3);       
         
     }
-
 
 }
 
 @media screen and (max-width: 800px){
-
-    .box-container {
-        
+    .box-container {       
         margin: 10px 0px 0px 0px;
-       
-        
         
     }
-
 
 }
 
-@media screen and (max-width: 769px){
-
-    .box-container {
-        
-        width: 100%;
-       
-        
+@media screen and (max-width: 780px){
+    .box-container {        
+        width: 100%;   
+        min-width: 200px;  
         
     }
-
 
 }
