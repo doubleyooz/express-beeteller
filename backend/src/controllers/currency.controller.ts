@@ -11,8 +11,8 @@ const url3 = 'https://api.kraken.com/0/public/Ticker?pair=XBTusd';
 async function latelyPrice(req: Request, res: Response) {
     const { currency, days } = req.query;
     interface chewed {
-        high: string;
-        low: string;
+        high: number;
+        low: number;
         varBid: string;
         timestamp: string;
     }
@@ -21,8 +21,8 @@ async function latelyPrice(req: Request, res: Response) {
         (high: string, low: string, varBid: string, timestamp: string): chewed;
     } = (high, low, varBid, timestamp) => {
         return {
-            high: high,
-            low: low,
+            high: parseFloat(high),
+            low: parseFloat(low),
             varBid: varBid,
             timestamp: new Intl.DateTimeFormat('pt-BR').format(
                 new Date(parseInt(timestamp) * 1e3),
@@ -33,10 +33,10 @@ async function latelyPrice(req: Request, res: Response) {
     axios
         .get(url + 'daily/' + currency + '/' + days)
         .then(json => {
-            let arr = json.data.map((item: chewed) => {
+           
+            let arr = json.data.map((item: any) => {                
                 return chew(item.high, item.low, item.varBid, item.timestamp);
-            });
-
+            });            
             return res
                 .status(201)
                 .json({
