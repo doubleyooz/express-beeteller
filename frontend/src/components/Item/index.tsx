@@ -10,7 +10,7 @@ const Item = (props: {
 }) => {
     return (
         <div className="item-container r-mrg">
-            <div className="basic">
+            <div className="label c">
                 <div className="icon">
                     <svg
                         width="24"
@@ -37,11 +37,17 @@ const Item = (props: {
                 </div>
             </div>
             <div className="closing">
-                <span className="min">{props.max}</span>
-                <span className="max">{props.max}</span>
+                <div className="label">
+                    <span className="min">{props.max}</span>
+                </div>
+                <div className="label">
+                    <span className="max">{props.max}</span>
+                </div>
             </div>
 
-            <span className="var">{props.var}</span>
+            <div className="label v">
+                <span>{props.var}</span>
+            </div>
         </div>
     );
 };

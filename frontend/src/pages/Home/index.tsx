@@ -55,62 +55,32 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="list">
-                <div className="header">
-                    <span className="title">Cotações</span>
-                    <select id="currency" className="r-mrg">
-                        <option value="Dolar Americano" selected>
-                            Dolar Americano
-                        </option>
-                        <option value="Euro">Euro</option>
-                        <option value="Bitcoin">Bitcoin</option>
-                    </select>
-                </div>
-
-                <div className="table">
-                    <div className="table-header r-mrg">
-                        <div>
+            <div className="table">
+                <div className="item-container table-head r-mrg">
+                    <div className="label">
                         <span>Moeda</span>
+                    </div>
+                    <div className="closing">
+                        <div className="label">
+                            <span>Mínimo</span>
+                            <svg
+                                width="15"
+                                height="8"
+                                viewBox="0 0 15 8"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.5 1L7.5 7L13.5 1"
+                                    stroke="#828282"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
                         </div>
-                        <div className="closing">
-                            <div className="min">
-                                <span>Mínimo</span>
-                                <svg
-                                    width="15"
-                                    height="8"
-                                    viewBox="0 0 15 8"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.5 1L7.5 7L13.5 1"
-                                        stroke="#828282"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-                            </div>
 
-                            <div className="max">
-                                <span>Máximo</span>
-                                <svg
-                                    width="15"
-                                    height="8"
-                                    viewBox="0 0 15 8"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M1.5 1L7.5 7L13.5 1"
-                                        stroke="#828282"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <span>Variação</span>
+                        <div className="label">
+                            <span>Máximo</span>
                             <svg
                                 width="15"
                                 height="8"
@@ -127,6 +97,25 @@ const Home = () => {
                             </svg>
                         </div>
                     </div>
+                    <div className="label v">
+                        <span>Variação</span>
+                        <svg
+                            width="15"
+                            height="8"
+                            viewBox="0 0 15 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M1.5 1L7.5 7L13.5 1"
+                                stroke="#828282"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </div>
+                </div>
+                <div className="list">
                     <Item
                         date={'25/12/2013'}
                         name={'Dolar Americano'}
