@@ -52,25 +52,22 @@ const currentPrice = () => {
                     message: getMessage('currency.current.prices'),
                     data: expect.arrayContaining([
                         expect.objectContaining({
-                            USDBRL: {
-                                code: 'USD',
-                                codein: 'BRL',
-                                bid: expect.any(String),
-                            },
+                            name: 'USD/BRL',
+                            code: 'USD',
+                            codein: 'BRL',
+                            bid: expect.any(String),
                         }),
                         expect.objectContaining({
-                            BTCEUR: {
-                                code: 'BTC',
-                                codein: 'EUR',
-                                bid: expect.any(String),
-                            },
+                            name: 'BTC/EUR',
+                            code: 'BTC',
+                            codein: 'EUR',
+                            bid: expect.any(String),
                         }),
                         expect.objectContaining({
-                            BTCUSD: {
-                                code: 'BTC',
-                                codein: 'USD',
-                                bid: expect.any(String),
-                            },
+                            name: 'BTC/USD',
+                            code: 'BTC',
+                            codein: 'USD',
+                            bid: expect.any(String),
                         }),
                     ]),
                 });
@@ -94,7 +91,7 @@ const getCurrency = (currency: string) => {
                 expect(response.body).toEqual({
                     message: getMessage('currency.get.price'),
                     data: expect.objectContaining({
-                        [currency.replace("-", "")]: {
+                        [currency.replace('-', '')]: {
                             ask: expect.any(String),
                             bid: expect.any(String),
                             code: 'USD',

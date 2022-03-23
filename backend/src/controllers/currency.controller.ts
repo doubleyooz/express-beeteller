@@ -64,12 +64,13 @@ async function currentPrice(req: Request, res: Response) {
                 const response3 = responses[2].data.result;
 
                 interface chewed {
-                    [key: string]: {
+                    
+                        name: string;
                         code: string;
                         codein: string;
                         bid: string;
-                    };
-                }
+                    
+                };
                 const chew: {
                     (
                         name: string,
@@ -79,11 +80,11 @@ async function currentPrice(req: Request, res: Response) {
                     ): chewed;
                 } = (name, code, codein, bid) => {
                     return {
-                        [name]: {
+                            name: name,
                             code: code,
                             codein: codein,
                             bid: bid,
-                        },
+                        
                     };
                 };
 
@@ -91,14 +92,14 @@ async function currentPrice(req: Request, res: Response) {
 
                 arr.push(
                     chew(
-                        'USDBRL',
+                        'USD/BRL',
                         response1.code,
                         response1.codein,
                         response1.bid,
                     ),
                 );
-                arr.push(chew('BTCEUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
-                arr.push(chew('BTCUSD', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
+                arr.push(chew('BTC/EUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
+                arr.push(chew('BTC/USD', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
 
                 return res
                     .status(201)
