@@ -15,7 +15,7 @@
             "dotenv/config"
         ],
         "modulePathIgnorePatterns": [
-            "dist"            
+            "dist"
         ],
         "setupFilesAfterEnv": [
             "./test/config/test.config.ts"
@@ -25,11 +25,11 @@
         "start": "NODE_ENV=dev ts-node-dev --respawn --transpile-only --exit-child --watch src src/index.ts dotenv_config_path=./.env.dev",
         "test": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watch --runInBand",
         "test:e2e": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles test/specs/e2e/"
-
-      },
+    },
     "devDependencies": {
         "@types/axios": "^0.14.0",
         "@types/bcrypt": "^5.0.0",
+        "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
         "@types/jest": "^27.4.1",
         "@types/mongodb-memory-server": "^2.3.0",
@@ -46,6 +46,7 @@
     "dependencies": {
         "axios": "^0.26.1",
         "bcrypt": "^5.0.1",
+        "cors": "^2.8.5",
         "dotenv": "^16.0.0",
         "express": "^4.17.3",
         "mongoose": "^6.2.7",
