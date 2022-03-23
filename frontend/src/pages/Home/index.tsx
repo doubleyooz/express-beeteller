@@ -47,7 +47,7 @@ const Home = () => {
         
              
             
-    }) // <-- empty dependency array
+    }, []) // <-- empty dependency array
 
 
     return (
@@ -87,18 +87,29 @@ const Home = () => {
                 </div>
 
                 <div className="cards">
-                    { boxes.map(item => (
+                    { boxes.map((item, index) => (
                         <Box
                             name={item.code + '/' + item.codein}
                             value={item.bid}
                             description="Dolar Turismo"
+                            key={index}
                         />
                     ))}                    
                    
                 </div>
             </div>
 
-            <div className="table">
+            <div className="table r-mrg">
+                <div className="header">
+                    <span className="title">Cotações</span>
+                    <select id="currency" defaultValue="0">
+                        <option value="0">Dolar Americano</option>
+                        <option value="1">Euro</option>
+                        <option value="2">
+                            Bitcoin
+                        </option>                     
+                    </select>
+                </div>
                 <div className="item-container table-head r-mrg">
                     <div className="label">
                         <span>Moeda</span>
@@ -166,8 +177,7 @@ const Home = () => {
                         max={'5.03'}
                         var={'1'}></Item>
                 </div>
-
-                <div className="days"></div>
+               
             </div>
         </div>
     );
