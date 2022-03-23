@@ -1,4 +1,5 @@
 $margin-right: calc(2000vw / 1440 + 12px);  ;
+$closing-hmargin: calc(10000vw / 1440 + 45px);
 
 html {
    
@@ -31,6 +32,17 @@ body {
     flex-direction: column; 
     
 }
+
+.closing {
+    display: flex;
+    flex-direction: row;
+    
+    .min {
+        margin-right: $closing-hmargin;
+    }
+                    
+} 
+
 
 .r-mrg {
     margin: 0 $margin-right 0 0px;

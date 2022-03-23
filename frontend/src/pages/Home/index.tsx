@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '../../components/Box';
+import Item from '../../components/Item';
 import './styles.scss';
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
-                        className='r-mrg'
+                        className="r-mrg"
                         width="24"
                         height="20"
                         viewBox="0 0 24 20"
@@ -57,18 +58,84 @@ const Home = () => {
             <div className="list">
                 <div className="header">
                     <span className="title">Cotações</span>
-                    <select id="currency">
-                        <option value="Dolar Americano" selected>Dolar Americano</option>
+                    <select id="currency" className="r-mrg">
+                        <option value="Dolar Americano" selected>
+                            Dolar Americano
+                        </option>
                         <option value="Euro">Euro</option>
-                        <option value="Bitcoin">
-                            Bitcoin
-                        </option>                     
+                        <option value="Bitcoin">Bitcoin</option>
                     </select>
                 </div>
 
-                <div className="days">
-                   
+                <div className="table">
+                    <div className="table-header r-mrg">
+                        <div>
+                        <span>Moeda</span>
+                        </div>
+                        <div className="closing">
+                            <div className="min">
+                                <span>Mínimo</span>
+                                <svg
+                                    width="15"
+                                    height="8"
+                                    viewBox="0 0 15 8"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.5 1L7.5 7L13.5 1"
+                                        stroke="#828282"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+
+                            <div className="max">
+                                <span>Máximo</span>
+                                <svg
+                                    width="15"
+                                    height="8"
+                                    viewBox="0 0 15 8"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.5 1L7.5 7L13.5 1"
+                                        stroke="#828282"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Variação</span>
+                            <svg
+                                width="15"
+                                height="8"
+                                viewBox="0 0 15 8"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.5 1L7.5 7L13.5 1"
+                                    stroke="#828282"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <Item
+                        date={'25/12/2013'}
+                        name={'Dolar Americano'}
+                        min={'5.04'}
+                        max={'5.03'}
+                        var={'1'}></Item>
                 </div>
+
+                <div className="days"></div>
             </div>
         </div>
     );

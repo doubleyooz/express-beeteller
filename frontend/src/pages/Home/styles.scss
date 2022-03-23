@@ -6,6 +6,7 @@ $title-size: calc(1600vw / 1440 + 20px);
 .header {
     display: flex;
     justify-content: space-between;    
+    align-items: center;
     margin: 0 0 $home-vpadding 0;
 
     span {
@@ -25,7 +26,7 @@ $title-size: calc(1600vw / 1440 + 20px);
 
     .dashboard {
         display: flex;
-        flex-direction: column;   
+        flex-direction: column;
         width: 100%;
 
         margin: 0 0 $home-vpadding 0;
@@ -36,6 +37,33 @@ $title-size: calc(1600vw / 1440 + 20px);
             align-items: center;
             width: 100%;
         } 
+    }
+
+    .list {
+        .table-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-content: center;
+
+            padding: 3px 25px 3px 40px;
+
+            .closing {
+                display: flex;
+                flex-direction: row;               
+            }
+            div {               
+                width: 100%;    
+            }
+
+            span {
+                font-size: 14px;
+                line-height: 16px;
+                letter-spacing: -0.04em;
+
+
+            }    
+        }    
     }
 
 }

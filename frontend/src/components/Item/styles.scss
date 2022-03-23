@@ -1,0 +1,59 @@
+$icon-padding: calc(1400vw / 1440 + 10px);
+$icon-size: calc(1600vw / 1440 + 8px);
+
+$basic-hmargin: calc(20000vw / 1440 + 91px);
+
+
+.item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding: 16px 20px;
+
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+
+    .basic {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        width: 100%;
+
+        .info {
+            display: flex;
+            flex-direction: column;   
+           
+
+            .name {
+                font-size: 18px;
+            }
+
+            .date {
+                font-size: 14px;
+                color: #828282;    
+            } 
+        }
+
+        .icon {      
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding: $icon-padding;
+            margin: 0 16px;
+
+            background: #F4C23B;
+            border-radius: 99px;  
+        }
+        svg {
+            width: $icon-size;
+            height: $icon-size;        
+                
+        }
+    }      
+    
+}
