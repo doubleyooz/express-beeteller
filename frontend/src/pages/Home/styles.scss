@@ -88,7 +88,8 @@ $label-size: calc(400vw / 1440 + 10px);
            .prices {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;               
+                justify-content: space-between;   
+                margin-right: 10px            
             }
             div {               
                 width: 100%;    

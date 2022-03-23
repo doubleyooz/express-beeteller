@@ -1,10 +1,13 @@
 $icon-padding: calc(1400vw / 1440 + 10px);
 $icon-size: calc(4800vw / 1440 + 24px);
+$label-size: calc(600vw / 1440 + 8px);
 
 $basic-hmargin: calc(10000vw / 1440 + 57px);
 $info-text: calc(1200vw / 1440 + 6px);
 $date-text: calc(800vw / 1440 + 6px);
 $item-vpadding: calc(1000vh / 1024 + 6px);
+$item-hpadding: calc(600vw / 1440 + 14px);
+
 $item-height: calc(8400vh / 1024 + 20px);
 
 
@@ -20,19 +23,43 @@ $item-height: calc(8400vh / 1024 + 20px);
     align-items: center;
 
     margin: 8px 0px;
-    padding: $item-vpadding 20px;
+    padding: $item-vpadding $item-hpadding;
 
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     .v {
-        justify-content: flex-end; 
+        justify-content: flex-end;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 8px 12px;
+
+            background-color: #E0E0E0;
+            border-radius: 8px;
+
+            
+
+        }
+
+        .pos {
+            background-color: #F4C23B;    
+        }
        
     }
     .prices {
         display: flex;
         flex-direction: row;
         justify-content: space-between;  
-        width: 100%;  
+        width: 100%; 
+        .label {
+            span {
+                font-size: $info-text;
+                line-height: 21px;
+                letter-spacing: -0.04em;
+            }    
+        }        
     }
 
     .label {
@@ -81,11 +108,12 @@ $item-height: calc(8400vh / 1024 + 20px);
        
 
         span {
-            font-size: 14px;
+            font-size: $label-size;
             line-height: 16px;
             letter-spacing: -0.04em;
 
-        }  
+
+        }   
     }      
 
    
@@ -98,7 +126,31 @@ $item-height: calc(8400vh / 1024 + 20px);
             .icon {
                 display: none;    
             }
-        }            
-    }       
+        }  
+        .v {
+            justify-content: flex-end;
+
+            div {                
+                padding: 6px 8px;               
+
+            }
+        
+        }          
+    }    
+           
             
 }   
+
+@media screen and(max-width: 500px){
+    .item-container {
+        padding: $item-vpadding $item-hpadding;
+    }       
+            
+} 
+
+@media screen and(max-width: 380px){
+    .item-container {
+        padding: 12px 8px;
+    }       
+            
+} 

@@ -191,9 +191,9 @@ const Home = () => {
                         key={index}
                         date={item.timestamp}
                         name={'Dolar Americano'}
-                        min={item.high}
-                        max={item.low}
-                        var={item.varBid}></Item>
+                        min={item.low}
+                        max={item.high}
+                        var={parseFloat(item.varBid)}></Item>
 
                     ))}
                    

@@ -6,7 +6,7 @@ const Item = (props: {
     name: string,
     min: string,
     max: string,
-    var: string,
+    var: number,
 }) => {
     return (
         <div className="item-container r-mrg">
@@ -38,15 +38,18 @@ const Item = (props: {
             </div>
             <div className="prices">
                 <div className="label" style={{justifyContent: "center"}}>
-                    <span className="min">{props.max}</span>
+                    <span className="min">{props.min}</span>
                 </div>
                 <div className="label" style={{justifyContent: "center"}}>
                     <span className="max">{props.max}</span>
                 </div>
             </div>
 
-            <div className="label v">
-                <span>{props.var}</span>
+            <div className="label v">                           
+                <div className={(props.var) >= 0 ? 'pos' : ''}>
+                    <span >{props.var < 0.0001 && props.var > -0.0001 ? `${props.var.toFixed(4)}%` : (props.var) > 0 ? `+ ${props.var.toFixed(4)}%` : `- ${Math.abs(props.var).toFixed(4)}%`}</span>
+                </div>
+               
             </div>
         </div>
     );
