@@ -8,7 +8,7 @@ const Box = (props: {name: string, value: string, description: string}) => {
                 <span className="name">{props.name}</span>
                 <div className="price">
                     <span className="currency">R$</span>
-                    <span className="value">{props.value}</span>
+                    <span className="value">{parseFloat(props.value).toFixed(2)}</span>
                 </div>
                 <span className="description">{props.description}</span>
             </div>

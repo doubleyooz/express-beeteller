@@ -21,12 +21,12 @@ const Home = () => {
      
         async function getBoxesData(){  
             console.log(boxes)                       
-            api.get('/', config)
+            api.get('/currencies/now', config)
                 .then(response => {
-                    console.log(response.data)
+                    console.log(response.data.data)
                     //setState({ feed: response.data });  
                     if(response.data !== null)                                     
-                        setBoxes(response.data)
+                        setBoxes(response.data.data)
         
                         
                     else {
