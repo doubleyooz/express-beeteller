@@ -13,7 +13,7 @@ async function latelyPrice(req: Request, res: Response) {
     interface chewed {
         high: number;
         low: number;
-        varBid: string;
+        varBid: number;
         timestamp: string;
     }
 
@@ -23,7 +23,7 @@ async function latelyPrice(req: Request, res: Response) {
         return {
             high: parseFloat(high),
             low: parseFloat(low),
-            varBid: varBid,
+            varBid: parseFloat(varBid),
             timestamp: new Intl.DateTimeFormat('pt-BR').format(
                 new Date(parseInt(timestamp) * 1e3),
             ),

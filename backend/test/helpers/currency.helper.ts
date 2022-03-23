@@ -25,7 +25,7 @@ const latelyPrice = (currency: string, days: number) => {
                         expect.objectContaining({
                             high: expect.any(Number),
                             low: expect.any(Number),
-                            varBid: expect.any(String),
+                            varBid: expect.any(Number),
                             timestamp: expect.any(String),
                         }),
                     ]),
