@@ -15,7 +15,7 @@ const Home = () => {
     interface chewed {
         high: number;
         low: number;
-        varBid: string;
+        varBid: number;
         timestamp: string;
     }
 
@@ -29,11 +29,31 @@ const Home = () => {
         headers: {},
     };
 
+    const sort = (n: number) => {
+        const arr = [...data]
+        switch (n) {
+            case 0:
+                arr.sort((a, b) => a.low - b.low)
+                break;
+            case 1:
+                arr.sort((a, b) => a.high - b.high)
+                break;
+            case 2:
+                arr.sort((a, b) => a.varBid - b.varBid)
+                break;
+            default:
+               break;
+
+        }        
+        setData(arr);
+        console.log(data)
+    }
+
     async function getLast10Days() {        
         api.get(`/currencies/lately?currency=${currency}&days=${days}`, config)
             .then((response) => {
-                console.log(response.data.data);
-                //setState({ feed: response.data });
+                //console.log(response.data.data);
+               
                 if (response.data !== null) setData(response.data.data);
                 else {
                     console.log('get info failed');
@@ -134,6 +154,7 @@ const Home = () => {
                                 <span className='long'>Mínimo</span>
                                 <span className='short'>Min</span>
                                 <svg
+                                    onClick={() => sort(0)}
                                     width="15"
                                     height="8"
                                     viewBox="0 0 15 8"
@@ -153,7 +174,7 @@ const Home = () => {
                                 <span className='long'>Máximo</span>
                                 <span className='short'>Max</span>
                                 <svg
-                                    onClick={() => setData(data.sort((a, b) => a.high - b.high ))}
+                                    onClick={() => sort(1)}
                                     width="15"
                                     height="8"
                                     viewBox="0 0 15 8"
@@ -172,6 +193,7 @@ const Home = () => {
                         <div className="label" style={{justifyContent: 'flex-end'}}>
                             <span>Variação</span>
                             <svg
+                                onClick={() => sort(2)}
                                 width="15"
                                 height="8"
                                 viewBox="0 0 15 8"
@@ -189,12 +211,13 @@ const Home = () => {
                     </div>
                     {data.map((item, index) => (
                         <Item
-                        key={index}
-                        date={item.timestamp}
-                        name={'Dolar Americano'}
-                        min={item.low}
-                        max={item.high}
-                        var={parseFloat(item.varBid)}></Item>
+                            key={index}
+                            date={item.timestamp}
+                            name={'Dolar Americano'}
+                            min={item.low}
+                            max={item.high}
+                            var={item.varBid}
+                        />
 
                     ))}
                    
