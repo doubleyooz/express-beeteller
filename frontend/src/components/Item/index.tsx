@@ -10,7 +10,7 @@ const Item = (props: {
 }) => {
     return (
         <div className="item-container r-mrg">
-            <div className="label c">
+            <div className="label">
                 <div className="icon">
                     <svg
                         width="24"

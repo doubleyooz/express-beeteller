@@ -96,13 +96,14 @@ const Home = () => {
                 </div>
                
                 <div className="list">
-                    <div className="table-head r-mrg">
-                        <div className="label">
+                    <div className="table-head">
+                        <div className="label" style={{justifyContent: 'flex-start'}}>
                             <span>Moeda</span>
                         </div>
                         <div className="prices">
-                            <div className="label" style={{justifyContent: "center"}}>
-                                <span>Mínimo</span>
+                            <div className="label">
+                                <span className='long'>Mínimo</span>
+                                <span className='short'>Min</span>
                                 <svg
                                     width="15"
                                     height="8"
@@ -119,8 +120,9 @@ const Home = () => {
                                 </svg>
                             </div>
 
-                            <div className="label" style={{justifyContent: "center"}}>
-                                <span>Máximo</span>
+                            <div className="label">
+                                <span className='long'>Máximo</span>
+                                <span className='short'>Max</span>
                                 <svg
                                     width="15"
                                     height="8"

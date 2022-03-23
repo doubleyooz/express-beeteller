@@ -2,16 +2,12 @@ $icon-padding: calc(1400vw / 1440 + 10px);
 $icon-size: calc(4800vw / 1440 + 24px);
 
 $basic-hmargin: calc(10000vw / 1440 + 57px);
+$info-text: calc(1200vw / 1440 + 6px);
+$date-text: calc(800vw / 1440 + 6px);
 $item-vpadding: calc(1000vh / 1024 + 6px);
 $item-height: calc(8400vh / 1024 + 20px);
 
-.label {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 
-    width: 100%;               
-}
 
 .item-container .header {
     padding: 3px 25px 3px 40px;
@@ -32,9 +28,19 @@ $item-height: calc(8400vh / 1024 + 20px);
         justify-content: flex-end; 
        
     }
-   
+    .prices {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;  
+        width: 100%;  
+    }
 
     .label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        width: 100%;               
         
         .info {
             display: flex;
@@ -42,15 +48,16 @@ $item-height: calc(8400vh / 1024 + 20px);
            
 
             .name {
-                font-size: 18px;
+                font-size: $info-text;
+                margin: 4px 0px;
             }
 
             .date {
-                font-size: 14px;
+                font-size: $date-text;
                 color: #828282;    
             } 
         }
-
+       
         .icon {      
             display: flex;
             flex-direction: column;
@@ -81,9 +88,17 @@ $item-height: calc(8400vh / 1024 + 20px);
         }  
     }      
 
-    .c {
-        width: auto;  
-        margin-right: $basic-hmargin;
-    }
-    
+   
 }
+
+
+@media screen and(max-width: 600px){
+    .item-container {
+        .label {
+            .icon {
+                display: none;    
+            }
+        }            
+    }       
+            
+}   

@@ -2,6 +2,7 @@ $bar-hpadding: calc(11500vw / 1440 + 20px);
 $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);    
 $title-size: calc(1600vw / 1440 + 20px);
+$label-size: calc(400vw / 1440 + 10px);
 
 
 
@@ -30,11 +31,7 @@ $title-size: calc(1600vw / 1440 + 20px);
         }   
     }
 }
-.prices {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;               
-}
+
 
 .home-container {
     display: flex;
@@ -60,37 +57,59 @@ $title-size: calc(1600vw / 1440 + 20px);
         } 
     }
 
-    .table {
+    .list {
         .table-head {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            align-content: center;
+            align-items: center;
 
             padding: 3px 25px 3px 40px;
+            .label {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
 
-           
+                span {
+                    margin: 0 4px;  
+                    color: #828282;
+                }
+
+                .short {
+                    display: none;    
+                }
+
+                .long {
+                    display: block;    
+                }
+                
+            }
+           .prices {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;               
+            }
             div {               
                 width: 100%;    
             }
 
             span {
-                font-size: 14px;
+                font-size: $label-size;
                 line-height: 16px;
                 letter-spacing: -0.04em;
 
 
-            }    
+            }   
+
+            svg {
+                width: $label-size;
+                height: 8px;    
+            }
         }    
     }
 
 }
-
-.list {
-    div {
-        width: 100%;    
-    }    
-}   
 
 @media screen and (max-width: 780px){    
    .home-container {   
@@ -103,6 +122,25 @@ $title-size: calc(1600vw / 1440 + 20px);
  
             } 
         }
+
+       
     }      
 }
-    
+
+@media screen and(max-width: 720px){
+    .home-container {   
+        .list {                    
+            .table-head {
+                .label {
+                    .short {
+                        display: block;    
+                    }
+
+                    .long {
+                        display: none;    
+                    }
+                }            
+            }          
+        }         
+    }          
+}   
