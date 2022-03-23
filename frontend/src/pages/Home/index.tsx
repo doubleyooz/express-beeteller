@@ -11,11 +11,39 @@ const Home = () => {
         codein: string;
         bid: string;
     }
+
+    interface chewed {
+        high: string;
+        low: string;
+        varBid: string;
+        timestamp: string;
+    }
+
+
     const [boxes, setBoxes] = useState<box[]>([]);
+    const [data, setData] = useState<chewed[]>([]);
+    const [currency, setCurrency] = useState<string>("USD-BRL");
+    const days = 10;
 
     let config = {
         headers: {},
     };
+
+    async function getLast10Days() {        
+        api.get(`/currencies/lately?currency=${currency}&days=${days}`, config)
+            .then((response) => {
+                console.log(response.data.data);
+                //setState({ feed: response.data });
+                if (response.data !== null) setData(response.data.data);
+                else {
+                    console.log('get info failed');
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                console.log('get info failed');
+            });
+    }
 
     async function getBoxesData() {        
         api.get('/currencies/now', config)
@@ -35,6 +63,7 @@ const Home = () => {
 
     useEffect(() => {
         getBoxesData();
+        getLast10Days();
     }, []); // <-- empty dependency array
 
     return (
@@ -157,12 +186,17 @@ const Home = () => {
                             </svg>
                         </div>
                     </div>
-                    <Item
-                        date={'25/12/2013'}
+                    {data.map((item, index) => (
+                        <Item
+                        key={index}
+                        date={item.timestamp}
                         name={'Dolar Americano'}
-                        min={'5.04'}
-                        max={'5.03'}
-                        var={'1'}></Item>
+                        min={item.high}
+                        max={item.low}
+                        var={item.varBid}></Item>
+
+                    ))}
+                   
                 </div>
             </div>
         </div>
