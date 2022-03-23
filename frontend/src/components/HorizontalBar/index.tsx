@@ -71,9 +71,9 @@ const HorizontalBar = () => {
                         <path
                             d="M13 10.5L10 19.5L4 1.5L1 10.5"
                             stroke="#BDBDBD"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
                     </svg>
                 </div>

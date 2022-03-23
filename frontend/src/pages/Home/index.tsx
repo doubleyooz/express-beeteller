@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import Item from '../../components/Item';
+import api from '../../services';
 import './styles.scss';
 
 const Home = () => {
+    interface box {
+        name: string;
+        code: string;
+        codein: string;
+        bid: string;
+        
+    }
+    const [boxes, setBoxes] = useState<Array<box>>([]);
+
+    let config = {
+        headers: {}
+    }
+    useEffect(()=>{
+     
+        async function getBoxesData(){  
+            console.log(boxes)                       
+            api.get('/', config)
+                .then(response => {
+                    console.log(response.data)
+                    //setState({ feed: response.data });  
+                    if(response.data !== null)                                     
+                        setBoxes(response.data)
+        
+                        
+                    else {
+                        console.log("get info failed")
+                    }           
+            
+                }).catch(err =>{
+                    console.log(err)
+                    console.log("get info failed")
+                    
+                })        
+        }        
+
+        
+        getBoxesData()
+        
+        
+        
+             
+            
+    }) // <-- empty dependency array
+
+
     return (
         <div className="home-container">
             <div className="dashboard">
@@ -19,39 +65,36 @@ const Home = () => {
                         <path
                             d="M23 2V8H17"
                             stroke="#828282"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
                         <path
                             d="M1 18V12H7"
                             stroke="#828282"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
                         <path
                             d="M3.51 6.99959C4.01717 5.56637 4.87913 4.28499 6.01547 3.27501C7.1518 2.26502 8.52547 1.55935 10.0083 1.22385C11.4911 0.888338 13.0348 0.933928 14.4952 1.35636C15.9556 1.77879 17.2853 2.5643 18.36 3.63959L23 7.99959M1 11.9996L5.64 16.3596C6.71475 17.4349 8.04437 18.2204 9.50481 18.6428C10.9652 19.0652 12.5089 19.1108 13.9917 18.7753C15.4745 18.4398 16.8482 17.7342 17.9845 16.7242C19.1209 15.7142 19.9828 14.4328 20.49 12.9996"
                             stroke="#828282"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
                     </svg>
                 </div>
 
                 <div className="cards">
-                    <Box
-                        name="BRL / USD"
-                        value="5,30"
-                        description="Dolar Turismo"
-                    />
-                    <Box name="BTC / EUR" value="3732,09" description="Euro" />
-                    <Box
-                        name="BTC / USD"
-                        value="4241,60"
-                        description="Dolar Turismo"
-                    />
+                    { boxes.map(item => (
+                        <Box
+                            name={item.code + '/' + item.codein}
+                            value={item.bid}
+                            description="Dolar Turismo"
+                        />
+                    ))}                    
+                   
                 </div>
             </div>
 
@@ -72,9 +115,9 @@ const Home = () => {
                                 <path
                                     d="M1.5 1L7.5 7L13.5 1"
                                     stroke="#828282"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                 />
                             </svg>
                         </div>
@@ -90,9 +133,9 @@ const Home = () => {
                                 <path
                                     d="M1.5 1L7.5 7L13.5 1"
                                     stroke="#828282"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                 />
                             </svg>
                         </div>
@@ -108,9 +151,9 @@ const Home = () => {
                             <path
                                 d="M1.5 1L7.5 7L13.5 1"
                                 stroke="#828282"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
                     </div>

@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import 'dotenv/config';
 
 //api.defaults.headers.common['Content-Type'] ='application/json;charset=utf-8';
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = `${process.env.URL}`;                            
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = `${process.env.REACT_APP_BASE_URL}`;                            
 axios.defaults.withCredentials = true
 
+console.log(`${process.env.REACT_APP_BASE_URL}`)
 const api: AxiosInstance = axios.create({
-    baseURL: process.env.URL
+    baseURL: process.env.REACT_APP_BASE_URL
         
 });
 
