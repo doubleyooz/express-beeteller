@@ -1,32 +1,35 @@
 $bar-hpadding: calc(11500vw / 1440 + 20px); 
-$dashboard-vpadding: calc(3000vh / 1024 + 10px);
+$home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);    
 $title-size: calc(1600vw / 1440 + 20px);
 
-
-.dashboard-container {
+.header {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;    
+    margin: 0 0 $home-vpadding 0;
+
+    span {
+        font-size: $title-size;    
+    }
+   
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 
     width: 100vw;
-    padding: $dashboard-vpadding $bar-hpadding;
+    padding: $home-vpadding $bar-hpadding;
+    
 
-    .card-container {
+    .dashboard {
         display: flex;
         flex-direction: column;   
         width: 100%;
 
-        margin: 0 0 0 0;
-        .header {
-            display: flex;
-            justify-content: space-between;    
-            margin: 0 0 $dashboard-vpadding 0;
- 
-            span {
-                font-size: $title-size;    
-            }
-
+        margin: 0 0 $home-vpadding 0;
+        .header {          
             svg {
                 margin: 0 $header-hmarging 0 0px;    
             }
@@ -42,15 +45,17 @@ $title-size: calc(1600vw / 1440 + 20px);
 }
 
 @media screen and (max-width: 769px){
+    
 
-   .dashboard-container {
+   .home-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
-    
-        padding: $dashboard-vpadding $bar-hpadding;
 
-        .card-container {
+        
+        padding: $home-vpadding $bar-hpadding;
+
+        .dashboard {
             display: flex;
             flex-direction: column;   
             justify-content: center;
@@ -59,7 +64,7 @@ $title-size: calc(1600vw / 1440 + 20px);
             .header {
                 display: flex;
                 justify-content: space-between;    
-                margin: 0 0 $dashboard-vpadding 0;
+                margin: 0 0 $home-vpadding 0;
 
                 span {
                     font-size: $title-size;    

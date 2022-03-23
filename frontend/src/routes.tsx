@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 import HorizontalBar from "./components/HorizontalBar";
 
 const Paths = () => {
@@ -11,7 +11,7 @@ const Paths = () => {
       <BrowserRouter>
       <HorizontalBar/>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>

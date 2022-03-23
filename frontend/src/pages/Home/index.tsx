@@ -2,10 +2,10 @@ import React from 'react';
 import Box from '../../components/Box';
 import './styles.scss';
 
-const Dashboard = () => {
+const Home = () => {
     return (
-        <div className="dashboard-container">
-            <div className="card-container">
+        <div className="home-container">
+            <div className="dashboard">
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
@@ -52,8 +52,25 @@ const Dashboard = () => {
                     />
                 </div>
             </div>
+
+            <div className="list">
+                <div className="header">
+                    <span className="title">Cotações</span>
+                    <select id="currency">
+                        <option value="Dolar Americano" selected>Dolar Americano</option>
+                        <option value="Euro">Euro</option>
+                        <option value="Bitcoin">
+                            Bitcoin
+                        </option>                     
+                    </select>
+                </div>
+
+                <div className="days">
+                   
+                </div>
+            </div>
         </div>
     );
 };
 
-export default Dashboard;
+export default Home;
