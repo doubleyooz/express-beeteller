@@ -3,6 +3,8 @@ $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);    
 $title-size: calc(1600vw / 1440 + 20px);
 
+
+
 .header {
     display: flex;
     justify-content: space-between;    
@@ -12,7 +14,26 @@ $title-size: calc(1600vw / 1440 + 20px);
     span {
         font-size: $title-size;    
     }
-   
+
+    svg {
+        width: 24px;
+        height: 20px;
+        transition: ease all .4s;
+
+        &:hover {
+            width: 27px;
+            height: 23px;
+            
+            path {
+               stroke: black;
+            }
+        }   
+    }
+}
+.prices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;               
 }
 
 .home-container {
@@ -39,7 +60,7 @@ $title-size: calc(1600vw / 1440 + 20px);
         } 
     }
 
-    .list {
+    .table {
         .table-head {
             display: flex;
             flex-direction: row;
@@ -48,10 +69,7 @@ $title-size: calc(1600vw / 1440 + 20px);
 
             padding: 3px 25px 3px 40px;
 
-            .closing {
-                display: flex;
-                flex-direction: row;               
-            }
+           
             div {               
                 width: 100%;    
             }
@@ -67,6 +85,12 @@ $title-size: calc(1600vw / 1440 + 20px);
     }
 
 }
+
+.list {
+    div {
+        width: 100%;    
+    }    
+}   
 
 @media screen and (max-width: 780px){    
    .home-container {   

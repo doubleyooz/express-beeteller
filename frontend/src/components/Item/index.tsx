@@ -36,11 +36,11 @@ const Item = (props: {
                     <span className="date">{props.date}</span>
                 </div>
             </div>
-            <div className="closing">
-                <div className="label">
+            <div className="prices">
+                <div className="label" style={{justifyContent: "center"}}>
                     <span className="min">{props.max}</span>
                 </div>
-                <div className="label">
+                <div className="label" style={{justifyContent: "center"}}>
                     <span className="max">{props.max}</span>
                 </div>
             </div>

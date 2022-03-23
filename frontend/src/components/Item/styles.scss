@@ -1,14 +1,16 @@
 $icon-padding: calc(1400vw / 1440 + 10px);
 $icon-size: calc(4800vw / 1440 + 24px);
 
-$basic-width: calc(39100vw / 1440 + 113px);
+$basic-hmargin: calc(10000vw / 1440 + 57px);
 $item-vpadding: calc(1000vh / 1024 + 6px);
 $item-height: calc(8400vh / 1024 + 20px);
 
-.closing {
+.label {
     display: flex;
-    flex-direction: row;   
-    width: 100%;             
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;               
 }
 
 .item-container .header {
@@ -33,11 +35,7 @@ $item-height: calc(8400vh / 1024 + 20px);
    
 
     .label {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        width: 100%;  
+        
         .info {
             display: flex;
             flex-direction: column;   
@@ -85,7 +83,7 @@ $item-height: calc(8400vh / 1024 + 20px);
 
     .c {
         width: auto;  
-        margin-right: 170px;
+        margin-right: $basic-hmargin;
     }
     
 }
