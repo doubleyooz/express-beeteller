@@ -4,8 +4,8 @@ import './styles.scss';
 const Item = (props: {
     date: string,
     name: string,
-    min: string,
-    max: string,
+    min: number,
+    max: number,
     var: number,
 }) => {
     return (

@@ -105,14 +105,25 @@ $label-size: calc(400vw / 1440 + 10px);
 
             svg {
                 width: $label-size;
-                height: 8px;    
+                height: 8px; 
+
+                       
+                margin: 0 4px;
+             
+                &:hover {
+                    path {
+                        stroke: black;    
+                    }
+                }     
+                
+          
             }
         }    
     }
 
 }
 
-@media screen and (max-width: 780px){    
+@media screen and (max-width: 869px){    
    .home-container {   
         .dashboard {             
             justify-content: center;

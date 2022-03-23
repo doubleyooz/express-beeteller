@@ -13,8 +13,8 @@ const Home = () => {
     }
 
     interface chewed {
-        high: string;
-        low: string;
+        high: number;
+        low: number;
         varBid: string;
         timestamp: string;
     }
@@ -153,6 +153,7 @@ const Home = () => {
                                 <span className='long'>Máximo</span>
                                 <span className='short'>Max</span>
                                 <svg
+                                    onClick={() => setData(data.sort((a, b) => a.high - b.high ))}
                                     width="15"
                                     height="8"
                                     viewBox="0 0 15 8"
