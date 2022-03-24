@@ -147,7 +147,7 @@ $svg-height: calc(1200vh / 1440 + 8px);
                 align-items: center;
 
                 span {
-                    margin: 0 4px;  
+                    margin: 0 4px 0 0;  
                     color: #828282;
                 }
 
@@ -224,7 +224,7 @@ $svg-height: calc(1200vh / 1440 + 8px);
             .table-head {
                 .label {
                     &:not(.v) {
-                         .short {
+                        .short {
                         display: block;    
                         }
 

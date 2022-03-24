@@ -15,7 +15,7 @@ const Home = () => {
     interface chewed {
         high: number
         low: number
-        varBid: number
+        pctChange: string
         timestamp: string
     }
 
@@ -27,7 +27,7 @@ const Home = () => {
         'BTC-BRL',
     ])
     const [isDisplayed, setIsDisplayed] = useState<boolean>(false)
-    const days = 10
+    const days = 30;
 
     let config = {
         headers: {},
@@ -37,10 +37,8 @@ const Home = () => {
         const arr = [...currencies]
 
         arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0))
-
-        setCurrencies(arr)
         setIsDisplayed(!isDisplayed)
-        console.log(arr)
+        setCurrencies(arr)
     }
 
     const sort = (n: number) => {
@@ -53,7 +51,7 @@ const Home = () => {
                 arr.sort((a, b) => a.high - b.high)
                 break
             case 2:
-                arr.sort((a, b) => a.varBid - b.varBid)
+                arr.sort((a, b) => parseFloat(a.pctChange) - parseFloat(b.pctChange))
                 break
             default:
                 break
@@ -61,13 +59,13 @@ const Home = () => {
         setData(arr)
     }
 
-    async function getLast10Days() {
+    async function getLast10Days() {        
         api.get(
             `/currencies/lately?currency=${currencies[0]}&days=${days}`,
             config
         )
             .then((response) => {
-                //console.log(response.data.data);
+                console.log(response.data.data)
 
                 if (response.data !== null) setData(response.data.data)
                 else {
@@ -81,9 +79,9 @@ const Home = () => {
     }
 
     async function getBoxesData() {
+        console.log(boxes)
         api.get('/currencies/now', config)
             .then((response) => {
-                console.log(response.data.data)
                 //setState({ feed: response.data });
                 if (response.data !== null) setBoxes(response.data.data)
                 else {
@@ -98,8 +96,11 @@ const Home = () => {
 
     useEffect(() => {
         getBoxesData()
-        getLast10Days()
     }, []) // <-- empty dependency array
+
+    useEffect(() => {
+        getLast10Days()
+    }, [currencies])
 
     const currentCurrency = (str: string) => {
         switch (str) {
@@ -173,10 +174,7 @@ const Home = () => {
                                 : { height: '40px' }
                         }
                     >
-                        <div
-                            className="currency-container"
-                            
-                        >
+                        <div className="currency-container">
                             {currencies.map((item, index) => (
                                 <div className="currency" key={index}>
                                     <span
@@ -278,9 +276,7 @@ const Home = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div
-                            className="label v"                           
-                        >
+                        <div className="label v">
                             <span className="long">Variação</span>
                             <span className="short">Var</span>
                             <svg
@@ -305,10 +301,10 @@ const Home = () => {
                         <Item
                             key={index}
                             date={item.timestamp}
-                            name={'Dolar Americano'}
+                            name={currentCurrency(currencies[0])}
                             min={item.low}
                             max={item.high}
-                            var={item.varBid}
+                            pctChange={parseFloat(item.pctChange)}
                         />
                     ))}
                 </div>
