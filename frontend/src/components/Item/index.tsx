@@ -1,12 +1,12 @@
-import React from 'react'
-import './styles.scss'
+import React from 'react';
+import './styles.scss';
 
 const Item = (props: {
-    date: string
-    name: string
-    min: number
-    max: number
-    pctChange: number
+    date: string;
+    name: string;
+    min: number;
+    max: number;
+    pctChange: number;
 }) => {
     return (
         <div className="item-container r-mrg">
@@ -64,7 +64,7 @@ const Item = (props: {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Item
+export default Item;

@@ -1,119 +1,121 @@
-import React, { useEffect, useState } from 'react'
-import Box from '../../components/Box'
-import Item from '../../components/Item'
-import api from '../../services'
-import './styles.scss'
+import React, { useEffect, useState } from 'react';
+import Box from '../../components/Box';
+import Item from '../../components/Item';
+import api from '../../services';
+import './styles.scss';
 
 const Home = () => {
     interface box {
-        name: string
-        code: string
-        codein: string
-        bid: string
+        name: string;
+        code: string;
+        codein: string;
+        bid: string;
     }
 
     interface chewed {
-        high: number
-        low: number
-        pctChange: string
-        timestamp: string
+        high: number;
+        low: number;
+        pctChange: string;
+        timestamp: string;
     }
 
-    const [boxes, setBoxes] = useState<box[]>([])
-    const [data, setData] = useState<chewed[]>([])
+    const [boxes, setBoxes] = useState<box[]>([]);
+    const [data, setData] = useState<chewed[]>([]);
     const [currencies, setCurrencies] = useState<string[]>([
         'USD-BRL',
         'EUR-BRL',
         'BTC-BRL',
-    ])
-    const [isDisplayed, setIsDisplayed] = useState<boolean>(false)
+    ]);
+    const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
     const days = 30;
 
     let config = {
         headers: {},
-    }
+    };
 
     const bringFirst = (str: string) => {
-        const arr = [...currencies]
+        const arr = [...currencies];
 
-        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0))
-        setIsDisplayed(!isDisplayed)
-        setCurrencies(arr)
-    }
+        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0));
+        setIsDisplayed(!isDisplayed);
+        setCurrencies(arr);
+    };
 
     const sort = (n: number) => {
-        const arr = [...data]
+        const arr = [...data];
         switch (n) {
             case 0:
-                arr.sort((a, b) => a.low - b.low)
-                break
+                arr.sort((a, b) => a.low - b.low);
+                break;
             case 1:
-                arr.sort((a, b) => a.high - b.high)
-                break
+                arr.sort((a, b) => a.high - b.high);
+                break;
             case 2:
-                arr.sort((a, b) => parseFloat(a.pctChange) - parseFloat(b.pctChange))
-                break
+                arr.sort(
+                    (a, b) => parseFloat(a.pctChange) - parseFloat(b.pctChange)
+                );
+                break;
             default:
-                break
+                break;
         }
-        setData(arr)
-    }
+        setData(arr);
+    };
 
-    async function getLast10Days() {        
+    async function getLast10Days() {
         api.get(
             `/currencies/lately?currency=${currencies[0]}&days=${days}`,
             config
         )
             .then((response) => {
-                console.log(response.data.data)
+                console.log(response.data.data);
 
-                if (response.data !== null) setData(response.data.data)
+                if (response.data !== null) setData(response.data.data);
                 else {
-                    console.log('get info failed')
+                    console.log('get info failed');
                 }
             })
             .catch((err) => {
-                console.log(err)
-                console.log('get info failed')
-            })
+                console.log(err);
+                console.log('get info failed');
+            });
     }
 
     async function getBoxesData() {
-        console.log(boxes)
+        console.log(boxes);
         api.get('/currencies/now', config)
             .then((response) => {
                 //setState({ feed: response.data });
-                if (response.data !== null) setBoxes(response.data.data)
+                if (response.data !== null) setBoxes(response.data.data);
                 else {
-                    console.log('get info failed')
+                    console.log('get info failed');
                 }
             })
             .catch((err) => {
-                console.log(err)
-                console.log('get info failed')
-            })
+                console.log(err);
+                console.log('get info failed');
+            });
     }
 
     useEffect(() => {
-        getBoxesData()
-    }, []) // <-- empty dependency array
+        getBoxesData();
+    }, []); // <-- empty dependency array
 
     useEffect(() => {
-        getLast10Days()
-    }, [currencies])
+        getLast10Days();
+    }, [currencies]);
 
     const currentCurrency = (str: string) => {
         switch (str) {
             case 'USD-BRL':
-                return 'Dolar Americano'
+                return 'Dolar Americano';
             case 'EUR-BRL':
-                return 'Euro'
+                return 'Euro';
             case 'BTC-BRL':
-                return 'Bitcoin'
+                return 'Bitcoin';
             default:
-                return ''
+                return '';
         }
-    }
+    };
 
     return (
         <div className="home-container">
@@ -310,7 +312,7 @@ const Home = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

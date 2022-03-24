@@ -11,66 +11,56 @@ $title-margin: calc(1400vw / 1440 + 6px);
 $title-1-line: calc(2800vw / 1440 + 14px);
 $title-2-line: calc(1600vw / 1440 + 12px);
 
-
 .login-container {
-    display: flex;   
+    display: flex;
     flex-grow: 1;
-   
-      
-  
+
     .image {
         background-color: #55dbec;
-        min-width: 50%;        
-    
+        min-width: 50%;
     }
 
     .card {
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
         align-items: center;
-        
-        background-color: #FFFFFF;
-        max-width: 50%;       
-        
-       
+
+        background-color: #ffffff;
+        max-width: 50%;
 
         padding: $card-vpadding $card-hpadding 20px $card-hpadding;
 
-        .header {                        
+        .header {
             margin: $title-margin 0px $title-margin 0px;
 
             display: inline-block;
 
-            .title {             
-                text-align: center;     
+            .title {
+                text-align: center;
                 font: $title-1 'Roboto';
                 line-height: $title-1-line;
                 color: #333333;
 
                 width: 100%;
-                display:inline-block;
+                display: inline-block;
 
-                margin-bottom: $title-margin; 
-               
+                margin-bottom: $title-margin;
             }
 
             .subtitle {
-                text-align: center;  
-                font: $title-2  'Roboto'; 
+                text-align: center;
+                font: $title-2 'Roboto';
                 color: #828282;
                 line-height: $title-2-line;
 
                 width: 100%;
                 display: inline-block;
             }
-
-          
         }
 
         form {
             display: flex;
             flex-direction: column;
-           
 
             width: 100%;
             min-width: 200px;
@@ -79,9 +69,9 @@ $title-2-line: calc(1600vw / 1440 + 12px);
             .field {
                 display: flex;
                 flex-direction: column;
-                padding: 0px 0px 10px 0px;    
+                padding: 0px 0px 10px 0px;
 
-                .up {                   
+                .up {
                     flex-direction: row;
 
                     justify-content: space-between;
@@ -89,46 +79,43 @@ $title-2-line: calc(1600vw / 1440 + 12px);
                     padding: 0px;
 
                     .forgot {
-                        color: #F4C23B;
+                        color: #f4c23b;
                     }
                 }
 
                 label {
-                    font: $label-size 'Roboto', sans-serif;       
+                    font: $label-size 'Roboto', sans-serif;
                     line-height: 16px;
                     color: #333333;
                     margin: 8px 0px;
-
                 }
 
                 input {
                     height: $input-height;
-                    
-                    background-color: #FFFFFF;
+
+                    background-color: #ffffff;
                     border-radius: 8px;
-                    border: 1px solid #E0E0E0;
+                    border: 1px solid #e0e0e0;
                     box-sizing: border-box;
                     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
 
-                    font: 14px 'Roboto', sans-serif;    
+                    font: 14px 'Roboto', sans-serif;
 
-                   
                     margin-bottom: 8px;
                     padding: 0px 16px 0px 16px;
 
-                    &::placeholder { 
-                        color: #BDBDBD;
-                        
+                    &::placeholder {
+                        color: #bdbdbd;
                     }
                 }
             }
 
             input {
-                font: $label-size 'Roboto', sans-serif;   
+                font: $label-size 'Roboto', sans-serif;
 
                 height: $input-height;
 
-                background-color: #F4C23B;
+                background-color: #f4c23b;
                 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
                 border-radius: 8px;
             }
@@ -136,17 +123,14 @@ $title-2-line: calc(1600vw / 1440 + 12px);
     }
 }
 
-@media screen and (max-width: 700px){
-    .login-container { 
-        justify-content: center;       
-        .image {      
+@media screen and (max-width: 700px) {
+    .login-container {
+        justify-content: center;
+        .image {
             display: none !important;
-        
         }
-        .card {    
-            padding: $card-vpadding 0 20px 0; 
+        .card {
+            padding: $card-vpadding 0 20px 0;
         }
     }
-      
 }
-    

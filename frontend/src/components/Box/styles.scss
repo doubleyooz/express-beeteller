@@ -3,11 +3,10 @@ $box-width: calc(16900vw / 1440 + 200px);
 $box-hmarging: calc(2000vw / 1440 + 12px);
 $box-padding: calc(1800vw / 1440 + 6px);
 
-
 $icon-size: calc(1600vw / 1440 + 8px);
 $icon-padding: calc(1000vw / 1440 + 10px);
 $value-size: calc(2800vw / 1440 + 20px);
-    
+
 .box-container {
     display: flex;
     flex-direction: row;
@@ -16,30 +15,29 @@ $value-size: calc(2800vw / 1440 + 20px);
 
     height: $box-height;
     width: $box-width;
-    
-    padding: $box-padding;    
-    
-    transition: ease all .9s;
 
-    background: #FFFFFF;
+    padding: $box-padding;
+
+    transition: ease all 0.9s;
+
+    background: #ffffff;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
 
     .info {
         display: flex;
-        flex-direction: column;         
+        flex-direction: column;
         justify-content: space-between;
-        
+
         height: 100%;
 
         span {
             letter-spacing: -0.04em;
             line-height: 21px;
-
         }
 
-        .name {                       
-            color :#333333;    
+        .name {
+            color: #333333;
         }
 
         .price {
@@ -48,18 +46,16 @@ $value-size: calc(2800vw / 1440 + 20px);
             letter-spacing: -0.04em;
 
             .currency {
-                font-size: 18px;                
+                font-size: 18px;
                 line-height: 21px;
-                
-                color: #828282;             
-                margin: 0px 8px;
 
+                color: #828282;
+                margin: 0px 8px;
             }
 
-            .value {                
+            .value {
                 font-size: $value-size;
                 line-height: 56px;
-                
             }
         }
 
@@ -67,49 +63,39 @@ $value-size: calc(2800vw / 1440 + 20px);
             font-size: 14px;
             line-height: 16px;
             color: #828282;
-                
         }
     }
-    .icon {      
+    .icon {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: $icon-padding;
 
-        background: #F4C23B;
-        border-radius: 99px;  
+        background: #f4c23b;
+        border-radius: 99px;
     }
     svg {
         width: $icon-size;
-        height: $icon-size;        
-               
+        height: $icon-size;
     }
-    
 }
 
-
-@media screen and (max-width: 950px){
-    .box-container {        
-        margin: 0px calc($box-hmarging / 3) 10px calc($box-hmarging / 3);       
-        
+@media screen and (max-width: 950px) {
+    .box-container {
+        margin: 0px calc($box-hmarging / 3) 10px calc($box-hmarging / 3);
     }
-
 }
 
-@media screen and (max-width: 800px){
-    .box-container {       
+@media screen and (max-width: 800px) {
+    .box-container {
         margin: 10px 0px 0px 0px;
-        
     }
-
 }
 
-@media screen and (max-width: 869px){
-    .box-container {        
-        width: 100%;   
-        min-width: 200px;  
-        
+@media screen and (max-width: 869px) {
+    .box-container {
+        width: 100%;
+        min-width: 200px;
     }
-
 }

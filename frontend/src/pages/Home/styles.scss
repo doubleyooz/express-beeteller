@@ -1,9 +1,9 @@
-$bar-hpadding: calc(11500vw / 1440 + 20px); 
+$bar-hpadding: calc(11500vw / 1440 + 20px);
 $home-vpadding: calc(3000vh / 1024 + 10px);
-$header-hmarging: calc(2000vw / 1440 + 12px);    
+$header-hmarging: calc(2000vw / 1440 + 12px);
 
-$dropdown-nav-width: calc(120vw / 1440 + 69px);  
-$dropdown-nav-hpadding: calc(800vw / 1440 + 10px);    
+$dropdown-nav-width: calc(120vw / 1440 + 69px);
+$dropdown-nav-hpadding: calc(800vw / 1440 + 10px);
 $title-size: calc(1600vw / 1440 + 20px);
 $option-size: calc(1000vw / 1440 + 8px);
 $label-size: calc(400vw / 1440 + 10px);
@@ -17,95 +17,85 @@ $svg-height: calc(1200vh / 1440 + 8px);
 
 .header {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
     align-items: center;
     margin: 0 0 $home-vpadding 0;
 
     .long {
         display: block;
-            
     }
 
     .short {
-        display: none;    
+        display: none;
     }
-        
+
     span {
-        font-size: $title-size;   
-        margin-right: 8px; 
+        font-size: $title-size;
+        margin-right: 8px;
     }
 
     svg {
         width: $svg-width;
         height: $svg-height;
-        transition: ease all .2s;
+        transition: ease all 0.2s;
 
         &:hover {
             width: 27px;
             height: 23px;
-            
+
             path {
-               stroke: black;
+                stroke: black;
             }
-        }   
+        }
     }
-    
+
     .dropdown-nav {
-        
         overflow: hidden;
-        
-        transition: ease height .8s;
-        
+
+        transition: ease height 0.8s;
+
         .currency-container {
-            display: flex;                      
+            display: flex;
             flex-direction: column;
             overflow: hidden;
-            
-            
 
             .currency {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
 
-                align-items: center;                
-                
+                align-items: center;
+
                 padding: 8px $dropdown-nav-hpadding;
 
-                border: 1px solid #E0E0E0;
+                border: 1px solid #e0e0e0;
                 box-sizing: border-box;
                 border-radius: 4px;
 
                 span {
                     margin: 0 8px;
-                    transition: ease all .8s;
+                    transition: ease all 0.8s;
                     font-size: $option-size;
                     color: #333333;
-                } 
-            }                   
-                
+                }
+            }
         }
-        div {           
-         
+        div {
             svg {
                 width: $label-size;
-                height: 8px; 
-                        
+                height: 8px;
+
                 margin: 0 4px;
-                
+
                 &:hover {
                     path {
-                        stroke: black;    
+                        stroke: black;
                     }
-                }                 
-            
-            } 
+                }
+            }
         }
-
-        
     }
 }
-
 
 .home-container {
     display: flex;
@@ -114,7 +104,6 @@ $svg-height: calc(1200vh / 1440 + 8px);
 
     width: 100vw;
     padding: $home-vpadding $bar-hpadding;
-    
 
     .dashboard {
         display: flex;
@@ -122,13 +111,13 @@ $svg-height: calc(1200vh / 1440 + 8px);
         width: 100%;
 
         margin: 0 0 $home-vpadding 0;
-       
+
         .cards {
             display: flex;
-            flex-direction: row;   
+            flex-direction: row;
             align-items: center;
             width: 100%;
-        } 
+        }
     }
 
     .list {
@@ -147,157 +136,138 @@ $svg-height: calc(1200vh / 1440 + 8px);
                 align-items: center;
 
                 span {
-                    margin: 0 4px 0 0;  
+                    margin: 0 4px 0 0;
                     color: #828282;
                 }
 
                 .short {
-                    display: none;    
+                    display: none;
                 }
 
                 .long {
-                    display: block;    
+                    display: block;
                 }
-                
             }
             .label.v {
                 justify-content: flex-end;
             }
 
-           .prices {
+            .prices {
                 display: flex;
                 flex-direction: row;
-                justify-content: center;   
-                margin-right: 10px;      
-                   
+                justify-content: center;
+                margin-right: 10px;
             }
-            div {               
-                width: 100%;    
+            div {
+                width: 100%;
             }
 
             span {
                 font-size: $label-size;
                 line-height: 16px;
                 letter-spacing: -0.04em;
-
-
-            }   
+            }
 
             svg {
                 width: $label-size;
-                height: 8px; 
+                height: 8px;
 
-                       
                 margin: 0 0px;
-             
+
                 &:hover {
                     path {
-                        stroke: black;    
+                        stroke: black;
                     }
-                }     
-                
-          
+                }
             }
-        }    
+        }
     }
-
 }
 
-@media screen and (max-width: 869px){    
-   .home-container {   
-        .dashboard {             
+@media screen and (max-width: 869px) {
+    .home-container {
+        .dashboard {
             justify-content: center;
             width: 100%;
 
-            .cards {                
-                flex-direction: column;               
- 
-            } 
+            .cards {
+                flex-direction: column;
+            }
         }
-
-       
-    }      
+    }
 }
 
-@media screen and(max-width: 720px){
-    .home-container {   
-        .list {                    
+@media screen and(max-width: 720px) {
+    .home-container {
+        .list {
             .table-head {
                 .prices {
-                    margin-left: 4px;    
+                    margin-left: 4px;
                 }
                 .label {
                     &:not(.v) {
                         .short {
-                        display: block;    
+                            display: block;
                         }
 
                         .long {
-                            display: none;    
+                            display: none;
                         }
-                    }                        
-                   
-                }                      
-            }          
-        }         
-    }          
-}   
-
-    @media screen and(max-width: 500px){
-    .header {  
-        .dropdown-nav {
-            .currency-container {
-                .currency {                    
-                    .long {
-                        display: none;
-                                
-                    }
-
-                    .short {
-                        display: block;    
                     }
                 }
             }
-        }                  
-    } 
+        }
+    }
+}
+
+@media screen and(max-width: 500px) {
+    .header {
+        .dropdown-nav {
+            .currency-container {
+                .currency {
+                    .long {
+                        display: none;
+                    }
+
+                    .short {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
     .list {
-        .table-head {           
-            
-           .prices  {
+        .table-head {
+            .prices {
                 margin-left: 8px;
                 .label:first-child {
                     margin: 0 8px;
                 }
-                
             }
-           
-        }    
-    }         
-}   
+        }
+    }
+}
 
-@media screen and(max-width: 425px){
-    .home-container {   
-        .list {                    
+@media screen and(max-width: 425px) {
+    .home-container {
+        .list {
             .table-head {
                 .label {
                     span {
                         font-size: $label-size2;
-                        
                     }
-                    
                 }
                 .label.v {
                     justify-content: center;
                     .short {
-                        display: block;    
+                        display: block;
                     }
 
                     .long {
-                        display: none;    
+                        display: none;
                     }
-                }            
-            }          
-        }         
-    }          
-}   
-
+                }
+            }
+        }
+    }
+}

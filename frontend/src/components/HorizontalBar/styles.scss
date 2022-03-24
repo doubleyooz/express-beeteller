@@ -1,7 +1,7 @@
 $bar-height: calc(8500vh / 1024);
-$bar-padding: calc(11500vw / 1440 + 20px); 
-$bar-marging: calc(100vw / 1440 + 10px); 
-$bar-marging-2: calc(600vw / 1440 + 2px); 
+$bar-padding: calc(11500vw / 1440 + 20px);
+$bar-marging: calc(100vw / 1440 + 10px);
+$bar-marging-2: calc(600vw / 1440 + 2px);
 
 $delimiter-height: calc(450vh / 1024 + 30px);
 
@@ -10,10 +10,9 @@ $text-size: calc(900vw / 1440 + 9px);
 $svg-width: calc(400vw / 1440 + 10px);
 $svg-height: calc(1400vw / 1440 + 7px);
 
-$header-hmarging: calc(2000vw / 1440 + 12px);  
+$header-hmarging: calc(2000vw / 1440 + 12px);
 
 .bar-container {
-        
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -25,7 +24,7 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
     width: 100vw;
     height: $bar-height;
     padding: 20px $bar-padding;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
 
@@ -35,13 +34,12 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
         align-items: center;
 
         margin: 10px 0px;
-        
+
         .delimiter {
             width: 1px;
             height: $delimiter-height;
-            background-color: #BDBDBD;
+            background-color: #bdbdbd;
             margin: 0px $bar-marging;
-
         }
 
         .activity {
@@ -49,40 +47,30 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
             order: 2;
             span {
                 font: $text-size 'Roboto', sans-serif;
-                font-variant: small-caps;                  
+                font-variant: small-caps;
                 line-height: 21px;
                 letter-spacing: 0.15em;
-                color: #BDBDBD;      
-                margin-right: $bar-marging-2;          
+                color: #bdbdbd;
+                margin-right: $bar-marging-2;
             }
 
             svg {
                 width: $svg-width;
                 height: $svg-height;
-               
-
-                
             }
         }
-        
-    }    
+    }
 
     .lang {
-        
-        font: $text-size 'Roboto', sans-serif;                        
+        font: $text-size 'Roboto', sans-serif;
         line-height: 21px;
         letter-spacing: -0.04em;
         color: #333333;
-        
-       
     }
 }
-    
 
-@media screen and (max-width: 780px){
-
-   .bar-container {
-        
+@media screen and (max-width: 780px) {
+    .bar-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -94,17 +82,12 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
         width: 100vw;
         height: $bar-height;
         padding: 20px $bar-padding;
-        background-color: #FFFFFF;
+        background-color: #ffffff;
 
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
 
-        
-        .lang {            
-            
+        .lang {
             margin: 0;
-        
         }
     }
-
-
 }
