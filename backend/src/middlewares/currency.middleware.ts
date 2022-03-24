@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { getMessage } from '../utils/message.util';
 
 const rules = {
-    currency: yup.string().matches(/^USD-BRL$|^BTC-USD$|^BTC-EUR$/),
+    currency: yup.string().matches(/^EUR-BRL$|^BTC-BRL$|^USD-BRL$|^BRL-USD$|^EUR-USD$|^BTC-EUR$|^BTC-USD$/),
     days: yup.number().moreThan(0)
         
 };

@@ -33,7 +33,8 @@ async function latelyPrice(req: Request, res: Response) {
     axios
         .get(url + 'daily/' + currency + '/' + days)
         .then(json => {
-           
+            console.log(currency)
+            console.log(json.data)
             let arr = json.data.map((item: any) => {                
                 return chew(item.high, item.low, item.varBid, item.timestamp);
             });            
