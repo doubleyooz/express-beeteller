@@ -13,17 +13,17 @@ async function latelyPrice(req: Request, res: Response) {
     interface chewed {
         high: number;
         low: number;
-        varBid: number;
+        pctChange: string;
         timestamp: string;
     }
 
     const chew: {
-        (high: string, low: string, varBid: string, timestamp: string): chewed;
-    } = (high, low, varBid, timestamp) => {
+        (high: string, low: string, pctChange: string, timestamp: string): chewed;
+    } = (high, low, pctChange, timestamp) => {
         return {
             high: parseFloat(high),
             low: parseFloat(low),
-            varBid: parseFloat(varBid),
+            pctChange: pctChange,
             timestamp: new Intl.DateTimeFormat('pt-BR').format(
                 new Date(parseInt(timestamp) * 1e3),
             ),
@@ -33,10 +33,9 @@ async function latelyPrice(req: Request, res: Response) {
     axios
         .get(url + 'daily/' + currency + '/' + days)
         .then(json => {
-            console.log(currency)
-            console.log(json.data)
+           
             let arr = json.data.map((item: any) => {                
-                return chew(item.high, item.low, item.varBid, item.timestamp);
+                return chew(item.high, item.low, item.pctChange, item.timestamp);
             });            
             return res
                 .status(201)
@@ -110,8 +109,7 @@ async function currentPrice(req: Request, res: Response) {
                     });
             }),
         )
-        .catch(err => {
-            console.log(err);
+        .catch(err => {           
             return res
                 .status(400)
                 .json({
