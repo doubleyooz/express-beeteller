@@ -38,10 +38,10 @@ const Item = (props: {
             </div>
             <div className="prices">
                 <div className="label" style={{justifyContent: "center"}}>
-                    <span className="min">{props.min}</span>
+                    <span className="min">{props.min.toFixed(4)}</span>
                 </div>
                 <div className="label" style={{justifyContent: "center"}}>
-                    <span className="max">{props.max}</span>
+                    <span className="max">{props.max.toFixed(4)}</span>
                 </div>
             </div>
 
