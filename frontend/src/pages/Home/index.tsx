@@ -1,90 +1,118 @@
-import React, {useEffect, useState} from 'react';
-import Box from '../../components/Box';
-import Item from '../../components/Item';
-import api from '../../services';
-import './styles.scss';
+import React, { useEffect, useState } from 'react'
+import Box from '../../components/Box'
+import Item from '../../components/Item'
+import api from '../../services'
+import './styles.scss'
 
 const Home = () => {
     interface box {
-        name: string;
-        code: string;
-        codein: string;
-        bid: string;
+        name: string
+        code: string
+        codein: string
+        bid: string
     }
 
     interface chewed {
-        high: number;
-        low: number;
-        varBid: number;
-        timestamp: string;
+        high: number
+        low: number
+        varBid: number
+        timestamp: string
     }
 
-
-    const [boxes, setBoxes] = useState<box[]>([]);
-    const [data, setData] = useState<chewed[]>([]);
-    const [currency, setCurrency] = useState<string>("USD-BRL");
-    const days = 10;
+    const [boxes, setBoxes] = useState<box[]>([])
+    const [data, setData] = useState<chewed[]>([])
+    const [currencies, setCurrencies] = useState<string[]>([
+        'USD-BRL',
+        'EUR-BRL',
+        'BTC-BRL',
+    ])
+    const [isDisplayed, setIsDisplayed] = useState<boolean>(false)
+    const days = 10
 
     let config = {
         headers: {},
-    };
+    }
+
+    const bringFirst = (str: string) => {
+        const arr = [...currencies]
+
+        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0))
+
+        setCurrencies(arr)
+        setIsDisplayed(!isDisplayed)
+        console.log(arr)
+    }
 
     const sort = (n: number) => {
         const arr = [...data]
         switch (n) {
             case 0:
                 arr.sort((a, b) => a.low - b.low)
-                break;
+                break
             case 1:
                 arr.sort((a, b) => a.high - b.high)
-                break;
+                break
             case 2:
                 arr.sort((a, b) => a.varBid - b.varBid)
-                break;
+                break
             default:
-               break;
-
-        }        
-        setData(arr);
-        console.log(data)
+                break
+        }
+        setData(arr)
     }
 
-    async function getLast10Days() {        
-        api.get(`/currencies/lately?currency=${currency}&days=${days}`, config)
+    async function getLast10Days() {
+        api.get(
+            `/currencies/lately?currency=${currencies[0]}&days=${days}`,
+            config
+        )
             .then((response) => {
                 //console.log(response.data.data);
-               
-                if (response.data !== null) setData(response.data.data);
+
+                if (response.data !== null) setData(response.data.data)
                 else {
-                    console.log('get info failed');
+                    console.log('get info failed')
                 }
             })
             .catch((err) => {
-                console.log(err);
-                console.log('get info failed');
-            });
+                console.log(err)
+                console.log('get info failed')
+            })
     }
 
-    async function getBoxesData() {        
+    async function getBoxesData() {
         api.get('/currencies/now', config)
             .then((response) => {
-                console.log(response.data.data);
+                console.log(response.data.data)
                 //setState({ feed: response.data });
-                if (response.data !== null) setBoxes(response.data.data);
+                if (response.data !== null) setBoxes(response.data.data)
                 else {
-                    console.log('get info failed');
+                    console.log('get info failed')
                 }
             })
             .catch((err) => {
-                console.log(err);
-                console.log('get info failed');
-            });
+                console.log(err)
+                console.log('get info failed')
+            })
     }
 
     useEffect(() => {
-        getBoxesData();
-        getLast10Days();
-    }, []); // <-- empty dependency array
+        getBoxesData()
+        getLast10Days()
+    }, []) // <-- empty dependency array
+
+    const currentCurrency = (str: string) => {
+        switch (str) {
+            case 'USD-BRL':
+                return 'Dolar Americano'
+            case 'EUR-BRL':
+                return 'Euro'
+            case 'BTC-BRL':
+                return 'Bitcoin'
+            default:
+                return ''
+        }
+    }
 
     return (
         <div className="home-container">
@@ -94,10 +122,10 @@ const Home = () => {
                     <svg
                         onClick={getBoxesData}
                         className="r-mrg"
-                       
                         viewBox="0 0 24 20"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <path
                             d="M23 2V8H17"
                             stroke="#828282"
@@ -137,29 +165,76 @@ const Home = () => {
             <div className="table r-mrg">
                 <div className="header">
                     <span className="title">Cotações</span>
-                    <select id="currency" defaultValue="0">
-                        <option value="0">Dolar Americano</option>
-                        <option value="1">Euro</option>
-                        <option value="2">Bitcoin</option>
-                    </select>
+                    <div
+                        className="dropdown-nav"
+                        style={
+                            isDisplayed
+                                ? { height: '120px' }
+                                : { height: '40px' }
+                        }
+                    >
+                        <div
+                            className="currency-container"
+                            
+                        >
+                            {currencies.map((item, index) => (
+                                <div className="currency" key={index}>
+                                    <span
+                                        onClick={
+                                            currencies[0] !== item
+                                                ? () => bringFirst(item)
+                                                : () => {}
+                                        }
+                                    >
+                                        {currentCurrency(item)}
+                                    </span>
+
+                                    {currencies[0] === item && (
+                                        <div>
+                                            <svg
+                                                onClick={() =>
+                                                    setIsDisplayed(!isDisplayed)
+                                                }
+                                                viewBox="0 0 15 8"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M1.5 1L7.5 7L13.5 1"
+                                                    stroke="#828282"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-               
+
                 <div className="list">
                     <div className="table-head">
-                        <div className="label" style={{justifyContent: 'flex-start'}}>
+                        <div
+                            className="label"
+                            style={{ justifyContent: 'flex-start' }}
+                        >
                             <span>Moeda</span>
                         </div>
                         <div className="prices">
                             <div className="label">
-                                <span className='long'>Mínimo</span>
-                                <span className='short'>Min</span>
+                                <span className="long">Mínimo</span>
+                                <span className="short">Min</span>
                                 <svg
                                     onClick={() => sort(0)}
                                     width="15"
                                     height="8"
                                     viewBox="0 0 15 8"
                                     fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
                                     <path
                                         d="M1.5 1L7.5 7L13.5 1"
                                         stroke="#828282"
@@ -171,15 +246,16 @@ const Home = () => {
                             </div>
 
                             <div className="label">
-                                <span className='long'>Máximo</span>
-                                <span className='short'>Max</span>
+                                <span className="long">Máximo</span>
+                                <span className="short">Max</span>
                                 <svg
                                     onClick={() => sort(1)}
                                     width="15"
                                     height="8"
                                     viewBox="0 0 15 8"
                                     fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
                                     <path
                                         d="M1.5 1L7.5 7L13.5 1"
                                         stroke="#828282"
@@ -190,7 +266,10 @@ const Home = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div className="label" style={{justifyContent: 'flex-end'}}>
+                        <div
+                            className="label"
+                            style={{ justifyContent: 'flex-end' }}
+                        >
                             <span>Variação</span>
                             <svg
                                 onClick={() => sort(2)}
@@ -198,7 +277,8 @@ const Home = () => {
                                 height="8"
                                 viewBox="0 0 15 8"
                                 fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
                                 <path
                                     d="M1.5 1L7.5 7L13.5 1"
                                     stroke="#828282"
@@ -218,13 +298,11 @@ const Home = () => {
                             max={item.high}
                             var={item.varBid}
                         />
-
                     ))}
-                   
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

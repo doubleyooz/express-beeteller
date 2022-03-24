@@ -1,7 +1,11 @@
 $bar-hpadding: calc(11500vw / 1440 + 20px); 
 $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);    
+
+
+$dropdown-nav-hpadding: calc(800vw / 1440 + 10px);    
 $title-size: calc(1600vw / 1440 + 20px);
+$option-size: calc(1000vw / 1440 + 8px);
 $label-size: calc(400vw / 1440 + 10px);
 
 
@@ -19,7 +23,7 @@ $label-size: calc(400vw / 1440 + 10px);
     svg {
         width: 24px;
         height: 20px;
-        transition: ease all .4s;
+        transition: ease all .2s;
 
         &:hover {
             width: 27px;
@@ -29,6 +33,59 @@ $label-size: calc(400vw / 1440 + 10px);
                stroke: black;
             }
         }   
+    }
+    
+    .dropdown-nav {
+        
+        overflow: hidden;
+        
+        transition: ease height .8s;
+        
+        .currency-container {
+            display: flex;                      
+            flex-direction: column;
+            overflow: hidden;
+            
+            .currency {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+                align-items: center;                
+                
+                padding: 8px $dropdown-nav-hpadding;
+
+                border: 1px solid #E0E0E0;
+                box-sizing: border-box;
+                border-radius: 4px;
+
+                span {
+                    margin: 0 8px;
+                    transition: ease all .8s;
+                    font-size: $option-size;
+                    color: #333333;
+                } 
+            }                   
+                
+        }
+        div {           
+         
+            svg {
+                width: $label-size;
+                height: 8px; 
+                        
+                margin: 0 4px;
+                
+                &:hover {
+                    path {
+                        stroke: black;    
+                    }
+                }                 
+            
+            } 
+        }
+
+        
     }
 }
 
