@@ -180,6 +180,7 @@ const Home = () => {
                             {currencies.map((item, index) => (
                                 <div className="currency" key={index}>
                                     <span
+                                        className="long"
                                         onClick={
                                             currencies[0] !== item
                                                 ? () => bringFirst(item)
@@ -187,6 +188,17 @@ const Home = () => {
                                         }
                                     >
                                         {currentCurrency(item)}
+                                    </span>
+
+                                    <span
+                                        className="short"
+                                        onClick={
+                                            currencies[0] !== item
+                                                ? () => bringFirst(item)
+                                                : () => {}
+                                        }
+                                    >
+                                        {item}
                                     </span>
 
                                     {currencies[0] === item && (

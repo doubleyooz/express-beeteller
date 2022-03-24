@@ -12,20 +12,32 @@ $label-size2: calc(600vw / 1440 + 8px);
 $table-head-r-padding: calc(1500vw / 1440 + 10px);
 $table-head-l-padding: calc(3000vw / 1440 + 10px);
 
+$svg-width: calc(1600vw / 1440 + 8px);
+$svg-height: calc(1200vh / 1440 + 8px);
+
 .header {
     display: flex;
     justify-content: space-between;    
     align-items: center;
     margin: 0 0 $home-vpadding 0;
 
+    .long {
+        display: block;
+            
+    }
+
+    .short {
+        display: none;    
+    }
+        
     span {
         font-size: $title-size;   
         margin-right: 8px; 
     }
 
     svg {
-        width: 24px;
-        height: 20px;
+        width: $svg-width;
+        height: $svg-height;
         transition: ease all .2s;
 
         &:hover {
@@ -155,7 +167,7 @@ $table-head-l-padding: calc(3000vw / 1440 + 10px);
            .prices {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;   
+                justify-content: center;   
                 margin-right: 10px            
             }
             div {               
@@ -175,7 +187,7 @@ $table-head-l-padding: calc(3000vw / 1440 + 10px);
                 height: 8px; 
 
                        
-                margin: 0 4px;
+                margin: 0 0px;
              
                 &:hover {
                     path {
@@ -225,6 +237,37 @@ $table-head-l-padding: calc(3000vw / 1440 + 10px);
             }          
         }         
     }          
+}   
+
+    @media screen and(max-width: 500px){
+    .header {  
+        .dropdown-nav {
+            .currency-container {
+                .currency {                    
+                    .long {
+                        display: none;
+                                
+                    }
+
+                    .short {
+                        display: block;    
+                    }
+                }
+            }
+        }                  
+    } 
+    .list {
+        .table-head {           
+            
+           .prices  {
+                .label:first-child {
+                    margin: 0 5px;
+                }
+                
+            }
+           
+        }    
+    }         
 }   
 
 @media screen and(max-width: 425px){
