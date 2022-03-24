@@ -120,7 +120,7 @@ const Home = () => {
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
-                        onClick={getBoxesData}
+                        onClick={() => getBoxesData()}
                         className="r-mrg"
                         viewBox="0 0 24 20"
                         fill="none"
@@ -267,10 +267,10 @@ const Home = () => {
                             </div>
                         </div>
                         <div
-                            className="label"
-                            style={{ justifyContent: 'flex-end' }}
+                            className="label v"                           
                         >
-                            <span>Variação</span>
+                            <span className="long">Variação</span>
+                            <span className="short">Var</span>
                             <svg
                                 onClick={() => sort(2)}
                                 width="15"

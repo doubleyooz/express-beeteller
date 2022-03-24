@@ -2,13 +2,15 @@ $bar-hpadding: calc(11500vw / 1440 + 20px);
 $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);    
 
-
+$dropdown-nav-width: calc(120vw / 1440 + 69px);  
 $dropdown-nav-hpadding: calc(800vw / 1440 + 10px);    
 $title-size: calc(1600vw / 1440 + 20px);
 $option-size: calc(1000vw / 1440 + 8px);
 $label-size: calc(400vw / 1440 + 10px);
+$label-size2: calc(600vw / 1440 + 8px);
 
-
+$table-head-r-padding: calc(1500vw / 1440 + 10px);
+$table-head-l-padding: calc(3000vw / 1440 + 10px);
 
 .header {
     display: flex;
@@ -17,7 +19,8 @@ $label-size: calc(400vw / 1440 + 10px);
     margin: 0 0 $home-vpadding 0;
 
     span {
-        font-size: $title-size;    
+        font-size: $title-size;   
+        margin-right: 8px; 
     }
 
     svg {
@@ -46,6 +49,8 @@ $label-size: calc(400vw / 1440 + 10px);
             flex-direction: column;
             overflow: hidden;
             
+            
+
             .currency {
                 display: flex;
                 flex-direction: row;
@@ -121,7 +126,8 @@ $label-size: calc(400vw / 1440 + 10px);
             justify-content: space-between;
             align-items: center;
 
-            padding: 3px 25px 3px 40px;
+            padding: 3px $table-head-r-padding 3px $table-head-l-padding;
+
             .label {
                 display: flex;
                 flex-direction: row;
@@ -142,6 +148,10 @@ $label-size: calc(400vw / 1440 + 10px);
                 }
                 
             }
+            .label.v {
+                justify-content: flex-end;
+            }
+
            .prices {
                 display: flex;
                 flex-direction: row;
@@ -201,6 +211,35 @@ $label-size: calc(400vw / 1440 + 10px);
         .list {                    
             .table-head {
                 .label {
+                    &:not(.v) {
+                         .short {
+                        display: block;    
+                        }
+
+                        .long {
+                            display: none;    
+                        }
+                    }                        
+                   
+                }                      
+            }          
+        }         
+    }          
+}   
+
+@media screen and(max-width: 425px){
+    .home-container {   
+        .list {                    
+            .table-head {
+                .label {
+                    span {
+                        font-size: $label-size2;
+                        
+                    }
+                    
+                }
+                .label.v {
+                    justify-content: center;
                     .short {
                         display: block;    
                     }
@@ -213,3 +252,4 @@ $label-size: calc(400vw / 1440 + 10px);
         }         
     }          
 }   
+

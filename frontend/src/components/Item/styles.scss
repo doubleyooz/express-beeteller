@@ -120,13 +120,19 @@ $item-height: calc(8400vh / 1024 + 20px);
 @media screen and(max-width: 600px){
     .item-container {
         .label {
+            .info {
+                .date {
+                    text-align: center;    
+                }
+               
+            }
             .icon {
                 display: none;    
             }
         }  
         .v {
-            justify-content: flex-end;
-
+            
+           
             div {                
                 padding: 6px 8px;               
 
@@ -141,13 +147,18 @@ $item-height: calc(8400vh / 1024 + 20px);
 @media screen and(max-width: 500px){
     .item-container {
         padding: $item-vpadding $item-hpadding;
+      
     }       
             
 } 
 
+
 @media screen and(max-width: 380px){
     .item-container {
         padding: 12px 8px;
+        .v {
+            justify-content: center;    
+        }
     }       
             
 } 
