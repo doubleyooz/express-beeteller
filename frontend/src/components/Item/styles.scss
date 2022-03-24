@@ -3,7 +3,7 @@ $icon-size: calc(4800vw / 1440 + 24px);
 $label-size: calc(600vw / 1440 + 8px);
 
 $basic-hmargin: calc(10000vw / 1440 + 57px);
-$info-text: calc(1200vw / 1440 + 6px);
+$info-text: calc(1000vw / 1440 + 8px);
 $date-text: calc(800vw / 1440 + 6px);
 $item-vpadding: calc(1000vh / 1024 + 6px);
 $item-hpadding: calc(600vw / 1440 + 14px);
@@ -75,6 +75,7 @@ $item-height: calc(8400vh / 1024 + 20px);
            
 
             .name {
+                text-align: center;
                 font-size: $info-text;
                 margin: 4px 0px;
             }
