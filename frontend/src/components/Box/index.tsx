@@ -9,7 +9,7 @@ const Box = (props: { name: string; value: string; description: string }) => {
                 <div className="price">
                     <span className="currency">R$</span>
                     <span className="value">
-                        {parseFloat(props.value).toFixed(2)}
+                        {parseFloat(props.value).toFixed(2).replace('.', ',')}
                     </span>
                 </div>
                 <span className="description">{props.description}</span>
