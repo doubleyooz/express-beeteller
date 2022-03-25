@@ -14,9 +14,9 @@ async function store(req: Request, res: Response) {
     newUser
         .save()
         .then(result => {
-            return res.status(201).json({
-                message: getMessage('user.valid.sign_up.sucess'),
+            return res.status(200).json({
                 data: { email: result.email },
+                message: getMessage('user.valid.sign_up.success'),
             });
         })
         .catch(err => {
@@ -29,7 +29,7 @@ async function store(req: Request, res: Response) {
             }
             return res.status(400).json({
                 message: getMessage('default.badRequest'),
-                err:  err,
+                err: err,
             });
         });
 }
@@ -48,12 +48,10 @@ async function list(req: Request, res: Response) {
             });
         })
         .catch(err => {
-            return res
-                .status(500)
-                .json({
-                    err: err,
-                    message: getMessage('default.serverError'),
-                });
+            return res.status(500).json({
+                err: err,
+                message: getMessage('default.serverError'),
+            });
         });
 }
 

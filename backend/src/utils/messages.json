@@ -1,6 +1,7 @@
-{
-    "default.badRequest": "You didn't give us what we want!",
-    "default.unauthorized": "You lack credentials to access this route.",
+{  
+    "default.unauthorized": "Unauthorized request.",
+    "default.success": "Successful request.",
+    "default.badRequest": "You didn't give us what we want!",   
     "default.serverError": "It's not you, it's us. Server Error",
     "default.helloWorld": "Hello World!",
 
