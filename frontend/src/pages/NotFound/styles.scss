@@ -6,6 +6,19 @@
     height: 100%;
 
     text-align: center;
+    .fadeout {
+        -webkit-animation: fadeout 2s;
+        -moz-animation: fadeout 2s;
+        -ms-animation: fadeout 2s;
+        -o-animation: fadeout 2s;
+        animation: fadeout 2s;
+
+        -webkit-animation-fill-mode: forwards;
+        -moz-animation-fill-mode: forwards;
+        -ms-animation-fill-mode: forwards;
+        -o-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+    }
     div {
         display: flex;
         flex-direction: column;
@@ -22,5 +35,54 @@
             font-size: 16px;
             margin: 10px 0 15px 0;
         }
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
