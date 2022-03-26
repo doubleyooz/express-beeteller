@@ -20,7 +20,7 @@ const signIn = (email: string, password: string, statusCode: number) => {
 
                 //console.log(response.body.data);
                 switch(statusCode) {
-                    case 200:
+                    case 200:                        
                         expect(response.status).toEqual(200);
                         expect(response.body).toEqual({
                             message: getMessage('user.valid.sign_in.success'),
@@ -30,6 +30,7 @@ const signIn = (email: string, password: string, statusCode: number) => {
                                 refreshToken: expect.any(String),
                             }),
                         });
+                        USER.token = response.body.metadata.accessToken;
                         break;
                     case 401: 
                         expect(response.status).toEqual(401);
