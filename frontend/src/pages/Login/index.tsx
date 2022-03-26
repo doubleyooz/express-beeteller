@@ -69,9 +69,7 @@ const LoginPage = () => {
                             name="email"
                             placeholder="Example@email.com"
                             style={
-                                errors.email
-                                    ? { borderColor: '#ff0000' }
-                                    : {}
+                                errors.email ? { borderColor: '#ff0000' } : {}
                             }
                         />
                         {errors.email && (
@@ -104,7 +102,19 @@ const LoginPage = () => {
                         )}
                     </div>
 
-                    <input className="submit" type="submit" value="Login" />
+                    <input
+                        className="submit"
+                        type="submit"
+                        value="Login"
+                        disabled={
+                            errors.password || errors.email ? true : false
+                        }
+                        style={
+                            errors.password || errors.email
+                                ? { backgroundColor: '#eed99e' }
+                                : {}
+                        }
+                    />
                 </form>
             </div>
         </div>
