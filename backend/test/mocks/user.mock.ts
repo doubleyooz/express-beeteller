@@ -7,6 +7,13 @@ export const USER = {
     token: '',
 };
 
+export const USER_2 = {
+    email: `test@gmail.com`,
+    password: `aDs@!#!@#dasd1`,
+    _id: randomUUID(),
+    token: '',
+};
+
 export const FAKE_USER = {
     email: `2.com5@d`,
     password: `asdasd`,

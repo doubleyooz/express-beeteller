@@ -1,8 +1,9 @@
+import mongoose from 'mongoose';
 import supertest from 'supertest';
 
 import { app } from '../../src/config/express.config';
 import { getMessage } from '../../src/utils/message.util';
-import { USER } from '../mocks/user.mock';
+import { USER, USER_2 } from '../mocks/user.mock';
 
 const itif = (condition: boolean) => (condition ? it : it.skip);
 const email = false;
@@ -18,14 +19,25 @@ const createUser = (payload: any, statusCode: number) => {
                         !Array.isArray(response.body) &&
                         response.body !== null,
                 ).toBeTruthy();
-
-                USER._id = response.body.data._id;
+                let data = {};
+                switch (payload.n) {
+                    case 1:
+                        USER._id = response.body.data._id;
+                        data = { email: USER.email, _id: USER._id };
+                        break;
+                    case 2:
+                        USER_2._id = response.body.data._id;
+                        data = { email: USER_2.email, _id: USER_2._id };
+                        break;
+                    default:
+                        break;
+                }
                 switch (statusCode) {
                     case 200:
                         expect(response.status).toEqual(200);
                         expect(response.body).toMatchObject({
                             message: getMessage('user.valid.sign_up.success'),
-                            data: { email: USER.email, _id: USER._id },
+                            data: data,
                         });
                         break;
 
@@ -54,10 +66,23 @@ const createUser = (payload: any, statusCode: number) => {
                         !Array.isArray(response.body) &&
                         response.body !== null,
                 ).toBeTruthy();
-                USER.token = response.body.metadata.token;
+
+                let data = {};
+                switch (payload.n) {
+                    case 1:
+                        USER.token = response.body.metadata.token;
+                        data = { _id: USER._id };
+                        break;
+                    case 2:
+                        USER_2.token = response.body.metadata.token;
+                        data = { _id: USER_2._id };
+                        break;
+                    default:
+                        break;
+                }
 
                 expect(response.body).toMatchObject({
-                    data: { _id: USER._id },
+                    data: data,
                     message: getMessage('user.valid.sign_in.success'),
                     metadata: {},
                 });
@@ -133,6 +158,12 @@ const remove = (statusCode: number, _id?: string) => {
                             message: getMessage('default.badRequest'),
                         });
                         break;
+                    case 401:
+                        expect(response.status).toEqual(401);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('default.unauthorized'),
+                        });
+                        break;
 
                     case 404:
                         expect(response.status).toEqual(404);
@@ -164,6 +195,23 @@ const remove = (statusCode: number, _id?: string) => {
                             expect(response.body).toMatchObject({
                                 message: getMessage('user.notfound'),
                             });
+                            break;
+                        case 401:
+                            if (
+                                mongoose.Types.ObjectId.isValid(_id) &&
+                                String(new mongoose.Types.ObjectId(_id)) === _id
+                            ) {
+                                expect(response.status).toEqual(404);
+                                expect(response.body).toMatchObject({
+                                    message: getMessage('user.notfound'),
+                                });
+                            } else {
+                                expect(response.status).toEqual(400);
+                                expect(response.body).toMatchObject({
+                                    message: getMessage('default.badRequest'),
+                                });
+                            }
+
                             break;
 
                         case 400:

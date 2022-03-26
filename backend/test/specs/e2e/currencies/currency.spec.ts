@@ -11,7 +11,7 @@ import { USER } from '../../../mocks/user.mock';
 const itif = (condition: boolean) => (condition ? it : it.skip);
 
 describe('Currencies', () => {
-    createUser({ email: USER.email, password: USER.password }, 200);
+    createUser({ email: USER.email, password: USER.password, n: 1 }, 200);
     signIn(USER.email, USER.password, 200);
 
     describe('should work', () => {
@@ -23,6 +23,6 @@ describe('Currencies', () => {
     describe('should reject', () => {
         latelyPrice('USD-BRL', 20, 400);
         latelyPrice('USDD-BRL', 30, 400);
-        getCurrency('USSD-BRL', 400);       
+        getCurrency('USSD-BRL', 400);
     });
 });
