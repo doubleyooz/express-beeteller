@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import HorizontalBar from './components/HorizontalBar';
+import NotFound from './pages/NotFound';
 
 const Paths = () => {
     return (
@@ -13,6 +14,7 @@ const Paths = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path='*' element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
         </div>
