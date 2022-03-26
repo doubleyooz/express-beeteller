@@ -52,7 +52,7 @@ async function findById(req: Request, res: Response, next: NextFunction) {
     yupObject
         .validate(req.query, { stripUnknown: true })
         .then(() => next())
-        .catch((err: any) => {
+        .catch((err: any) => {           
             return res.status(400).json({
                 message: getMessage('default.badRequest'),
                 data: err.errors,

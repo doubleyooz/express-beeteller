@@ -60,17 +60,24 @@ async function findOne(req: Request, res: Response) {
     const { _id } = req.query;
 
     User.findById(_id)
-        .then(result => {
-            return res.status(200).json({
-                data: result,
-                message: getMessage('user.findOne.success'),
+        .then(result => { 
+            console.log(`${_id}: ${result}`)           
+            if(result)   {   
+                       
+                return res.status(200).json({
+                    data: result,
+                    message: getMessage('user.findOne.success'),
+                });
+            }
+            return res.status(404).json({                
+                message: getMessage('user.notfound'),
             });
         })
         .catch(err => {
             console.log(err);
             return res
-                .status(400)
-                .json({ err: err, message: getMessage('user.notFound') });
+                .status(500)
+                .json({ err: err, message: getMessage('default.serverError') });
         });
 }
 
@@ -79,6 +86,7 @@ async function remove(req: Request, res: Response) {
 
     User.deleteOne({ _id: _id }, function (err) {
         if (err) {
+            console.log(err)
             return res.status(404).json({
                 message: getMessage('user.notfound'),
                 err: err.message,
