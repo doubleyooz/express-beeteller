@@ -44,8 +44,6 @@ export const auth = () => {
                         );
                         req.new_token = `Bearer ${newToken}`;
                         console.log(`New Token: ${newToken}`);
-                    } else {
-                        console.log('Token not expired');
                     }
 
                     payload = null;
