@@ -81,6 +81,10 @@ async function findOne(req: Request, res: Response) {
 
 async function remove(req: Request, res: Response) {
     const { _id } = req.query;
+    if (req.auth !== _id)
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
 
     User.deleteOne({ _id: _id })
         .then(result => {
