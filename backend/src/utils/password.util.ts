@@ -11,5 +11,5 @@ export const matchPassword = async (
     password: string,
     supposedPassword: string,
 ) => {
-    return await bcrypt.compare(password, supposedPassword);
+    return await bcrypt.compare(supposedPassword, password);
 };
