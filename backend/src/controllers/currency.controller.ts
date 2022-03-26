@@ -38,7 +38,7 @@ async function latelyPrice(req: Request, res: Response) {
                 return chew(item.high, item.low, item.pctChange, item.timestamp);
             });            
             return res
-                .status(201)
+                .status(200)
                 .json({
                     data: arr,
                     message: getMessage('currency.lately.prices'),
@@ -102,7 +102,7 @@ async function currentPrice(req: Request, res: Response) {
                 arr.push(chew('BTC/USD', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
 
                 return res
-                    .status(201)
+                    .status(200)
                     .json({
                         data: arr,
                         message: getMessage('currency.current.prices'),
@@ -126,7 +126,7 @@ async function getCurrency(req: Request, res: Response) {
         .get(url + 'last/' + currency)
         .then(json => {
             return res
-                .status(201)
+                .status(200)
                 .json({
                     data: json.data,
                     message: getMessage('currency.get.price'),
