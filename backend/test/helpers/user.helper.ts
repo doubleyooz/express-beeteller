@@ -2,7 +2,6 @@ import supertest from 'supertest';
 
 import { app } from '../../src/config/express.config';
 import { getMessage } from '../../src/utils/message.util';
-import jwt from '../../src/utils/jwt.util';
 import { USER } from '../mocks/user.mock';
 
 const itif = (condition: boolean) => (condition ? it : it.skip);
@@ -64,32 +63,13 @@ const createUser = (payload: any, statusCode: number) => {
                 });
             });
     });
-
-    itif(statusCode == 200)('GET /users/findOne', async () => {
-        await supertest(app)
-            .get(`/users/findOne?_id=${USER._id}`)
-            .send({})
-            .expect(statusCode)
-            .then(response => {
-                // Check type and length
-                expect(
-                    typeof response.body === 'object' &&
-                        !Array.isArray(response.body) &&
-                        response.body !== null,
-                ).toBeTruthy();
-
-                expect(response.body).toMatchObject({
-                    message: getMessage('user.findOne.success'),
-                    data: { email: payload.email, _id: USER._id },
-                });
-            });
-    });
 };
 
 const findOne = (statusCode: number, _id?: string) => {
     it('GET /users/findOne', async () => {
         await supertest(app)
             .get(`/users/findOne?_id=${_id ? _id : USER._id}`)
+            .set('Authorization', 'Bearer ' + USER.token)
             .then(response => {
                 expect(
                     typeof response.body === 'object' &&
@@ -131,6 +111,7 @@ const remove = (statusCode: number, _id?: string) => {
     it('DELETE /users', async () => {
         await supertest(app)
             .delete(`/users?_id=${_id ? _id : USER._id}`)
+            .set('Authorization', 'Bearer ' + USER.token)
             .then(response => {
                 expect(
                     typeof response.body === 'object' &&
@@ -169,6 +150,7 @@ const remove = (statusCode: number, _id?: string) => {
     it('GET /users/findOne', async () => {
         await supertest(app)
             .get(`/users/findOne?_id=${_id ? _id : USER._id}`)
+            .set('Authorization', 'Bearer ' + USER.token)
             .then(response => {
                 expect(
                     typeof response.body === 'object' &&
