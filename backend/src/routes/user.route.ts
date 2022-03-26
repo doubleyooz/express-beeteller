@@ -6,5 +6,6 @@ const routes = Router();
 
 routes.post('/users', UserMiddleware.store, UserController.store);
 routes.get('/users', UserController.list);
+routes.get('/users/findOne', UserController.findOne);
 
 export default routes;

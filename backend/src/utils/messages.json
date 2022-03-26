@@ -13,6 +13,7 @@
     "user.valid.sign_in.success": "Successful login.",
     "user.valid.sign_up.success": "Successful registration.",
     "user.list.success": "User list retrieved successfully!",
+    "user.findOne.success": "User retrieved successfully!",
 
     "currency.lately.prices": "Prices from the period returned",
     "currency.current.prices": "Current prices returned.",

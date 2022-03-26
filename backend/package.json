@@ -24,7 +24,8 @@
     "scripts": {
         "start": "NODE_ENV=dev ts-node-dev --respawn --transpile-only --exit-child --watch src src/index.ts dotenv_config_path=./.env.dev",
         "test": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watch --runInBand",
-        "test:e2e": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles test/specs/e2e/"
+        "test:e2e": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles test/specs/e2e/",
+        "test:unit": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles test/specs/unit/"
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",

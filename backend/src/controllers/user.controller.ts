@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import User, { IUser } from '../models/user.model';
 import { hashPassword } from '../utils/password.util';
 import { getMessage } from '../utils/message.util';
+import mongoose from 'mongoose';
 
 async function store(req: Request, res: Response) {
     const { email, password }: IUser = req.body;
@@ -15,7 +16,7 @@ async function store(req: Request, res: Response) {
         .save()
         .then(result => {
             return res.status(200).json({
-                data: { email: result.email },
+                data: { email: result.email, _id: result._id },
                 message: getMessage('user.valid.sign_up.success'),
             });
         })
@@ -55,4 +56,23 @@ async function list(req: Request, res: Response) {
         });
 }
 
-export default { store, list };
+async function findOne(req: Request, res: Response) {
+    const { _id } = req.query;
+
+    User.findById(_id)
+        .then(result => {
+            return res
+                .status(200)
+                .json({
+                    data: result,
+                    message: getMessage('user.findOne.success'),
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            return res
+                .status(400)
+                .json({ err: err, message: getMessage('user.notFound') });
+        });
+}
+export default { store, findOne, list };
