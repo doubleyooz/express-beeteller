@@ -19,7 +19,9 @@ const signIn = async (req: Request, res: Response) => {
         .split(':');
 
     const user = await User.findOne({ email: email }).select(['password']);
-    const match = user ? matchPassword(user.password, supposedPassword) : null;
+    const match = user
+        ? await matchPassword(user.password, supposedPassword)
+        : null;
 
     if (!match) {
         return res.status(401).json({
@@ -42,14 +44,14 @@ const signIn = async (req: Request, res: Response) => {
     );
 
     req.headers.authorization = `Bearer ${token}`;
-    
+
     /*res.cookie('jid', refreshToken, {
         httpOnly: true,
         path: '/refresh-token',
     });*/
 
     return res.status(200).json({
-        data: { email: user!.email },
+        data: { _id: user!._id },
         message: getMessage('user.valid.sign_in.success'),
         metadata: { accessToken: token, refreshToken: refreshToken },
     });
