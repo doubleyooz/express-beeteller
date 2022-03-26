@@ -1,5 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services';
@@ -33,7 +34,8 @@ const LoginPage = () => {
         resolver: yupResolver(schema),
         mode: 'onBlur',
     });
-
+    const navigate = useNavigate();
+    
     const onSubmit = handleSubmit((data: User) => {
         api.get(`/sign-in`, {
             auth: {
@@ -43,6 +45,8 @@ const LoginPage = () => {
         })
             .then((response) => {
                 console.log(response.data);
+
+                navigate('/');
             })
             .catch((err) => {
                 console.log(err);
