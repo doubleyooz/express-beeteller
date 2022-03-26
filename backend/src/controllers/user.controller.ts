@@ -60,16 +60,14 @@ async function findOne(req: Request, res: Response) {
     const { _id } = req.query;
 
     User.findById(_id)
-        .then(result => { 
-            console.log(`${_id}: ${result}`)           
-            if(result)   {   
-                       
+        .then(result => {
+            if (result) {
                 return res.status(200).json({
                     data: result,
                     message: getMessage('user.findOne.success'),
                 });
             }
-            return res.status(404).json({                
+            return res.status(404).json({
                 message: getMessage('user.notfound'),
             });
         })
@@ -84,19 +82,32 @@ async function findOne(req: Request, res: Response) {
 async function remove(req: Request, res: Response) {
     const { _id } = req.query;
 
-    User.deleteOne({ _id: _id }, function (err) {
-        if (err) {
-            console.log(err)
-            return res.status(404).json({
-                message: getMessage('user.notfound'),
-                err: err.message,
+    User.deleteOne({ _id: _id })
+        .then(result => {
+            switch (result.deletedCount) {
+                case 1:
+                    return res.status(200).json({
+                        message: getMessage('user.delete.success'),
+                    });
+                    break;
+                case 0:
+                    return res.status(404).json({
+                        message: getMessage('user.notfound'),
+                    });
+                    break;
+                default:
+                    return res.status(500).json({
+                        message: getMessage('default.serverError'),
+                    });
+                    break;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({
+                message: getMessage('default.serverError'),
             });
-        } else {
-            return res.status(200).json({
-                message: getMessage('user.delete.success'),
-            });
-        }
-    });
+        });
 }
 
 export default { store, findOne, list, remove };

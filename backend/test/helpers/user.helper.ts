@@ -86,10 +86,10 @@ const createUser = (payload: any, statusCode: number) => {
     });
 };
 
-const findOne = (payload: any, statusCode: number) => {
+const findOne = (statusCode: number, _id?: string) => {
     it('GET /users/findOne', async () => {
         await supertest(app)
-            .get(`/users/findOne?_id=${USER._id}`)
+            .get(`/users/findOne?_id=${_id ? _id : USER._id}`)
             .then(response => {
                 expect(
                     typeof response.body === 'object' &&
@@ -97,10 +97,10 @@ const findOne = (payload: any, statusCode: number) => {
                         response.body !== null,
                 ).toBeTruthy();
 
-                USER._id = response.body.data._id;
                 switch (statusCode) {
                     case 200:
                         expect(response.status).toEqual(200);
+                        USER._id = response.body.data._id;
                         expect(response.body).toMatchObject({
                             message: getMessage('user.findOne.success'),
                             data: { email: USER.email, _id: USER._id },
@@ -113,9 +113,120 @@ const findOne = (payload: any, statusCode: number) => {
                             message: getMessage('default.badRequest'),
                         });
                         break;
+                    case 404:
+                        expect(response.status).toEqual(404);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('user.notfound'),
+                        });
+                        break;
                     default:
                         expect(1).toEqual(2);
                         break;
+                }
+            });
+    });
+};
+
+const remove = (statusCode: number, _id?: string) => {
+    it('DELETE /users', async () => {
+        await supertest(app)
+            .delete(`/users?_id=${_id ? _id : USER._id}`)
+            .then(response => {
+                expect(
+                    typeof response.body === 'object' &&
+                        !Array.isArray(response.body) &&
+                        response.body !== null,
+                ).toBeTruthy();
+
+                switch (statusCode) {
+                    case 200:
+                        expect(response.status).toEqual(200);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('user.delete.success'),
+                        });
+                        break;
+
+                    case 400:
+                        expect(response.status).toEqual(400);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('default.badRequest'),
+                        });
+                        break;
+
+                    case 404:
+                        expect(response.status).toEqual(404);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('user.notfound'),
+                        });
+                        break;
+                    default:
+                        expect(1).toEqual(2);
+                        break;
+                }
+            });
+    });
+
+    it('GET /users/findOne', async () => {
+        await supertest(app)
+            .get(`/users/findOne?_id=${_id ? _id : USER._id}`)
+            .then(response => {
+                expect(
+                    typeof response.body === 'object' &&
+                        !Array.isArray(response.body) &&
+                        response.body !== null,
+                ).toBeTruthy();
+                if (_id) {
+                    switch (statusCode) {
+                        case 404:
+                            expect(response.status).toEqual(404);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('user.notfound'),
+                            });
+                            break;
+
+                        case 400:
+                            expect(response.status).toEqual(400);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('default.badRequest'),
+                            });
+                            break;
+
+                        case 200:
+                            expect(response.status).toEqual(404);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('user.notfound'),
+                            });
+                            break;
+                        default:
+                            expect(1).toEqual(2);
+                            break;
+                    }
+                } else {
+                    switch (statusCode) {
+                        case 404:
+                            expect(response.status).toEqual(200);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('user.findOne.success'),
+                            });
+                            break;
+
+                        case 400:
+                            expect(response.status).toEqual(200);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('user.findOne.success'),
+                            });
+                            break;
+
+                        case 200:
+                            expect(response.status).toEqual(404);
+                            expect(response.body).toMatchObject({
+                                message: getMessage('user.notfound'),
+                            });
+                            break;
+                        default:
+                            expect(1).toEqual(2);
+                            break;
+                    }
                 }
             });
     });
@@ -136,4 +247,4 @@ const sign_in = (payload: { _id: string; tokenVersion: number }) => {
     };
 };
 
-export { createUser, findOne, schema };
+export { createUser, findOne, remove, schema };
