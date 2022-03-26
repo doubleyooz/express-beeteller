@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import api from '../../services';
+import {signIn} from '../../services';
 import './styles.scss';
+import AuthContext from '../../context/AuthProvider';
 
 const LoginPage = () => {
+    const {token} = useContext(AuthContext);
+
     const schema = yup.object().shape({
         email: yup
             .string()
@@ -34,24 +36,9 @@ const LoginPage = () => {
         resolver: yupResolver(schema),
         mode: 'onBlur',
     });
-    const navigate = useNavigate();
-    
-    const onSubmit = handleSubmit((data: User) => {
-        api.get(`/sign-in`, {
-            auth: {
-                username: data.email,
-                password: data.password,
-            },
-        })
-            .then((response) => {
-                console.log(response.data);
 
-                navigate('/');
-            })
-            .catch((err) => {
-                console.log(err);
-                console.log('get info failed');
-            });
+    const onSubmit = handleSubmit((data: User) => {
+        
     });
     return (
         <div className="login-container">

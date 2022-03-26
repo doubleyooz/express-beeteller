@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import Item from '../../components/Item';
-import api from '../../services';
+import { getBoxesData, getLast} from '../../services';
 import './styles.scss';
 
 const Home = () => {
+  
     interface box {
         name: string;
         code: string;
@@ -20,7 +21,7 @@ const Home = () => {
     }
 
     const [boxes, setBoxes] = useState<box[]>([]);
-    const [data, setData] = useState<chewed[]>([]);
+    const [list, setList] = useState<chewed[]>([]);
     const [currencies, setCurrencies] = useState<string[]>([
         'USD-BRL',
         'EUR-BRL',
@@ -29,9 +30,7 @@ const Home = () => {
     const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
     const days = 30;
 
-    let config = {
-        headers: {},
-    };
+  
 
     const bringFirst = (str: string) => {
         const arr = [...currencies];
@@ -42,7 +41,7 @@ const Home = () => {
     };
 
     const sort = (n: number) => {
-        const arr = [...data];
+        const arr = [...list];
         switch (n) {
             case 0:
                 arr.sort((a, b) => a.low - b.low);
@@ -58,50 +57,24 @@ const Home = () => {
             default:
                 break;
         }
-        setData(arr);
+        setList(arr);
     };
 
-    async function getLast10Days() {
-        api.get(
-            `/currencies/lately?currency=${currencies[0]}&days=${days}`,
-            config
-        )
-            .then((response) => {
-                console.log(response.data.data);
-
-                if (response.data !== null) setData(response.data.data);
-                else {
-                    console.log('get info failed');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                console.log('get info failed');
-            });
-    }
-
-    async function getBoxesData() {
-        console.log(boxes);
-        api.get('/currencies/now', config)
-            .then((response) => {
-                //setState({ feed: response.data });
-                if (response.data !== null) setBoxes(response.data.data);
-                else {
-                    console.log('get info failed');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                console.log('get info failed');
-            });
-    }
+   
 
     useEffect(() => {
-        getBoxesData();
+        getBoxesData().then(result => {
+            if(result)
+                setBoxes(result);
+        });
+       
     }, []); // <-- empty dependency array
 
     useEffect(() => {
-        getLast10Days();
+        getLast(currencies[0], days).then(result => {
+            if(result)
+                setList(result);
+        });
     }, [currencies]);
 
     const currentCurrency = (str: string) => {
@@ -299,7 +272,7 @@ const Home = () => {
                             </svg>
                         </div>
                     </div>
-                    {data.map((item, index) => (
+                    {list.map((item, index) => (
                         <Item
                             key={index}
                             date={item.timestamp}
