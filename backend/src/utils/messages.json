@@ -5,6 +5,8 @@
     "default.serverError": "It's not you, it's us. Server Error",
     "default.helloWorld": "Hello World!",
 
+    "invalid.object.id" : "You need to provide a valid IdObject to continue this operation.",
+
     "user.notfound": "user not found or already removed.",
     "user.invalid.email.duplicate": "Email already in use.",
     "user.invalid.password": "Invalid Password",
@@ -14,6 +16,8 @@
     "user.valid.sign_up.success": "Successful registration.",
     "user.list.success": "User list retrieved successfully!",
     "user.findOne.success": "User retrieved successfully!",
+    "user.delete.fail": "The specified user could not be deleted",
+    "user.delete.success": "The specified user was deleted",
 
     "currency.lately.prices": "Prices from the period returned",
     "currency.current.prices": "Current prices returned.",

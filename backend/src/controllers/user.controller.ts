@@ -61,12 +61,10 @@ async function findOne(req: Request, res: Response) {
 
     User.findById(_id)
         .then(result => {
-            return res
-                .status(200)
-                .json({
-                    data: result,
-                    message: getMessage('user.findOne.success'),
-                });
+            return res.status(200).json({
+                data: result,
+                message: getMessage('user.findOne.success'),
+            });
         })
         .catch(err => {
             console.log(err);
@@ -75,4 +73,22 @@ async function findOne(req: Request, res: Response) {
                 .json({ err: err, message: getMessage('user.notFound') });
         });
 }
-export default { store, findOne, list };
+
+async function remove(req: Request, res: Response) {
+    const { _id } = req.query;
+
+    User.deleteOne({ _id: _id }, function (err) {
+        if (err) {
+            return res.status(404).json({
+                message: getMessage('user.notfound'),
+                err: err.message,
+            });
+        } else {
+            return res.status(200).json({
+                message: getMessage('user.delete.success'),
+            });
+        }
+    });
+}
+
+export default { store, findOne, list, remove };
