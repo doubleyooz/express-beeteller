@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Item from '../../components/Item';
 import AuthContext from '../../context/AuthProvider';
-import { getLast } from '../../services';
+import { getLast, refreshToken } from '../../services';
 import './styles.scss';
 
 interface chewed {
@@ -125,8 +125,6 @@ const Items = (props: { currency: string }) => {
     const days = 30;
 
     const increasingly = (n: number) => {
-        console.log(`increasingly ${isInc}`);
-
         const arr = [...list];
         switch (n) {
             case 0:
@@ -150,7 +148,6 @@ const Items = (props: { currency: string }) => {
     };
 
     const decreasingly = (n: number) => {
-        console.log(`decreasingly ${isInc}`);
         const arr = [...list];
         switch (n) {
             case 0:
@@ -174,14 +171,32 @@ const Items = (props: { currency: string }) => {
         setList(arr.reverse());
     };
 
-    useEffect(() => {
-        getLast(props.currency, days, token)
-            .then((result) => {
-                setList(result);
-            })
-            .catch((err) => {
+    const updateList = async () => {
+        try {
+            const response = await getLast(props.currency, days, token);
+
+            setList(response.data.data);
+        } catch (e) {
+            try {
+                const temp = await refreshToken();
+
+                setToken(temp.data.accessToken);
+                const response = await getLast(
+                    props.currency,
+                    days,
+                    temp.data.accessToken
+                );
+
+                setList(response.data.data);
+            } catch (e) {
                 setToken('');
-            });
+                nav('/login');
+            }
+        }
+    };
+
+    useEffect(() => {
+        updateList();
         setLoading(false);
     }, [props.currency]);
 
@@ -195,7 +210,8 @@ const Items = (props: { currency: string }) => {
                     <div className="label">
                         <span className="long">Mínimo</span>
                         <span className="short">Min</span>
-                        <svg className={isInc === 0 ? 'rotate180' : ''}
+                        <svg
+                            className={isInc === 0 ? 'rotate180' : ''}
                             onClick={
                                 isInc === 0
                                     ? () => decreasingly(0)
@@ -220,7 +236,8 @@ const Items = (props: { currency: string }) => {
                     <div className="label">
                         <span className="long">Máximo</span>
                         <span className="short">Max</span>
-                        <svg className={isInc === 1 ? 'rotate180' : ''}
+                        <svg
+                            className={isInc === 1 ? 'rotate180' : ''}
                             onClick={
                                 isInc === 1
                                     ? () => decreasingly(1)
@@ -245,7 +262,8 @@ const Items = (props: { currency: string }) => {
                 <div className="label v">
                     <span className="long">Variação</span>
                     <span className="short">Var</span>
-                    <svg className={isInc === 2 ? 'rotate180' : ''}
+                    <svg
+                        className={isInc === 2 ? 'rotate180' : ''}
                         onClick={
                             isInc === 2
                                 ? () => decreasingly(2)
@@ -286,3 +304,6 @@ const Items = (props: { currency: string }) => {
 };
 
 export default React.memo(List);
+function nav(arg0: string) {
+    throw new Error('Function not implemented.');
+}

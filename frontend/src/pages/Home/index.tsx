@@ -35,18 +35,17 @@ const Dashboard = React.memo(() => {
     const updateBoxes = async (token: string) => {
         try {
             const response = await getBoxesData(token);
-            console.log(response.data.data);
+
             setBoxes(response.data.data);
         } catch (e) {
             try {
                 const token = await refreshToken();
-                console.log(token);
+
                 setToken(token.data.accessToken);
                 const response = await getBoxesData(token.data.accessToken);
-                console.log(response.data.data);
+
                 setBoxes(response.data.data);
             } catch (e) {
-                console.log(e);
                 setToken('');
                 nav('/login');
             }
