@@ -45,15 +45,15 @@ const signIn = async (req: Request, res: Response) => {
 
     req.headers.authorization = `Bearer ${token}`;
 
-    /*res.cookie('jid', refreshToken, {
+    res.cookie('jid', refreshToken, {
         httpOnly: true,
         path: '/refresh-token',
-    });*/
+    });
 
     return res.status(200).json({
         data: { _id: user!._id },
         message: getMessage('user.valid.sign_in.success'),
-        metadata: { accessToken: token, refreshToken: refreshToken },
+        metadata: { accessToken: token },
     });
 };
 
