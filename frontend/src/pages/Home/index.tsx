@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Box from '../../components/Box';
 import List from '../../components/List';
 
 import AuthContext from '../../context/AuthProvider';
-import { getBoxesData, getLast } from '../../services';
+import { getBoxesData, getLast, refreshToken } from '../../services';
 import './styles.scss';
 
 interface box {
@@ -30,15 +30,27 @@ const Dashboard = React.memo(() => {
     const { token, setToken } = useContext(AuthContext);
     const [boxes, setBoxes] = useState<box[]>([]);
     const [loading, setLoading] = useState(true);
+    const nav = useNavigate();
 
-    const updateBoxes = (token: string) => {
-        getBoxesData(token)
-            .then((result) => {
-                setBoxes(result);
-            })
-            .catch((err) => {
+    const updateBoxes = async (token: string) => {
+        try {
+            const response = await getBoxesData(token);
+            console.log(response.data.data);
+            setBoxes(response.data.data);
+        } catch (e) {
+            try {
+                const token = await refreshToken();
+                console.log(token);
+                setToken(token.data.accessToken);
+                const response = await getBoxesData(token.data.accessToken);
+                console.log(response.data.data);
+                setBoxes(response.data.data);
+            } catch (e) {
+                console.log(e);
                 setToken('');
-            });
+                nav('/login');
+            }
+        }
     };
 
     useEffect(() => {
@@ -101,8 +113,8 @@ const Dashboard = React.memo(() => {
 
 const Home: React.FC = () => {
     const { token } = useContext(AuthContext);
-    console.log('home-container');
 
+    console.log(token);
     if (token === '') {
         return <Navigate to="/login" />;
     }
