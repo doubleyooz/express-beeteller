@@ -1,9 +1,57 @@
 import { Request, Response } from 'express';
 
 import jwt from '../utils/jwt.util';
-import User, { IUser } from '../models/user.model';
+import User from '../models/user.model';
 import { getMessage } from '../utils/message.util';
 import { matchPassword } from '../utils/password.util';
+
+async function refreshAccessToken(req: Request, res: Response) {
+    const refreshToken = req.cookies.jid;
+    if (!refreshToken) {
+        return res.status(401).json({
+            message: getMessage('unauthorized.refresh.token.missing'),
+        });
+    }
+    console.log(refreshToken);
+    let payload: any = null;
+    try {
+        payload = jwt.verifyJwt(refreshToken, 2);
+    } catch (err) {
+        console.log(err);
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
+    }
+    if (!payload)
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
+
+    User.findById(payload._id)
+        .then(result => {
+            if (result) {
+                const accessToken = jwt.generateJwt(
+                    {
+                        _id: result._id,
+                        tokenVersion: result.tokenVersion,
+                    },
+                    1,
+                );
+                return res.status(200).json({
+                    accessToken: accessToken,
+                    message: getMessage('default.success'),
+                });
+            }
+            return res.status(401).json({
+                message: getMessage('default.unauthorized'),
+            });
+        })
+        .catch(err => {
+            return res.status(401).json({
+                message: getMessage('default.unauthorized'),
+            });
+        });
+}
 
 const signIn = async (req: Request, res: Response) => {
     const [hashType, hash] = req.headers.authorization!.split(' ');
@@ -57,4 +105,4 @@ const signIn = async (req: Request, res: Response) => {
     });
 };
 
-export default { signIn };
+export default { signIn, refreshAccessToken };

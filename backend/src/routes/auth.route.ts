@@ -4,5 +4,6 @@ import AuthController from '../controllers/auth.controller';
 const routes = Router();
 
 routes.get('/sign-in', AuthController.signIn);
+routes.get('/refresh-token', AuthController.refreshAccessToken);
 
 export default routes;

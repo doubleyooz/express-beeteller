@@ -6,7 +6,8 @@
     "default.helloWorld": "Hello World!",
 
     "invalid.object.id" : "You need to provide a valid IdObject to continue this operation.",
-
+    "unauthorized.refresh.token.missing": "lack credentials",
+        
     "user.notfound": "user not found or already removed.",
     "user.invalid.email.duplicate": "Email already in use.",
     "user.invalid.password": "Invalid Password",
