@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './styles.scss';
 
 const Box = (props: { name: string; value: string; description: string }) => {
-   
+    //const [data, setData] = useState({name: '', value: '', description: ''});
+    //setData(props)
     return (
         <div className="box-container r-mrg">
             <div className="info">

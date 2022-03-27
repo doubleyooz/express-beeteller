@@ -2,10 +2,9 @@ $bar-hpadding: calc(11500vw / 1440 + 20px);
 $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);
 
-$dropdown-nav-width: calc(120vw / 1440 + 69px);
-$dropdown-nav-hpadding: calc(800vw / 1440 + 10px);
+
 $title-size: calc(1600vw / 1440 + 20px);
-$option-size: calc(1000vw / 1440 + 8px);
+
 $label-size: calc(400vw / 1440 + 10px);
 $label-size2: calc(600vw / 1440 + 8px);
 
@@ -49,52 +48,7 @@ $svg-height: calc(1200vh / 1440 + 8px);
         }
     }
 
-    .dropdown-nav {
-        overflow: hidden;
-
-        transition: ease height 0.8s;
-
-        .currency-container {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-
-            .currency {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-
-                align-items: center;
-
-                padding: 8px $dropdown-nav-hpadding;
-
-                border: 1px solid #e0e0e0;
-                box-sizing: border-box;
-                border-radius: 4px;
-
-                span {
-                    margin: 0 8px;
-                    transition: ease all 0.8s;
-                    font-size: $option-size;
-                    color: #333333;
-                }
-            }
-        }
-        div {
-            svg {
-                width: $label-size;
-                height: 8px;
-
-                margin: 0 4px;
-
-                &:hover {
-                    path {
-                        stroke: black;
-                    }
-                }
-            }
-        }
-    }
+  
 }
 
 .home-container {
