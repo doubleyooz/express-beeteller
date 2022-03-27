@@ -11,18 +11,116 @@ interface chewed {
     timestamp: string;
 }
 
-const List = () => {
-    const { token, setToken } = useContext(AuthContext);
+const currentCurrency = (str: string) => {
+    switch (str) {
+        case 'USD-BRL':
+            return 'Dolar Americano';
+        case 'EUR-BRL':
+            return 'Euro';
+        case 'BTC-BRL':
+            return 'Bitcoin';
+        default:
+            return '';
+    }
+};
 
-    const [list, setList] = useState<chewed[]>([]);
+const DropdownNav = (props: {
+    currencies: string[];
+    bringFirst: (str: string) => void;
+}) => {
+    const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
+
+    const bringFirst = (str: string) => {
+        props.bringFirst(str);
+        setIsDisplayed(!isDisplayed);
+    };
+
+    return (
+        <div
+            className="dropdown-nav"
+            style={isDisplayed ? { height: '120px' } : { height: '40px' }}
+        >
+            <div className="currency-container">
+                {props.currencies.map((item, index) => (
+                    <div className="currency" key={index}>
+                        <span
+                            className="long"
+                            onClick={
+                                props.currencies[0] !== item
+                                    ? () => bringFirst(item)
+                                    : () => {}
+                            }
+                        >
+                            {currentCurrency(item)}
+                        </span>
+
+                        <span
+                            className="short"
+                            onClick={
+                                props.currencies[0] !== item
+                                    ? () => bringFirst(item)
+                                    : () => {}
+                            }
+                        >
+                            {item}
+                        </span>
+
+                        {props.currencies[0] === item && (
+                            <div>
+                                <svg
+                                    onClick={() => setIsDisplayed(!isDisplayed)}
+                                    viewBox="0 0 15 8"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M1.5 1L7.5 7L13.5 1"
+                                        stroke="#828282"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const List = () => {
     const [currencies, setCurrencies] = useState<string[]>([
         'USD-BRL',
         'EUR-BRL',
         'BTC-BRL',
     ]);
-    const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
-    const [loading, setLoading] = useState(true);
+    const bringFirst = (str: string) => {
+        const arr = [...currencies];
 
+        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0));
+
+        setCurrencies(arr);
+    };
+
+    return (
+        <div className="table r-mrg">
+            <div className="header">
+                <span className="title">Cotações</span>
+                <DropdownNav bringFirst={bringFirst} currencies={currencies} />
+            </div>
+            <div className="list">
+                <Items currency={currencies[0]} />
+            </div>
+        </div>
+    );
+};
+
+const Items = (props: { currency: string }) => {
+    const [list, setList] = useState<chewed[]>([]);
+    const [loading, setLoading] = useState(true);
+    const { token, setToken } = useContext(AuthContext);
     const days = 30;
 
     const sort = (n: number) => {
@@ -45,153 +143,50 @@ const List = () => {
         setList(arr);
     };
 
-    const bringFirst = (str: string) => {
-        const arr = [...currencies];
-
-        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0));
-        setIsDisplayed(!isDisplayed);
-        setCurrencies(arr);
-    };
-
-    const currentCurrency = (str: string) => {
-        switch (str) {
-            case 'USD-BRL':
-                return 'Dolar Americano';
-            case 'EUR-BRL':
-                return 'Euro';
-            case 'BTC-BRL':
-                return 'Bitcoin';
-            default:
-                return '';
-        }
-    };
     useEffect(() => {
-        getLast(currencies[0], days, token)
+        getLast(props.currency, days, token)
             .then((result) => {
                 setList(result);
             })
             .catch((err) => {
                 setToken('');
             });
-            setLoading(false);
-    }, []);
+        setLoading(false);
+    }, [props.currency]);
 
     return (
-        <div className="table r-mrg">
-            <div className="header">
-                <span className="title">Cotações</span>
-                <div
-                    className="dropdown-nav"
-                    style={
-                        isDisplayed ? { height: '120px' } : { height: '40px' }
-                    }
-                >
-                    <div className="currency-container">
-                        {currencies.map((item, index) => (
-                            <div className="currency" key={index}>
-                                <span
-                                    className="long"
-                                    onClick={
-                                        currencies[0] !== item
-                                            ? () => bringFirst(item)
-                                            : () => {}
-                                    }
-                                >
-                                    {currentCurrency(item)}
-                                </span>
-
-                                <span
-                                    className="short"
-                                    onClick={
-                                        currencies[0] !== item
-                                            ? () => bringFirst(item)
-                                            : () => {}
-                                    }
-                                >
-                                    {item}
-                                </span>
-
-                                {currencies[0] === item && (
-                                    <div>
-                                        <svg
-                                            onClick={() =>
-                                                setIsDisplayed(!isDisplayed)
-                                            }
-                                            viewBox="0 0 15 8"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M1.5 1L7.5 7L13.5 1"
-                                                stroke="#828282"
-                                                strokeWidth="2"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
+        <div className="list">
+            <div className="table-head">
+                <div className="label" style={{ justifyContent: 'flex-start' }}>
+                    <span>Moeda</span>
                 </div>
-            </div>
-            <div className="list">
-                <div className="table-head">
-                    <div
-                        className="label"
-                        style={{ justifyContent: 'flex-start' }}
-                    >
-                        <span>Moeda</span>
-                    </div>
-                    <div className="prices">
-                        <div className="label">
-                            <span className="long">Mínimo</span>
-                            <span className="short">Min</span>
-                            <svg
-                                onClick={() => sort(0)}
-                                width="15"
-                                height="8"
-                                viewBox="0 0 15 8"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M1.5 1L7.5 7L13.5 1"
-                                    stroke="#828282"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </div>
-
-                        <div className="label">
-                            <span className="long">Máximo</span>
-                            <span className="short">Max</span>
-                            <svg
-                                onClick={() => sort(1)}
-                                width="15"
-                                height="8"
-                                viewBox="0 0 15 8"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M1.5 1L7.5 7L13.5 1"
-                                    stroke="#828282"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </div>
-                    </div>
-                    <div className="label v">
-                        <span className="long">Variação</span>
-                        <span className="short">Var</span>
+                <div className="prices">
+                    <div className="label">
+                        <span className="long">Mínimo</span>
+                        <span className="short">Min</span>
                         <svg
-                            onClick={() => sort(2)}
+                            onClick={() => sort(0)}
+                            width="15"
+                            height="8"
+                            viewBox="0 0 15 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M1.5 1L7.5 7L13.5 1"
+                                stroke="#828282"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </div>
+
+                    <div className="label">
+                        <span className="long">Máximo</span>
+                        <span className="short">Max</span>
+                        <svg
+                            onClick={() => sort(1)}
                             width="15"
                             height="8"
                             viewBox="0 0 15 8"
@@ -208,21 +203,41 @@ const List = () => {
                         </svg>
                     </div>
                 </div>
-                {!loading ? (
-                    list.map((item, index) => (
-                        <Item
-                            key={index}
-                            date={item.timestamp}
-                            name={currentCurrency(currencies[0])}
-                            min={item.low}
-                            max={item.high}
-                            pctChange={parseFloat(item.pctChange)}
+                <div className="label v">
+                    <span className="long">Variação</span>
+                    <span className="short">Var</span>
+                    <svg
+                        onClick={() => sort(2)}
+                        width="15"
+                        height="8"
+                        viewBox="0 0 15 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M1.5 1L7.5 7L13.5 1"
+                            stroke="#828282"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
-                    ))
-                ) : (
-                    <div>Loading...</div>
-                )}
+                    </svg>
+                </div>
             </div>
+            {!loading ? (
+                list.map((item, index) => (
+                    <Item
+                        key={index}
+                        date={item.timestamp}
+                        name={currentCurrency(props.currency)}
+                        min={item.low}
+                        max={item.high}
+                        pctChange={parseFloat(item.pctChange)}
+                    />
+                ))
+            ) : (
+                <div> Loading...</div>
+            )}
         </div>
     );
 };
