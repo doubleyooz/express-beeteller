@@ -135,5 +135,8 @@ $item-height: calc(8400vh / 1024 + 20px);
         .v {
             justify-content: center;
         }
+        .info {
+            max-width: 90%;
+        }
     }
 }

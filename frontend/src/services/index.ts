@@ -25,29 +25,40 @@ const config = (token: string) => {
 };
 
 const getLast = async (currency: string, days: number, token: string) => {
-    return api.get(
-        `/currencies/lately?currency=${currency}&days=${days}`,
-        config(token)
-    )
+    return api
+        .get(
+            `/currencies/lately?currency=${currency}&days=${days}`,
+            config(token)
+        )
         .then((response) => {
             return response.data.data;
         })
         .catch((err) => {
             console.log('get info failed');
             return err;
-            
         });
 };
 
 const getBoxesData = async (token: string) => {
-    return api.get('/currencies/now', config(token))
+    return api
+        .get('/currencies/now', config(token))
         .then((response) => {
             return response.data.data;
         })
         .catch((err) => {
             console.log('get info failed');
             return err;
-           
+        });
+};
+
+const refreshToken = async () => {
+    return api
+        .get('/refresh-token', { withCredentials: true })
+        .then((result) => {
+            return result.data;
+        })
+        .catch((err) => {
+            return err;
         });
 };
 
@@ -70,4 +81,4 @@ const signIn: (email: string, password: string) => Promise<Response> = async (
         });
 };
 
-export { signIn, getBoxesData, getLast };
+export { signIn, getBoxesData, getLast, refreshToken };

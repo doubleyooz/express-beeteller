@@ -8,8 +8,7 @@ import './styles.scss';
 
 const Home: React.FC = () => {
     const { token } = useContext(AuthContext);
-    console.log(token);
-
+    
     interface box {
         name: string;
         code: string;
@@ -63,8 +62,7 @@ const Home: React.FC = () => {
         setList(arr);
     };
 
-    useEffect(() => {
-        console.log('useEffect');
+    useEffect(() => {       
         Promise.all([getBoxesData(token), getLast(currencies[0], days, token)])
             .then((responses) => {
                 setBoxes(responses[0]);

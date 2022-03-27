@@ -4,6 +4,7 @@ import { signIn } from '../services';
 
 interface AuthContextData {
     token: string;
+    setToken:  React.Dispatch<React.SetStateAction<string>>;
     handleSignIn(email: string, password: string): Promise<void>;
 }
 
@@ -21,7 +22,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         else throw new Error('login failed');
     }
     return (
-        <AuthContext.Provider value={{ token: token, handleSignIn }}>
+        <AuthContext.Provider value={{ token: token, handleSignIn, setToken: setToken }}>
             {children}
         </AuthContext.Provider>
     );
