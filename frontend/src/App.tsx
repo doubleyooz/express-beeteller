@@ -1,11 +1,14 @@
 import React from 'react';
+import { AuthProvider } from './context/AuthProvider';
 import './global.scss';
-import Paths from './routes';
+import Routes from './routes';
 
 function App() {
     return (
         <div className="app">
-            <Paths />
+            <AuthProvider>
+                <Routes />
+            </AuthProvider>
         </div>
     );
 }

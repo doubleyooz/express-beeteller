@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {signIn} from '../../services';
 import './styles.scss';
 import AuthContext from '../../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const {token} = useContext(AuthContext);
+    const { handleSignIn } = useContext(AuthContext);
+    const nav = useNavigate();
 
     const schema = yup.object().shape({
         email: yup
@@ -37,9 +38,16 @@ const LoginPage = () => {
         mode: 'onBlur',
     });
 
-    const onSubmit = handleSubmit((data: User) => {
-        
+    const onSubmit = handleSubmit(async (data: User) => {
+        handleSignIn(data.email, data.password)
+            .then(() => {
+                nav('/');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     });
+
     return (
         <div className="login-container">
             <div className="image"></div>
