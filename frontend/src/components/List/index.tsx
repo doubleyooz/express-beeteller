@@ -120,27 +120,58 @@ const List = () => {
 const Items = (props: { currency: string }) => {
     const [list, setList] = useState<chewed[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isInc, setIsInc] = useState(5);
     const { token, setToken } = useContext(AuthContext);
     const days = 30;
 
-    const sort = (n: number) => {
+    const increasingly = (n: number) => {
+        console.log(`increasingly ${isInc}`);
+
         const arr = [...list];
         switch (n) {
             case 0:
                 arr.sort((a, b) => a.low - b.low);
+                setIsInc(0);
                 break;
             case 1:
                 arr.sort((a, b) => a.high - b.high);
+                setIsInc(1);
                 break;
             case 2:
                 arr.sort(
                     (a, b) => parseFloat(a.pctChange) - parseFloat(b.pctChange)
                 );
+                setIsInc(2);
                 break;
             default:
                 break;
         }
         setList(arr);
+    };
+
+    const decreasingly = (n: number) => {
+        console.log(`decreasingly ${isInc}`);
+        const arr = [...list];
+        switch (n) {
+            case 0:
+                arr.sort((a, b) => a.low - b.low);
+
+                break;
+            case 1:
+                arr.sort((a, b) => a.high - b.high);
+
+                break;
+            case 2:
+                arr.sort(
+                    (a, b) => parseFloat(a.pctChange) - parseFloat(b.pctChange)
+                );
+
+                break;
+            default:
+                break;
+        }
+        setIsInc(5);
+        setList(arr.reverse());
     };
 
     useEffect(() => {
@@ -164,8 +195,12 @@ const Items = (props: { currency: string }) => {
                     <div className="label">
                         <span className="long">Mínimo</span>
                         <span className="short">Min</span>
-                        <svg
-                            onClick={() => sort(0)}
+                        <svg className={isInc === 0 ? 'rotate180' : ''}
+                            onClick={
+                                isInc === 0
+                                    ? () => decreasingly(0)
+                                    : () => increasingly(0)
+                            }
                             width="15"
                             height="8"
                             viewBox="0 0 15 8"
@@ -185,8 +220,12 @@ const Items = (props: { currency: string }) => {
                     <div className="label">
                         <span className="long">Máximo</span>
                         <span className="short">Max</span>
-                        <svg
-                            onClick={() => sort(1)}
+                        <svg className={isInc === 1 ? 'rotate180' : ''}
+                            onClick={
+                                isInc === 1
+                                    ? () => decreasingly(1)
+                                    : () => increasingly(1)
+                            }
                             width="15"
                             height="8"
                             viewBox="0 0 15 8"
@@ -206,8 +245,12 @@ const Items = (props: { currency: string }) => {
                 <div className="label v">
                     <span className="long">Variação</span>
                     <span className="short">Var</span>
-                    <svg
-                        onClick={() => sort(2)}
+                    <svg className={isInc === 2 ? 'rotate180' : ''}
+                        onClick={
+                            isInc === 2
+                                ? () => decreasingly(2)
+                                : () => increasingly(2)
+                        }
                         width="15"
                         height="8"
                         viewBox="0 0 15 8"
