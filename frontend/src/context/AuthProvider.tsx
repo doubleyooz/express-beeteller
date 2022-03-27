@@ -12,7 +12,8 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [token, setToken] = useState('');
-
+    
+    
     async function handleSignIn(email: string, password: string) {
         const response = await signIn(email, password);
 
@@ -20,7 +21,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         else throw new Error('login failed');
     }
     return (
-        <AuthContext.Provider value={{ token: '', handleSignIn }}>
+        <AuthContext.Provider value={{ token: token, handleSignIn }}>
             {children}
         </AuthContext.Provider>
     );

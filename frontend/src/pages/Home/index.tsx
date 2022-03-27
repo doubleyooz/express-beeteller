@@ -1,11 +1,15 @@
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import Box from '../../components/Box';
 import Item from '../../components/Item';
-import { getBoxesData, getLast} from '../../services';
+import AuthContext from '../../context/AuthProvider';
+import { getBoxesData, getLast } from '../../services';
 import './styles.scss';
 
-const Home = () => {
-  
+const Home: React.FC = () => {
+    const { token } = useContext(AuthContext);
+    console.log(token);
+
     interface box {
         name: string;
         code: string;
@@ -28,9 +32,8 @@ const Home = () => {
         'BTC-BRL',
     ]);
     const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
+    const [loading, setLoading] = useState(true);
     const days = 30;
-
-  
 
     const bringFirst = (str: string) => {
         const arr = [...currencies];
@@ -60,20 +63,25 @@ const Home = () => {
         setList(arr);
     };
 
-   
-
     useEffect(() => {
-        getBoxesData().then(result => {
-            if(result)
-                setBoxes(result);
-        });
-       
+        console.log('useEffect');
+        Promise.all([getBoxesData(token), getLast(currencies[0], days, token)])
+            .then((responses) => {
+                setBoxes(responses[0]);
+
+                setList(responses[1]);
+
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     }, []); // <-- empty dependency array
 
     useEffect(() => {
-        getLast(currencies[0], days).then(result => {
-            if(result)
-                setList(result);
+        getLast(currencies[0], days, token).then((result) => {
+            if (result) setList(result);
         });
     }, [currencies]);
 
@@ -96,7 +104,7 @@ const Home = () => {
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
-                        onClick={() => getBoxesData()}
+                        onClick={() => getBoxesData(token)}
                         className="r-mrg"
                         viewBox="0 0 24 20"
                         fill="none"
@@ -272,16 +280,20 @@ const Home = () => {
                             </svg>
                         </div>
                     </div>
-                    {list.map((item, index) => (
-                        <Item
-                            key={index}
-                            date={item.timestamp}
-                            name={currentCurrency(currencies[0])}
-                            min={item.low}
-                            max={item.high}
-                            pctChange={parseFloat(item.pctChange)}
-                        />
-                    ))}
+                    {!loading ? (
+                        list.map((item, index) => (
+                            <Item
+                                key={index}
+                                date={item.timestamp}
+                                name={currentCurrency(currencies[0])}
+                                min={item.low}
+                                max={item.high}
+                                pctChange={parseFloat(item.pctChange)}
+                            />
+                        ))
+                    ) : (
+                        <div>Loading...</div>
+                    )}
                 </div>
             </div>
         </div>

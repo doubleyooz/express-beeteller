@@ -25,38 +25,30 @@ const config = (token: string) => {
 };
 
 const getLast = async (currency: string, days: number, token: string) => {
-    api.get(
+    return api.get(
         `/currencies/lately?currency=${currency}&days=${days}`,
         config(token)
     )
         .then((response) => {
-            console.log(response.data.data);
-
-            if (response.data !== null) return response.data.data;
-            else {
-                console.log('get info failed');
-            }
+            return response.data.data;
         })
         .catch((err) => {
-            console.log(err);
             console.log('get info failed');
+            return err;
+            
         });
-    return null;
 };
 
 const getBoxesData = async (token: string) => {
-    api.get('/currencies/now', config(token))
+    return api.get('/currencies/now', config(token))
         .then((response) => {
-            if (response.data !== null) return response.data.data;
-            else {
-                console.log('get info failed');
-            }
+            return response.data.data;
         })
         .catch((err) => {
-            console.log(err);
             console.log('get info failed');
+            return err;
+           
         });
-    return null;
 };
 
 const signIn: (email: string, password: string) => Promise<Response> = async (
