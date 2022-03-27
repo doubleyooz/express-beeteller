@@ -10,14 +10,16 @@ import AuthContext from '../context/AuthProvider';
 import { refreshToken } from '../services';
 
 const Paths: React.FC = () => {
-    const { setToken } = useContext(AuthContext);
+    const { token, setToken } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        refreshToken().then((result) => {            
-            if (result) setToken(result.accessToken);
-            setLoading(false);
-        });
+        if (token === '') {            
+            refreshToken().then((result) => {
+                if (result) setToken(result.accessToken);
+                setLoading(false);
+            });
+        } else setLoading(false);
     }, []);
 
     return (
