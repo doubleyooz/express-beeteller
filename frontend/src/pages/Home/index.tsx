@@ -1,10 +1,12 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Box from '../../components/Box';
 import List from '../../components/List';
 
 import AuthContext from '../../context/AuthProvider';
-import { getBoxesData, getLast, refreshToken } from '../../services';
+import { getBoxesData, refreshToken } from '../../services';
+import { useTranslation, Trans } from 'react-i18next';
+
 import './styles.scss';
 
 interface box {
@@ -27,6 +29,7 @@ const currentCurrency = (str: string) => {
 };
 
 const Dashboard = React.memo(() => {
+    const { t, i18n } = useTranslation();
     const { token, setToken } = useContext(AuthContext);
     const [boxes, setBoxes] = useState<box[]>([]);
     const [loading, setLoading] = useState(true);
@@ -61,7 +64,7 @@ const Dashboard = React.memo(() => {
     return (
         <div className="dashboard">
             <div className="header">
-                <span className="title">Moedas</span>
+                <span className="title">{t('dashboard.box.title')}</span>
                 <svg
                     onClick={() => updateBoxes(token)}
                     className="r-mrg"

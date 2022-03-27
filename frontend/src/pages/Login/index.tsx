@@ -2,11 +2,16 @@ import React, { useContext } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import './styles.scss';
-import AuthContext from '../../context/AuthProvider';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import AuthContext from '../../context/AuthProvider';
+import { useTranslation, Trans } from 'react-i18next';
+
+
+import './styles.scss';
+
 const LoginPage = () => {
+    const { t, i18n } = useTranslation();
     const { handleSignIn, token } = useContext(AuthContext);
     const nav = useNavigate();
 
@@ -57,7 +62,7 @@ const LoginPage = () => {
             <div className="image"></div>
             <div className="card">
                 <div className="header">
-                    <span className="title">Olá! Bem vindo de volta.</span>
+                    <span className="title"> {t('login.header.title')}</span>
                     <br />
                     <span className="subtitle">
                         Faça Login com seus dados inseridos durante o registro.
