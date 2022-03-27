@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import './styles.scss';
 
 const Box = (props: { name: string; value: string; description: string }) => {
+   
     return (
         <div className="box-container r-mrg">
             <div className="info">
@@ -39,4 +40,11 @@ const Box = (props: { name: string; value: string; description: string }) => {
     );
 };
 
-export default Box;
+export default React.memo(Box);
+function useState(props: {
+    name: string;
+    value: string;
+    description: string;
+}): [any, any] {
+    throw new Error('Function not implemented.');
+}

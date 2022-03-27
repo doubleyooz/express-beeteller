@@ -1,28 +1,29 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Box from '../../components/Box';
 import Item from '../../components/Item';
 import AuthContext from '../../context/AuthProvider';
 import { getBoxesData, getLast } from '../../services';
 import './styles.scss';
 
+interface box {
+    name: string;
+    code: string;
+    codein: string;
+    bid: string;
+}
+
+interface chewed {
+    high: number;
+    low: number;
+    pctChange: string;
+    timestamp: string;
+}
+
+
 const Home: React.FC = () => {
-    const { token } = useContext(AuthContext);
-    
-    interface box {
-        name: string;
-        code: string;
-        codein: string;
-        bid: string;
-    }
-
-    interface chewed {
-        high: number;
-        low: number;
-        pctChange: string;
-        timestamp: string;
-    }
-
+    const { token, setToken } = useContext(AuthContext);
     const [boxes, setBoxes] = useState<box[]>([]);
     const [list, setList] = useState<chewed[]>([]);
     const [currencies, setCurrencies] = useState<string[]>([
@@ -62,27 +63,42 @@ const Home: React.FC = () => {
         setList(arr);
     };
 
-    useEffect(() => {       
-        Promise.all([getBoxesData(token), getLast(currencies[0], days, token)])
-            .then((responses) => {
-                setBoxes(responses[0]);
-
-                setList(responses[1]);
-
-                setLoading(false);
+    const updateBoxes = useCallback((token: string) => {
+        getBoxesData(token)
+            .then((result) => {
+                setBoxes(result);
             })
             .catch((err) => {
-                console.log(err);
-                setLoading(false);
+                setToken('');
             });
+    }, []);
+
+    useEffect(() => {
+        console.log('useEffect once');
+        updateBoxes(token);
+
+        getLast(currencies[0], days, token)
+            .then((result) => {
+                setList(result);
+            })
+            .catch((err) => {
+                setToken('');
+            });
+        setLoading(false);
     }, []); // <-- empty dependency array
 
     useEffect(() => {
-        getLast(currencies[0], days, token).then((result) => {
-            if (result) setList(result);
-        });
+        console.log('List');
+        getLast(currencies[0], days, token)
+            .then((result) => {
+                if (result) setList(result);
+            })
+            .catch((err) => {
+                setToken('');
+            });
     }, [currencies]);
 
+    console.log('home-container');
     const currentCurrency = (str: string) => {
         switch (str) {
             case 'USD-BRL':
@@ -96,13 +112,16 @@ const Home: React.FC = () => {
         }
     };
 
+    if (token === '') {
+        return <Navigate to="/login" />;
+    }
     return (
         <div className="home-container">
             <div className="dashboard">
                 <div className="header">
                     <span className="title">Moedas</span>
                     <svg
-                        onClick={() => getBoxesData(token)}
+                        onClick={() => updateBoxes(token)}
                         className="r-mrg"
                         viewBox="0 0 24 20"
                         fill="none"
@@ -298,4 +317,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default React.memo(Home);
