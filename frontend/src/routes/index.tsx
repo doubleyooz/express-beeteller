@@ -16,7 +16,9 @@ const Paths: React.FC = () => {
     useEffect(() => {
         if (token === '') {            
             refreshToken().then((result) => {
-                if (result) setToken(result.accessToken);
+                if (result) setToken(result.data.accessToken);
+                setLoading(false);
+            }).catch(err => {
                 setLoading(false);
             });
         } else setLoading(false);
