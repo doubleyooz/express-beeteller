@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './styles.scss';
 import AuthContext from '../../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const { handleSignIn } = useContext(AuthContext);
+    const { handleSignIn, token } = useContext(AuthContext);
     const nav = useNavigate();
 
     const schema = yup.object().shape({
@@ -47,6 +47,10 @@ const LoginPage = () => {
                 console.log(err);
             });
     });
+
+    if(token !== ''){
+        return <Navigate to='/'/>
+    }
 
     return (
         <div className="login-container">
