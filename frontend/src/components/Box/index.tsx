@@ -41,10 +41,3 @@ const Box = (props: { name: string; value: string; description: string }) => {
 };
 
 export default React.memo(Box);
-function useState(props: {
-    name: string;
-    value: string;
-    description: string;
-}): [any, any] {
-    throw new Error('Function not implemented.');
-}

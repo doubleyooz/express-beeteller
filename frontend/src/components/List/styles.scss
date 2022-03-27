@@ -1,0 +1,140 @@
+$table-head-r-padding: calc(1500vw / 1440 + 10px);
+$table-head-l-padding: calc(3000vw / 1440 + 10px);
+$label-size: calc(400vw / 1440 + 10px);
+$label-size2: calc(600vw / 1440 + 8px);
+
+.list {
+    .table-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 3px $table-head-r-padding 3px $table-head-l-padding;
+
+        .label {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                margin: 0 4px 0 0;
+                color: #828282;
+            }
+
+            .short {
+                display: none;
+            }
+
+            .long {
+                display: block;
+            }
+        }
+        .label.v {
+            justify-content: flex-end;
+        }
+
+        .prices {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        div {
+            width: 100%;
+        }
+
+        span {
+            font-size: $label-size;
+            line-height: 16px;
+            letter-spacing: -0.04em;
+        }
+
+        svg {
+            width: $label-size;
+            height: 8px;
+
+            margin: 0 0px;
+
+            &:hover {
+                path {
+                    stroke: black;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 720px) {
+    .list {
+        .table-head {
+            .prices {
+                margin-left: 4px;
+            }
+            .label {
+                &:not(.v) {
+                    .short {
+                        display: block;
+                    }
+
+                    .long {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 500px) {
+    .header {
+        .dropdown-nav {
+            .currency-container {
+                .currency {
+                    .long {
+                        display: none;
+                    }
+
+                    .short {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    .list {
+        .table-head {
+            .prices {
+                margin-left: 8px;
+                .label:first-child {
+                    margin: 0 8px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and(max-width: 425px) {
+    .home-container {
+        .list {
+            .table-head {
+                .label {
+                    span {
+                        font-size: $label-size2;
+                    }
+                }
+                .label.v {
+                    justify-content: center;
+                    .short {
+                        display: block;
+                    }
+
+                    .long {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
