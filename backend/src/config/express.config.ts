@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(cors(corsOptionsDelegate));
+app.use(cors());
+//app.use(cors(corsOptionsDelegate));
 
 app.use(appRoute);
 app.use(authRoute);
