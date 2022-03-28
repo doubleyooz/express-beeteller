@@ -25,10 +25,15 @@ export const auth = () => {
 
             User.exists({
                 _id: payload._id,
-                active: true,
-                token_version: payload.token_version,
+                tokenVersion: payload.tokenVersion,
             })
                 .then(result => {
+                    if(result === null) {
+                        return res.status(401).json({
+                            message: getMessage('default.unauthorized')
+                            
+                        });
+                    }
                     req.auth = payload._id;
                     let current_time = Date.now().valueOf() / 1000;
                     if (
