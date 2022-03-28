@@ -39,7 +39,7 @@ const LoginPage = () => {
         formState: { errors },
     } = useForm<User>({
         resolver: yupResolver(schema),
-        mode: 'onChange',
+        mode: 'onBlur',
     });
 
     const onSubmit = handleSubmit(async (data: User) => {
