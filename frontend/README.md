@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# How to Run
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Set a .env file in root folder and store the backend url as follows:
+```
+#.env
+REACT_APP_BASE_URL=http://localhost:9999 
+```
+
+There was no signUp page in this project, therefore add users to the Database using Postman/Insonmia or manually to see the website working.
+Make sure to create an account and set a cluster here https://www.mongodb.com/cloud/atlas/register.
+
 
 ## Available Scripts
 

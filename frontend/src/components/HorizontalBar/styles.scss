@@ -8,8 +8,8 @@ $delimiter-height: calc(450vh / 1024 + 30px);
 
 $text-size: calc(900vw / 1440 + 9px);
 
-$svg-width: calc(400vw / 1440 + 10px);
-$svg-height: calc(1400vh / 1024 + 7px);
+$svg-width: calc(400vw / 1440 + 8px);
+$svg-height: calc(1000vh / 1024 + 8px);
 
 $header-hmarging: calc(2000vw / 1440 + 12px);
 
@@ -46,6 +46,8 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
         .activity {
             display: flex;
             order: 2;
+
+            align-items: center;
             span {
                 font: $text-size 'Roboto', sans-serif;
                 font-variant: small-caps;
@@ -53,6 +55,8 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
                 letter-spacing: 0.15em;
                 color: #bdbdbd;
                 margin-right: $bar-marging-2;
+                
+                font-variant: small-caps;
             }
 
             svg {
