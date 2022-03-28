@@ -120,9 +120,9 @@ const Home: React.FC = () => {
     if (token === '') {
         return <Navigate to="/login" />;
     }
+    // <div onClick={() => revokeToken()}>logout</div>
     return (
         <div className="home-container">
-            <div onClick={() => revokeToken()}>logout</div>
             <Dashboard />
             <List />
         </div>
