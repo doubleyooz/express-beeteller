@@ -138,5 +138,11 @@ $item-height: calc(8400vh / 1024 + 20px);
         .info {
             max-width: 90%;
         }
+
+        .prices {
+            .label {
+                margin-right: 5px;    
+            }
+        }
     }
 }

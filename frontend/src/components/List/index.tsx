@@ -32,8 +32,8 @@ const DropdownNav = (props: {
     bringFirst: (str: string) => void;
 }) => {
     const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
-   
-  
+    const { t, i18n } = useTranslation();
+
     const bringFirst = (str: string) => {
         props.bringFirst(str);
         setIsDisplayed(!isDisplayed);
@@ -100,7 +100,7 @@ const List = () => {
         'EUR-BRL',
         'BTC-BRL',
     ]);
-    
+
     const bringFirst = (str: string) => {
         const arr = [...currencies];
 
@@ -178,7 +178,7 @@ const Items = (props: { currency: string }) => {
         setIsInc(5);
         setList(arr.reverse());
     };
-   
+
     const updateList = async () => {
         try {
             const response = await getLast(props.currency, days, token);

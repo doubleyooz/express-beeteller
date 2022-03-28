@@ -1,5 +1,6 @@
 $bar-height: calc(8500vh / 1024);
 $bar-padding: calc(11500vw / 1440 + 20px);
+$bar-padding-2: calc(11500vw / 1440 + 5px);
 $bar-marging: calc(100vw / 1440 + 10px);
 $bar-marging-2: calc(600vw / 1440 + 2px);
 
@@ -8,7 +9,7 @@ $delimiter-height: calc(450vh / 1024 + 30px);
 $text-size: calc(900vw / 1440 + 9px);
 
 $svg-width: calc(400vw / 1440 + 10px);
-$svg-height: calc(1400vw / 1440 + 7px);
+$svg-height: calc(1400vh / 1024 + 7px);
 
 $header-hmarging: calc(2000vw / 1440 + 12px);
 
@@ -60,12 +61,20 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
             }
         }
     }
+    .lang-nav {
+        overflow: hidden;
+        position: relative;
 
-    .lang {
-        font: $text-size 'Roboto', sans-serif;
-        line-height: 21px;
-        letter-spacing: -0.04em;
-        color: #333333;
+        .languages-container {
+            .language {
+                span {
+                    font: $text-size 'Roboto', sans-serif;
+                    line-height: 21px;
+                    letter-spacing: -0.04em;
+                    color: #333333;
+                }
+            }
+        }
     }
 }
 
@@ -89,5 +98,11 @@ $header-hmarging: calc(2000vw / 1440 + 12px);
         .lang {
             margin: 0;
         }
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .bar-container {
+        padding: 20px $bar-padding-2;
     }
 }

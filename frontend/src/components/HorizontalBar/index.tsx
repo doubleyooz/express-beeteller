@@ -1,8 +1,34 @@
-import { t } from 'i18next';
-import React from 'react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../I18n';
 import './styles.scss';
 
+const LangNav = () => {
+    const [languages, setLanguages] = useState(['en', 'pt']);
+
+   
+    const changeLanguage = (str: string) => {
+        const arr = [...languages];
+
+        arr.sort((a, b) => (a === str ? -1 : b === str ? 1 : 0));
+
+        i18n.changeLanguage(str);
+        setLanguages(arr);
+    };
+
+    return (
+        <div className="lang-nav">
+            <div className="languages-container">
+                <div className="language">
+                    <span onClick={() => changeLanguage(languages[1])}>{languages[0].toUpperCase()}</span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const HorizontalBar = () => {
+    const { t, i18n } = useTranslation();
     return (
         <div className="bar-container">
             <div className="logo-container">
@@ -91,7 +117,7 @@ const HorizontalBar = () => {
                 </div>
             </div>
 
-            <span className="lang r-mrg">EN</span>
+            <LangNav />
         </div>
     );
 };

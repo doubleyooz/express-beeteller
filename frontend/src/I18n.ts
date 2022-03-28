@@ -108,7 +108,7 @@ i18n.use(LanguageDetector)
                         'email.label': 'E-mail',
                         'email.placeholder': 'Exemplo@email.com',
                         'password.label': 'Senha',
-                        'password.placeholder': 'Digite a senah',
+                        'password.placeholder': 'Digite a senha',
                         'password.forgot': 'Esqueceu a senha?',
 
                         'submit.button': 'Login',
