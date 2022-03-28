@@ -20,6 +20,7 @@ const createUser = (payload: any, statusCode: number) => {
                         response.body !== null,
                 ).toBeTruthy();
                 let data = {};
+
                 switch (payload.n) {
                     case 1:
                         USER._id = response.body.data._id;
@@ -68,13 +69,14 @@ const createUser = (payload: any, statusCode: number) => {
                 ).toBeTruthy();
 
                 let data = {};
+
                 switch (payload.n) {
                     case 1:
-                        USER.token = response.body.metadata.token;
+                        USER.token = response.body.metadata.accessToken;
                         data = { _id: USER._id };
                         break;
                     case 2:
-                        USER_2.token = response.body.metadata.token;
+                        USER_2.token = response.body.metadata.accessToken;
                         data = { _id: USER_2._id };
                         break;
                     default:
@@ -111,7 +113,12 @@ const findOne = (statusCode: number, _id?: string) => {
                             data: { email: USER.email, _id: USER._id },
                         });
                         break;
-
+                    case 401:
+                        expect(response.status).toEqual(401);
+                        expect(response.body).toMatchObject({
+                            message: getMessage('default.unauthorized'),
+                        });
+                        break;
                     case 400:
                         expect(response.status).toEqual(400);
                         expect(response.body).toMatchObject({
@@ -222,9 +229,9 @@ const remove = (statusCode: number, _id?: string) => {
                             break;
 
                         case 200:
-                            expect(response.status).toEqual(404);
+                            expect(response.status).toEqual(401);
                             expect(response.body).toMatchObject({
-                                message: getMessage('user.notfound'),
+                                message: getMessage('default.unauthorized'),
                             });
                             break;
                         default:
@@ -248,9 +255,9 @@ const remove = (statusCode: number, _id?: string) => {
                             break;
 
                         case 200:
-                            expect(response.status).toEqual(404);
+                            expect(response.status).toEqual(401);
                             expect(response.body).toMatchObject({
-                                message: getMessage('user.notfound'),
+                                message: getMessage('default.unauthorized'),
                             });
                             break;
                         default:
