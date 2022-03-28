@@ -12,7 +12,6 @@ async function refreshAccessToken(req: Request, res: Response) {
             message: getMessage('unauthorized.refresh.token.missing'),
         });
     }
-    console.log(refreshToken);
     let payload: any = null;
     try {
         payload = jwt.verifyJwt(refreshToken, 2);
@@ -41,6 +40,55 @@ async function refreshAccessToken(req: Request, res: Response) {
                     accessToken: accessToken,
                     message: getMessage('default.success'),
                 });
+            }
+            return res.status(401).json({
+                message: getMessage('default.unauthorized'),
+            });
+        })
+        .catch(err => {
+            return res.status(401).json({
+                message: getMessage('default.unauthorized'),
+            });
+        });
+}
+
+async function revokeRefreshToken(req: Request, res: Response) {
+    const refreshToken = req.cookies.jid;
+    if (!refreshToken) {
+        return res.status(401).json({
+            message: getMessage('unauthorized.refresh.token.missing'),
+        });
+    }
+    let payload: any = null;
+    try {
+        payload = jwt.verifyJwt(refreshToken, 2);
+    } catch (err) {
+        console.log(err);
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
+    }
+    if (!payload)
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
+
+    User.findById(payload._id)
+        .then(user => {
+            if (user) {
+                user.tokenVersion += 1;
+                user.save()
+                    .then(result => {
+                        return res.status(200).json({
+                            message: getMessage('default.success'),
+                        });
+                    })
+                    .catch(err => {
+                        return res.status(500).json({
+                            message: getMessage('default.serverError'),
+                            err: err,
+                        });
+                    });
             }
             return res.status(401).json({
                 message: getMessage('default.unauthorized'),
@@ -105,4 +153,4 @@ const signIn = async (req: Request, res: Response) => {
     });
 };
 
-export default { signIn, refreshAccessToken };
+export default { signIn, revokeRefreshToken, refreshAccessToken };
