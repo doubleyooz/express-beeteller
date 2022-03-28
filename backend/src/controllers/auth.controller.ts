@@ -7,6 +7,7 @@ import { matchPassword } from '../utils/password.util';
 
 async function refreshAccessToken(req: Request, res: Response) {
     const refreshToken = req.cookies.jid;
+
     if (!refreshToken) {
         return res.status(401).json({
             message: getMessage('unauthorized.refresh.token.missing'),
@@ -26,13 +27,13 @@ async function refreshAccessToken(req: Request, res: Response) {
             message: getMessage('default.unauthorized'),
         });
 
-    User.findById(payload._id)
+    User.exists({_id: payload._id, tokenVersion: payload.tokenVersion})
         .then(result => {
             if (result) {
                 const accessToken = jwt.generateJwt(
                     {
-                        _id: result._id,
-                        tokenVersion: result.tokenVersion,
+                        _id: payload._id,
+                        tokenVersion: payload.tokenVersion,
                     },
                     1,
                 );
@@ -54,28 +55,32 @@ async function refreshAccessToken(req: Request, res: Response) {
 
 async function revokeRefreshToken(req: Request, res: Response) {
     const refreshToken = req.cookies.jid;
+    
     if (!refreshToken) {
         return res.status(401).json({
             message: getMessage('unauthorized.refresh.token.missing'),
         });
     }
+  
     let payload: any = null;
     try {
         payload = jwt.verifyJwt(refreshToken, 2);
+
     } catch (err) {
-        console.log(err);
-        return res.status(401).json({
-            message: getMessage('default.unauthorized'),
-        });
+        if(err instanceof Error)
+            throw new Error(err.message);
+        else throw new Error( getMessage('default.unauthorized'));
     }
+    
     if (!payload)
         return res.status(401).json({
             message: getMessage('default.unauthorized'),
         });
-
+   
     User.findById(payload._id)
         .then(user => {
             if (user) {
+                console.log(user)
                 user.tokenVersion += 1;
                 user.save()
                     .then(result => {
@@ -89,10 +94,14 @@ async function revokeRefreshToken(req: Request, res: Response) {
                             err: err,
                         });
                     });
+            } else {
+                return res.status(401).json({
+                    message: getMessage('default.unauthorized'),
+                });
             }
-            return res.status(401).json({
-                message: getMessage('default.unauthorized'),
-            });
+          
+          
+            
         })
         .catch(err => {
             return res.status(401).json({
@@ -114,7 +123,7 @@ const signIn = async (req: Request, res: Response) => {
         .toString()
         .split(':');
 
-    const user = await User.findOne({ email: email }).select(['password']);
+    const user = await User.findOne({ email: email }).select(['password', 'tokenVersion']);
     const match = user
         ? await matchPassword(user.password, supposedPassword)
         : null;
@@ -124,6 +133,7 @@ const signIn = async (req: Request, res: Response) => {
             message: getMessage('default.unauthorized'),
         });
     }
+   
     const token = jwt.generateJwt(
         {
             _id: user!._id,
@@ -142,8 +152,7 @@ const signIn = async (req: Request, res: Response) => {
     req.headers.authorization = `Bearer ${token}`;
 
     res.cookie('jid', refreshToken, {
-        httpOnly: true,
-        path: '/refresh-token',
+        httpOnly: true,       
     });
 
     return res.status(200).json({

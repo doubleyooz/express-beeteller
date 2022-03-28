@@ -18,12 +18,12 @@ export const auth = () => {
                 throw new Error(err.message);
             else throw new Error( getMessage('default.unauthorized'));
         }
-
+        
         User.exists({
             _id: payload._id,
             tokenVersion: payload.tokenVersion,
         })
-            .then(result => {
+            .then(result => {                
                 if (result === null) {
                     return res.status(401).json({
                         message: getMessage('default.unauthorized'),
