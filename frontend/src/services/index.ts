@@ -39,23 +39,22 @@ const refreshToken = async () => {
     return await api.get('/refresh-token', { withCredentials: true });
 };
 
-const signIn: (email: string, password: string) => Promise<Response> = async (
+const revokeToken = async () => {
+    return await api.get('/revoke-token', { withCredentials: true });
+};
+
+const signIn = async (
     email: string,
     password: string
 ) => {
-    return api
+    return await api
         .get(`/sign-in`, {
             auth: {
                 username: email,
                 password: password,
             },
         })
-        .then((response) => {
-            return response.data;
-        })
-        .catch((err) => {
-            return err;
-        });
+       
 };
 
-export { signIn, getBoxesData, getLast, refreshToken };
+export { signIn, getBoxesData, getLast, refreshToken, revokeToken };

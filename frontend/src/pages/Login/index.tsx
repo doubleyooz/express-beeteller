@@ -24,7 +24,7 @@ const LoginPage = () => {
             .min(8, t('yup.password.short'))
             .matches(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-                t('yuppassword.weak')
+                t('yup.password.weak')
             ),
     });
 

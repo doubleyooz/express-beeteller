@@ -18,7 +18,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     async function handleSignIn(email: string, password: string) {
         const response = await signIn(email, password);
 
-        if (response) setToken(response.metadata.accessToken);
+        if (response) setToken(response.data.metadata.accessToken);
         else throw new Error('login failed');
         setLoading(false);
     }

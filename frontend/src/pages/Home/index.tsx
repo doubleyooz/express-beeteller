@@ -4,7 +4,7 @@ import Box from '../../components/Box';
 import List from '../../components/List';
 
 import AuthContext from '../../context/AuthProvider';
-import { getBoxesData, refreshToken } from '../../services';
+import { getBoxesData, refreshToken, revokeToken } from '../../services';
 import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
@@ -59,7 +59,6 @@ const Dashboard = React.memo(() => {
     useEffect(() => {
         console.log('useEffect once');
         updateBoxes(token);
-
         setLoading(false);
     }, []); // <-- empty dependency array
     return (
@@ -123,6 +122,7 @@ const Home: React.FC = () => {
     }
     return (
         <div className="home-container">
+            <div onClick={() => revokeToken()}>logout</div>
             <Dashboard />
             <List />
         </div>
