@@ -18,14 +18,14 @@ const LoginPage = () => {
     const schema = yup.object().shape({
         email: yup
             .string()
-            .email('Email should have correct format')
-            .required('Email is a required field'),
+            .email(t('yup.email.invalid'))
+            .required(t('yup.email.required')),
         password: yup
             .string()
-            .min(8, 'Password is too short - must be 8 chars minimum.')
+            .min(8, t('yup.password.short'))
             .matches(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-                'the password must contain at least 1 number, at least 1 lower case letter, at least 1 upper case and at least 1 special character.'
+                t('yuppassword.weak')
             ),
     });
 
@@ -65,17 +65,17 @@ const LoginPage = () => {
                     <span className="title"> {t('login.header.title')}</span>
                     <br />
                     <span className="subtitle">
-                        Faça Login com seus dados inseridos durante o registro.
+                        {t('login.header.subtitle')}
                     </span>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="field">
-                        <label htmlFor="email">E-mail</label>
+                        <label htmlFor="email">{t('login.email.label')}</label>
                         <input
                             {...register('email')}
                             type="email"
                             name="email"
-                            placeholder="Example@email.com"
+                            placeholder={t('login.email.placeholder')}
                             style={
                                 errors.email ? { borderColor: '#ff0000' } : {}
                             }
@@ -88,15 +88,15 @@ const LoginPage = () => {
                     </div>
                     <div className="field">
                         <div className="field up">
-                            <label htmlFor="password">Senha</label>
-                            <label className="forgot">Esqueceu a senha</label>
+                            <label htmlFor="password">{t('login.password.label')}</label>
+                            <label className="forgot">{t('login.password.forgot')}</label>
                         </div>
 
                         <input
                             {...register('password')}
                             type="password"
                             name="password"
-                            placeholder="Enter password"
+                            placeholder={t('login.password.placeholder')}
                             style={
                                 errors.password
                                     ? { borderColor: '#ff0000' }

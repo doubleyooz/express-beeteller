@@ -15,18 +15,7 @@ interface box {
     codein: string;
     bid: string;
 }
-const currentCurrency = (str: string) => {
-    switch (str) {
-        case 'USD/BRL':
-            return 'Dolar Real';
-        case 'BTC/EUR':
-            return 'Bitcoin Euro';
-        case 'BTC/USD':
-            return 'Bitcoin Dolar';
-        default:
-            return '';
-    }
-};
+
 
 const Dashboard = React.memo(() => {
     const { t, i18n } = useTranslation();
@@ -34,6 +23,19 @@ const Dashboard = React.memo(() => {
     const [boxes, setBoxes] = useState<box[]>([]);
     const [loading, setLoading] = useState(true);
     const nav = useNavigate();
+
+    const currentCurrency = (str: string) => {
+        switch (str) {
+            case 'USD/BRL':
+                return t('dashboard.box.usd-brl');
+            case 'BTC/EUR':
+                return t('dashboard.box.btc-eur');
+            case 'BTC/USD':
+                return t('dashboard.box.btc-usd');
+            default:
+                return '';
+        }
+    };
 
     const updateBoxes = async (token: string) => {
         try {

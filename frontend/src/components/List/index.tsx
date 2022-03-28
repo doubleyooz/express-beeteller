@@ -1,4 +1,7 @@
+import { t } from 'i18next';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Item from '../../components/Item';
 import AuthContext from '../../context/AuthProvider';
 import { getLast, refreshToken } from '../../services';
@@ -14,11 +17,11 @@ interface chewed {
 const currentCurrency = (str: string) => {
     switch (str) {
         case 'USD-BRL':
-            return 'Dolar Americano';
+            return t('dashboard.list.usd-brl');
         case 'EUR-BRL':
-            return 'Euro';
+            return t('dashboard.list.eur-brl');
         case 'BTC-BRL':
-            return 'Bitcoin';
+            return t('dashboard.list.btc-brl');
         default:
             return '';
     }
@@ -29,7 +32,8 @@ const DropdownNav = (props: {
     bringFirst: (str: string) => void;
 }) => {
     const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
-
+   
+  
     const bringFirst = (str: string) => {
         props.bringFirst(str);
         setIsDisplayed(!isDisplayed);
@@ -96,6 +100,7 @@ const List = () => {
         'EUR-BRL',
         'BTC-BRL',
     ]);
+    
     const bringFirst = (str: string) => {
         const arr = [...currencies];
 
@@ -107,7 +112,7 @@ const List = () => {
     return (
         <div className="table r-mrg">
             <div className="header">
-                <span className="title">Cotações</span>
+                <span className="title">{t('dashboard.list.title')}</span>
                 <DropdownNav bringFirst={bringFirst} currencies={currencies} />
             </div>
             <div className="list">
@@ -118,6 +123,9 @@ const List = () => {
 };
 
 const Items = (props: { currency: string }) => {
+    const { t, i18n } = useTranslation();
+    const nav = useNavigate();
+
     const [list, setList] = useState<chewed[]>([]);
     const [loading, setLoading] = useState(true);
     const [isInc, setIsInc] = useState(5);
@@ -170,7 +178,7 @@ const Items = (props: { currency: string }) => {
         setIsInc(5);
         setList(arr.reverse());
     };
-
+   
     const updateList = async () => {
         try {
             const response = await getLast(props.currency, days, token);
@@ -204,12 +212,16 @@ const Items = (props: { currency: string }) => {
         <div className="list">
             <div className="table-head">
                 <div className="label" style={{ justifyContent: 'flex-start' }}>
-                    <span>Moeda</span>
+                    <span>{t('dashboard.list.label.coins')}</span>
                 </div>
                 <div className="prices">
                     <div className="label">
-                        <span className="long">Mínimo</span>
-                        <span className="short">Min</span>
+                        <span className="long">
+                            {t('dashboard.list.label.min.long')}
+                        </span>
+                        <span className="short">
+                            {t('dashboard.list.label.min.short')}
+                        </span>
                         <svg
                             className={isInc === 0 ? 'rotate180' : ''}
                             onClick={
@@ -234,8 +246,12 @@ const Items = (props: { currency: string }) => {
                     </div>
 
                     <div className="label">
-                        <span className="long">Máximo</span>
-                        <span className="short">Max</span>
+                        <span className="long">
+                            {t('dashboard.list.label.max.long')}
+                        </span>
+                        <span className="short">
+                            {t('dashboard.list.label.max.short')}
+                        </span>
                         <svg
                             className={isInc === 1 ? 'rotate180' : ''}
                             onClick={
@@ -260,8 +276,12 @@ const Items = (props: { currency: string }) => {
                     </div>
                 </div>
                 <div className="label v">
-                    <span className="long">Variação</span>
-                    <span className="short">Var</span>
+                    <span className="long">
+                        {t('dashboard.list.label.var.long')}
+                    </span>
+                    <span className="short">
+                        {t('dashboard.list.label.var.short')}
+                    </span>
                     <svg
                         className={isInc === 2 ? 'rotate180' : ''}
                         onClick={
@@ -304,6 +324,3 @@ const Items = (props: { currency: string }) => {
 };
 
 export default React.memo(List);
-function nav(arg0: string) {
-    throw new Error('Function not implemented.');
-}

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './styles.scss';
 
@@ -10,19 +11,15 @@ const NotFound = () => {
         setTimeout(function () {
             nav('/');
         }, 2000);
-    }, []); // <-- empty dependency array
+    }, []);
 
     return (
         <div className="notfound-container">
             <div className="fadeout">
                 <span className="error-message-title">
-                    There's nothing here.
+                    {t('notfound.title')}
                 </span>
-                <span className="error-message-body">
-                    Whatever you were looking for doesn't currently exist at
-                    this address. Unless you were looking for this error page,
-                    in which case: Congrats! You totally found it.
-                </span>
+                <span className="error-message-body">{t('notfound.body')}</span>
             </div>
         </div>
     );

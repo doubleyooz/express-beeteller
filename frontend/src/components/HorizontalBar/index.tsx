@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import './styles.scss';
 
@@ -71,7 +72,7 @@ const HorizontalBar = () => {
                 <div className="delimiter"></div>
 
                 <div className="activity">
-                    <span>COTAÇÕES</span>
+                    <span>{t('navbar.activity')}</span>
                     <svg
                         width="14"
                         height="21"

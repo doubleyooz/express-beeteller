@@ -2,15 +2,13 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-i18n
-   
-    .use(LanguageDetector)   
-    .use(initReactI18next)    
+i18n.use(LanguageDetector)
+    .use(initReactI18next)
     .init({
         debug: true,
         fallbackLng: 'en',
         interpolation: {
-            escapeValue: false, 
+            escapeValue: false,
         },
         resources: {
             en: {
@@ -22,8 +20,8 @@ i18n
                         'box.btc-usd': 'Bitcoin Dollar',
 
                         'list.usd-brl': 'American Dollar',
-                        'list.btc-eur': 'Euro',
-                        'list.btc-usd': 'Bitcoin',
+                        'list.eur-brl': 'Euro',
+                        'list.btc-brl': 'Bitcoin',
                         'list.title': 'Quotation',
 
                         'list.label.coins': 'Coin',
@@ -121,7 +119,6 @@ i18n
                 },
             },
         },
-       
     });
 
 export default i18n;
