@@ -14,13 +14,15 @@ const Paths: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (token === '') {            
-            refreshToken().then((result) => {
-                if (result) setToken(result.data.accessToken);
-                setLoading(false);
-            }).catch(err => {
-                setLoading(false);
-            });
+        if (token === '') {
+            refreshToken()
+                .then((result) => {
+                    if (result) setToken(result.data.accessToken);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    setLoading(false);
+                });
         } else setLoading(false);
     }, []);
 

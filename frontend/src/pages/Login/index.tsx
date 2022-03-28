@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthProvider';
-import { useTranslation, Trans } from 'react-i18next';
-
+import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
 
 const LoginPage = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { handleSignIn, token } = useContext(AuthContext);
     const nav = useNavigate();
 
@@ -53,8 +52,8 @@ const LoginPage = () => {
             });
     });
 
-    if(token !== ''){
-        return <Navigate to='/'/>
+    if (token !== '') {
+        return <Navigate to="/" />;
     }
 
     return (
@@ -88,8 +87,12 @@ const LoginPage = () => {
                     </div>
                     <div className="field">
                         <div className="field up">
-                            <label htmlFor="password">{t('login.password.label')}</label>
-                            <label className="forgot">{t('login.password.forgot')}</label>
+                            <label htmlFor="password">
+                                {t('login.password.label')}
+                            </label>
+                            <label className="forgot">
+                                {t('login.password.forgot')}
+                            </label>
                         </div>
 
                         <input

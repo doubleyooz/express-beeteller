@@ -5,18 +5,16 @@ import { signIn } from '../services';
 interface AuthContextData {
     token: string;
     loading: boolean;
-    setToken:  React.Dispatch<React.SetStateAction<string>>;
+    setToken: React.Dispatch<React.SetStateAction<string>>;
     handleSignIn(email: string, password: string): Promise<void>;
 }
 
-//set initial value of user to null (pre-login)
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [token, setToken] = useState('');
     const [loading, setLoading] = useState(true);
-    
-    
+
     async function handleSignIn(email: string, password: string) {
         const response = await signIn(email, password);
 
@@ -25,7 +23,14 @@ export const AuthProvider: React.FC = ({ children }) => {
         setLoading(false);
     }
     return (
-        <AuthContext.Provider value={{ token: token, handleSignIn, setToken: setToken, loading: loading }}>
+        <AuthContext.Provider
+            value={{
+                token: token,
+                handleSignIn,
+                setToken: setToken,
+                loading: loading,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

@@ -5,7 +5,7 @@ import List from '../../components/List';
 
 import AuthContext from '../../context/AuthProvider';
 import { getBoxesData, refreshToken } from '../../services';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
 
@@ -16,9 +16,8 @@ interface box {
     bid: string;
 }
 
-
 const Dashboard = React.memo(() => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const { token, setToken } = useContext(AuthContext);
     const [boxes, setBoxes] = useState<box[]>([]);
     const [loading, setLoading] = useState(true);

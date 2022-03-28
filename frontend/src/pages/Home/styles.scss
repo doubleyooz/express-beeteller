@@ -2,7 +2,6 @@ $bar-hpadding: calc(11500vw / 1440 + 20px);
 $home-vpadding: calc(3000vh / 1024 + 10px);
 $header-hmarging: calc(2000vw / 1440 + 12px);
 
-
 $title-size: calc(1600vw / 1440 + 20px);
 
 $label-size: calc(400vw / 1440 + 10px);
@@ -47,8 +46,6 @@ $svg-height: calc(1200vh / 1440 + 8px);
             }
         }
     }
-
-  
 }
 
 .home-container {
@@ -73,8 +70,6 @@ $svg-height: calc(1200vh / 1440 + 8px);
             width: 100%;
         }
     }
-
-   
 }
 
 @media screen and (max-width: 869px) {
@@ -89,4 +84,3 @@ $svg-height: calc(1200vh / 1440 + 8px);
         }
     }
 }
-

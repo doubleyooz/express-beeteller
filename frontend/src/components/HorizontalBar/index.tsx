@@ -6,7 +6,6 @@ import './styles.scss';
 const LangNav = () => {
     const [languages, setLanguages] = useState(['en', 'pt']);
 
-   
     const changeLanguage = (str: string) => {
         const arr = [...languages];
 
@@ -20,7 +19,9 @@ const LangNav = () => {
         <div className="lang-nav">
             <div className="languages-container">
                 <div className="language">
-                    <span onClick={() => changeLanguage(languages[1])}>{languages[0].toUpperCase()}</span>
+                    <span onClick={() => changeLanguage(languages[1])}>
+                        {languages[0].toUpperCase()}
+                    </span>
                 </div>
             </div>
         </div>
@@ -28,7 +29,7 @@ const LangNav = () => {
 };
 
 const HorizontalBar = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className="bar-container">
             <div className="logo-container">
