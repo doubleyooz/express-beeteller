@@ -22,8 +22,9 @@
         ]
     },
     "scripts": {
+        "postinstall": "tsc && mv -i -v public dist/ && rm -v -rf src",
         "tsc": "tsc",
-        "start:prod": "yarn run tsc && node build/src/index.js",
+        "start:prod": "node build/src/index.js",
         "start:dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only --exit-child --watch src src/index.ts dotenv_config_path=./.env.dev",
         "test": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watch --runInBand",
         "test:e2e": "NODE_ENV=test DOTENV_CONFIG_PATH=./.env.test jest --watchAll --runInBand --detectOpenHandles test/specs/e2e/",
