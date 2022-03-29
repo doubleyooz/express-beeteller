@@ -6,7 +6,7 @@ import { getMessage } from '../utils/message.util';
 
 export const auth = () => {
     return async (req: Request, res: Response, next: NextFunction) => {
-        if(!req.headers.authorization){
+        if (!req.headers.authorization) {
             return res.status(401).json({
                 message: getMessage('default.unauthorized'),
             });
@@ -19,16 +19,22 @@ export const auth = () => {
         try {
             payload = jwt.verifyJwt(token, 1);
         } catch (err) {
-            if(err instanceof Error)
-                throw new Error(err.message);
-            else throw new Error( getMessage('default.unauthorized'));
+            if (err instanceof Error)
+                return res.status(401).json({
+                    message: getMessage('default.unauthorized'),
+                    err: err.message,
+                });
+            else
+                return res.status(401).json({
+                    message: getMessage('default.unauthorized'),
+                });
         }
-        
+
         User.exists({
             _id: payload._id,
             tokenVersion: payload.tokenVersion,
         })
-            .then(result => {                
+            .then(result => {
                 if (result === null) {
                     return res.status(401).json({
                         message: getMessage('default.unauthorized'),
