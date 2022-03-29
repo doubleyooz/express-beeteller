@@ -104,6 +104,11 @@ async function revokeRefreshToken(req: Request, res: Response) {
 }
 
 const signIn = async (req: Request, res: Response) => {
+    if(!req.headers.authorization){
+        return res.status(401).json({
+            message: getMessage('default.unauthorized'),
+        });
+    }
     const [hashType, hash] = req.headers.authorization!.split(' ');
 
     if (hashType !== 'Basic') {
