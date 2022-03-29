@@ -1,6 +1,6 @@
 import cors from 'cors';
 import { Request, Response, NextFunction } from 'express';
-const allowedOrigins = [`${process.env.CLIENT}`];
+const whitelist = [`${process.env.CLIENT}`];
 
 const headers = [
     'Origin',
@@ -12,20 +12,16 @@ const headers = [
     'X-Requested-With',
     /*"Access-Control-Request-Method",*/ 'Access-Control-Allow-Credentials' /*"Access-Control-Request-Header"*/,
 ];
-const corsOptionsDelegate = function (
-    req: Request,
-    callback: (arg0: null, arg1: cors.CorsOptions) => void,
-) {
-    const corsOptions: cors.CorsOptions = allowedOrigins.indexOf(
-        req.header('Origin')!,
-    )
-        ? { origin: true }
-        : { origin: false };
 
-    (corsOptions.allowedHeaders = headers),
-        (corsOptions.methods = ['GET', 'PUT', 'POST', 'DELETE']);
-    corsOptions.credentials = true;
-    callback(null, corsOptions); // callback expects two parameters: error and options
+const corsOptionsDelegate: cors.CorsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'), false);
+        }
+    },
+    credentials: true,
 };
 
 export default corsOptionsDelegate;
