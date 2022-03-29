@@ -6,6 +6,11 @@ import { getMessage } from '../utils/message.util';
 
 export const auth = () => {
     return async (req: Request, res: Response, next: NextFunction) => {
+        if(!req.headers.authorization){
+            return res.status(401).json({
+                message: getMessage('default.unauthorized'),
+            });
+        }
         const [, token] = req.headers.authorization
             ? req.headers.authorization.split(' ')
             : [, ''];
