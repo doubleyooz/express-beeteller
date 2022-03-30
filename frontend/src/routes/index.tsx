@@ -7,13 +7,16 @@ import Login from '../pages/Login';
 import HorizontalBar from '../components/HorizontalBar';
 import NotFound from '../pages/NotFound';
 import AuthContext from '../context/AuthProvider';
+import LanguageContext from '../context/LanguageProvider';
 import { refreshToken } from '../services';
 
 const Paths: React.FC = () => {
     const { token, setToken } = useContext(AuthContext);
+    const { language, checkLanguage } = useContext(LanguageContext);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        checkLanguage().then().catch();
         if (token === '') {
             refreshToken()
                 .then((result) => {

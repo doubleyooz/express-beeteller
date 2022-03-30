@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import LanguageContext from '../../context/LanguageProvider';
 import i18n from '../../I18n';
 import './styles.scss';
 
 const LangNav = () => {
-    const [languages, setLanguages] = useState(['en', 'pt']);
+    const { language } = useContext(LanguageContext);
+   
+    const [languages, setLanguages] = useState(
+        ['en', 'pt'].sort((x, y) => {            
+            return x == language ? -1 : y == language ? 1 : 0;
+        })
+    );
 
     const changeLanguage = (str: string) => {
         const arr = [...languages];
