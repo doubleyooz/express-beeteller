@@ -1,6 +1,15 @@
 # selecao-full-stack
 Desafio para seleção de Desenvolvedor Full Stack
 
+The application is deployed on heroku and is working https://beeteller.herokuapp.com/login https://beeteller-api.herokuapp.com/, since the frontend application does not have a sign up page, I will let here the test credentials.
+
+```js
+{
+    "email": "admin@gmail.com",
+    "password": "tesSt233@1"
+}
+```
+
 ## Backend
 
 I thought of making it simple, an api to make authentications and to deliver the required data. So Following the image on figma I figured out what features it should have. I need a route to return data for the three boxes and another one to return the currency list, just 2 routes. For the user, I just saw a login page and no profile intended, then I set the user with just `{email: string, password: string}` initially. After pondering a while, I decided to build this backend in a more scalable way, so made CRUDL operation for user and a 'getcurrency()' even though the frontend will not consume it. But since the user only has sensitive properties I didn't add the update method.
@@ -94,28 +103,27 @@ routes.delete('/users', auth(), UserMiddleware.findById, UserController.remove);
 ```
 
 ## Frontend 
-    I really got confused if I should make a signup page or not,I end up choosing don't do it, in the same fashion I didn't add a button for logout even though all the functions are implemented there, just there's no element to perform this action. Some elements I used alignment and others I calculated their proportional size using `calc()`, I know some browsers don't support this function but I think would be worst if there were some random values of vh/vw in my code without an explanation, anyway this is something that can be easily fixed. 
-About Scss/Sass, when I first learn React I used styled-components in my projects, but at least to me it leaves the code more confusing, it's way better to have a file set apart for all the stylings, especially with all the features that scss/sass has, and now with tailwind out there I don't see myself going back use styled-components anytime soon.
+   I really got confused if I should make a signup page or not,I end up choosing don't do it, in the same fashion I didn't add a button for logout even though all the functions are implemented there, just there's no element to perform this action. Some elements I used alignment and others I calculated their proportional size using `calc()`, I know some browsers don't support this function but I think would be worst if there were some random values of vh/vw in my code without an explanation, anyway this is something that can be easily fixed. 
+About Scss/Sass, when I first learn React I used styled-components in my projects, but at least to me it leaves the code more confusing, it's way better to have a file set apart for all the stylings, especially with all the features that scss/sass has, and now with tailwind out there I don't see myself going back to use styled-components anytime soon.
 Since there was no way to sign-up through the frontend, to see the website working you need to have some users already stored in the database, whether by manual insertion or using postman/insomnia. To logout, you can set the tokens to a short lifetime and wait for their time to expire.
  
    
 
 ### Login
-    I didn't manage to get the same image as displayed on Figma, so left a blue background in its place. In the form I made using react-hook-form, you're allowed to get on this page only if your token is empty and the refreshToken can't get you a new one. The font-size gets a bit small on smartphones.
+   I didn't manage to get the same image as displayed on Figma, so left a blue background in its place. In the form I made using react-hook-form, you're allowed to get on this page only if your token is empty and the refreshToken can't get you a new one. The font-size gets a bit small on smartphones.
     
 ### Navbar
    The navbar is present is all screens, I have a language toggle that changes the website language, it was making using i18n. The activity text is a bit too big when displayed in English. It would be cool to make the beeteller logo clickable, so it would redirect to the home page, but since there are no other routes besides login didn't make much sense doing that.
    
 ### Dashboard
-    The only one I thought it was fun to make. If you're not authenticated or failed trying to refresh your token you're sent back to login. There are some re-renderings, which seem normal, but I tried my best to reduce them. 
+   The only one I thought it was fun to make. If you're not authenticated or failed trying to refresh your token you're sent back to login. There are some re-renderings, which seem normal, but I tried my best to reduce them. 
     
    #### list
    A Title, a header, and 30 rows of items, also a dropdown-nav that you can select which currency do you want to look at. 
    
-   #### cards
-    The cards are there, 3 of them, a fixed number that I choose to map an array to create them, I'm not sure if it was the best option. Also, there's a refresh button that probably you better as part of the cards-container itself and not of the header. 
-    
-   
+   #### cards   
+   There are 3 cards, a fixed number that I chose to map an array to create them, I'm not sure if it was the best option. Maybe it would be better if I let them static and just populate it with data. Also, there's a refresh button that probably would be better as part of the cards-container or as a float button.
+  
 ### NotFound
    I happened to bump into the Tumblr error page these days, I found it was cool so I reproduced it here.
     
@@ -128,7 +136,5 @@ I could have made a way to change reset the password, even without two-step veri
 My original plan with the language toggle was to change all basic currencies, so if the language was English all currencies would be measured on dollar (the pair USD-BRL would be BRL-USD), if it was Portuguese all currencies would be measured on brl, and so on.
 
 I could have rendered the boxes and the list statically, there are always 3 boxes and always 30 rows, I should have let them bw already defined instead of trying to generate them, this way React could rerender just the info which has changed, this definitely is viable with the boxes at least.
-
-I could have deployed it on Heroku, I actually did it https://beeteller.herokuapp.com/login https://beeteller-api.herokuapp.com/, but there's some cors issue. Since I am using the same repository for backend and frontend I had to go for some not so usual ways, I have both backend and frontend deployed but they can't communicate with each other due to the cors issue, looks like I have set a proxy in the frontend to get this working. Probably if I had set two repositories for them it would be working just fine.
 
 I could have tested the frontend, but I didn't and I don't think is that crucial to test the frontend during the early stage of development.
