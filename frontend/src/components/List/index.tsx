@@ -181,9 +181,9 @@ const Items = (props: { currency: string }) => {
 
     const updateList = async () => {
         try {
-            const response = await getLast(props.currency, days, token);
-
+            const response = await getLast(props.currency, days, token);           
             setList(response.data.data);
+            if (response.data.metadata) setToken(response.data.metadata);
         } catch (e) {
             try {
                 const temp = await refreshToken();
