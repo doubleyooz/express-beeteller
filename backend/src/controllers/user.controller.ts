@@ -46,12 +46,14 @@ async function list(req: Request, res: Response) {
             return res.status(201).json({
                 data: doc,
                 message: getMessage('user.list.success'),
+                metadata: req.new_token,
             });
         })
         .catch(err => {
             return res.status(500).json({
                 err: err,
                 message: getMessage('default.serverError'),
+                metadata: req.new_token,
             });
         });
 }
@@ -65,10 +67,12 @@ async function findOne(req: Request, res: Response) {
                 return res.status(200).json({
                     data: result,
                     message: getMessage('user.findOne.success'),
+                    metadata: req.new_token,
                 });
             }
             return res.status(404).json({
                 message: getMessage('user.notfound'),
+                metadata: req.new_token,
             });
         })
         .catch(err => {
@@ -97,6 +101,7 @@ async function remove(req: Request, res: Response) {
                 case 0:
                     return res.status(404).json({
                         message: getMessage('user.notfound'),
+                        metadata: req.new_token,
                     });
                     break;
                 default:

@@ -10,6 +10,7 @@ const url3 = 'https://api.kraken.com/0/public/Ticker?pair=XBTusd';
 
 async function latelyPrice(req: Request, res: Response) {
     const { currency, days } = req.query;
+
     interface chewed {
         high: number;
         low: number;
@@ -18,7 +19,12 @@ async function latelyPrice(req: Request, res: Response) {
     }
 
     const chew: {
-        (high: string, low: string, pctChange: string, timestamp: string): chewed;
+        (
+            high: string,
+            low: string,
+            pctChange: string,
+            timestamp: string,
+        ): chewed;
     } = (high, low, pctChange, timestamp) => {
         return {
             high: parseFloat(high),
@@ -33,24 +39,26 @@ async function latelyPrice(req: Request, res: Response) {
     axios
         .get(url + 'daily/' + currency + '/' + days)
         .then(json => {
-           
-            let arr = json.data.map((item: any) => {                
-                return chew(item.high, item.low, item.pctChange, item.timestamp);
-            });            
-            return res
-                .status(200)
-                .json({
-                    data: arr,
-                    message: getMessage('currency.lately.prices'),
-                });
+            let arr = json.data.map((item: any) => {
+                return chew(
+                    item.high,
+                    item.low,
+                    item.pctChange,
+                    item.timestamp,
+                );
+            });
+            return res.status(200).json({
+                data: arr,
+                message: getMessage('currency.lately.prices'),
+                metadata: req.new_token,
+            });
         })
         .catch(err => {
-            return res
-                .status(400)
-                .json({
-                    error: err,
-                    message: getMessage('default.badRequest'),
-                });
+            return res.status(400).json({
+                error: err,
+                message: getMessage('default.badRequest'),
+                metadata: req.new_token,
+            });
         });
 }
 
@@ -64,13 +72,11 @@ async function currentPrice(req: Request, res: Response) {
                 const response3 = responses[2].data.result;
 
                 interface chewed {
-                    
-                        name: string;
-                        code: string;
-                        codein: string;
-                        bid: string;
-                    
-                };
+                    name: string;
+                    code: string;
+                    codein: string;
+                    bid: string;
+                }
                 const chew: {
                     (
                         name: string,
@@ -80,11 +86,10 @@ async function currentPrice(req: Request, res: Response) {
                     ): chewed;
                 } = (name, code, codein, bid) => {
                     return {
-                            name: name,
-                            code: code,
-                            codein: codein,
-                            bid: bid,
-                        
+                        name: name,
+                        code: code,
+                        codein: codein,
+                        bid: bid,
                     };
                 };
 
@@ -98,24 +103,26 @@ async function currentPrice(req: Request, res: Response) {
                         response1.bid,
                     ),
                 );
-                arr.push(chew('BTC/EUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]));
-                arr.push(chew('BTC/USD', 'BTC', 'USD', response3.XXBTZUSD.a[0]));
+                arr.push(
+                    chew('BTC/EUR', 'BTC', 'EUR', response2.XXBTZEUR.a[0]),
+                );
+                arr.push(
+                    chew('BTC/USD', 'BTC', 'USD', response3.XXBTZUSD.a[0]),
+                );
 
-                return res
-                    .status(200)
-                    .json({
-                        data: arr,
-                        message: getMessage('currency.current.prices'),
-                    });
+                return res.status(200).json({
+                    data: arr,
+                    message: getMessage('currency.current.prices'),
+                    metadata: req.new_token,
+                });
             }),
         )
-        .catch(err => {           
-            return res
-                .status(400)
-                .json({
-                    error: err,
-                    message: getMessage('default.badRequest'),
-                });
+        .catch(err => {
+            return res.status(400).json({
+                error: err,
+                message: getMessage('default.badRequest'),
+                metadata: req.new_token,
+            });
         });
 }
 
@@ -125,20 +132,18 @@ async function getCurrency(req: Request, res: Response) {
     axios
         .get(url + 'last/' + currency)
         .then(json => {
-            return res
-                .status(200)
-                .json({
-                    data: json.data,
-                    message: getMessage('currency.get.price'),
-                });
+            return res.status(200).json({
+                data: json.data,
+                message: getMessage('currency.get.price'),
+                metadata: req.new_token,
+            });
         })
         .catch(err => {
-            return res
-                .status(400)
-                .json({
-                    error: err,
-                    message: getMessage('default.badRequest'),
-                });
+            return res.status(400).json({
+                error: err,
+                message: getMessage('default.badRequest'),
+                metadata: req.new_token,
+            });
         });
 }
 

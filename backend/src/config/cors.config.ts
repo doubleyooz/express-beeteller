@@ -22,9 +22,10 @@ const corsOptionsDelegate = (
         ? { origin: true }
         : { origin: false };
 
-    (corsOptions.allowedHeaders = headers),
-        (corsOptions.methods = ['GET', 'PUT', 'POST', 'DELETE']);
+    corsOptions.allowedHeaders = headers;
+    corsOptions.methods = ['GET', 'PUT', 'POST', 'DELETE'];
     corsOptions.credentials = true;
+
     callback(null, corsOptions); // callback expects two parameters: error and options
 };
 
