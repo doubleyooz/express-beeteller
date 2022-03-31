@@ -41,6 +41,8 @@ const Dashboard = React.memo(() => {
             const response = await getBoxesData(token);
 
             setBoxes(response.data.data);
+            console.log(response.data);
+            if (response.data.metadata) setToken(response.data.metadata);
         } catch (e) {
             try {
                 const token = await refreshToken();
