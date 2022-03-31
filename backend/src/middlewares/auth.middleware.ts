@@ -53,7 +53,7 @@ export const auth = () => {
                         },
                         1,
                     );
-                    req.new_token = `Bearer ${newToken}`;
+                    req.new_token = `${newToken}`;
                     console.log(`New Token: ${newToken}`);
                 }
                 console.log('shall pass');
