@@ -151,9 +151,11 @@ const signIn = async (req: Request, res: Response) => {
     );
 
     req.headers.authorization = `Bearer ${token}`;
-
+  
     res.cookie('jid', refreshToken, {
         httpOnly: true,
+        sameSite: 'none',
+        secure: true
     });
 
     return res.status(200).json({
