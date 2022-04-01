@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import corsOptionsDelegate from './cors.config';
+import corsOptions from './cors.config';
 
 import appRoute from '../routes/app.route';
 import authRoute from '../routes/auth.route';
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 //app.use(cors());
-app.use(cors(corsOptionsDelegate));
+app.use(cors(corsOptions));
 
 app.use(appRoute);
 app.use(authRoute);
