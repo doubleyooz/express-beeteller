@@ -6,21 +6,22 @@ import Login from '../pages/Login';
 
 import HorizontalBar from '../components/HorizontalBar';
 import NotFound from '../pages/NotFound';
-import AuthContext from '../context/AuthProvider';
 import LanguageContext from '../context/LanguageProvider';
 import { refreshToken } from '../services';
 
-const Paths: React.FC = () => {
-    const { token, setToken } = useContext(AuthContext);
+const Paths: React.FC = () => {   
     const { language, checkLanguage } = useContext(LanguageContext);
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
         checkLanguage().then().catch();
-        if (token === '') {
+       
+        if (sessionStorage.getItem(process.env.REACT_APP_JWT!) === '') {
             refreshToken()
                 .then((result) => {
-                    if (result) setToken(result.data.accessToken);
+                    console.log(result.data)
+                    if (result) sessionStorage.setItem(process.env.REACT_APP_JWT!, result.data.accessToken);
                     setLoading(false);
                 })
                 .catch((err) => {

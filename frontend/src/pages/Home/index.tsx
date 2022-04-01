@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Box from '../../components/Box';
 import List from '../../components/List';
 
-import AuthContext from '../../context/AuthProvider';
 import { getBoxesData, refreshToken, revokeToken } from '../../services';
 import { useTranslation } from 'react-i18next';
 
@@ -17,8 +16,7 @@ interface box {
 }
 
 const Dashboard = React.memo(() => {
-    const { t } = useTranslation();
-    const { token, setToken } = useContext(AuthContext);
+    const { t } = useTranslation();  
     const [boxes, setBoxes] = useState<box[]>([]);
     const [loading, setLoading] = useState(true);
     const nav = useNavigate();
@@ -41,17 +39,18 @@ const Dashboard = React.memo(() => {
             const response = await getBoxesData(token);
 
             setBoxes(response.data.data);           
-            if (response.data.metadata) setToken(response.data.metadata);
+            
+            if (response.data.metadata) sessionStorage.setItem(process.env.REACT_APP_JWT!, response.data.metadata);
         } catch (e) {
             try {
                 const token = await refreshToken();
 
-                setToken(token.data.accessToken);
+                sessionStorage.setItem(process.env.REACT_APP_JWT!, token.data.accessToken);
                 const response = await getBoxesData(token.data.accessToken);
 
                 setBoxes(response.data.data);
             } catch (e) {
-                setToken('');
+                sessionStorage.setItem(process.env.REACT_APP_JWT!, '');
                 nav('/login');
             }
         }
@@ -59,7 +58,7 @@ const Dashboard = React.memo(() => {
 
     useEffect(() => {
         console.log('useEffect once');
-        updateBoxes(token);
+        updateBoxes(sessionStorage.getItem(process.env.REACT_APP_JWT!) || '');
         setLoading(false);
     }, []); // <-- empty dependency array
     return (
@@ -67,7 +66,7 @@ const Dashboard = React.memo(() => {
             <div className="header">
                 <span className="title">{t('dashboard.box.title')}</span>
                 <svg
-                    onClick={() => updateBoxes(token)}
+                    onClick={() => updateBoxes(sessionStorage.getItem(process.env.REACT_APP_JWT!) || '')}
                     className="r-mrg"
                     viewBox="0 0 24 20"
                     fill="none"
@@ -114,11 +113,9 @@ const Dashboard = React.memo(() => {
     );
 });
 
-const Home: React.FC = () => {
-    const { token } = useContext(AuthContext);
-
-    console.log(token);
-    if (token === '') {
+const Home: React.FC = () => {    
+    console.log(sessionStorage.getItem(process.env.REACT_APP_JWT!));
+    if (sessionStorage.getItem(process.env.REACT_APP_JWT!) === '') {
         return <Navigate to="/login" />;
     }
     // <div onClick={() => revokeToken()}>logout</div>

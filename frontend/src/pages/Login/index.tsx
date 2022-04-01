@@ -1,17 +1,15 @@
-import { useContext } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import AuthContext from '../../context/AuthProvider';
 import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
+import { signIn } from '../../services';
 
 const LoginPage = () => {
     const { t } = useTranslation();
-    const { handleSignIn, token } = useContext(AuthContext);
     const nav = useNavigate();
 
     const schema = yup.object().shape({
@@ -43,8 +41,9 @@ const LoginPage = () => {
     });
 
     const onSubmit = handleSubmit(async (data: User) => {
-        handleSignIn(data.email, data.password)
-            .then(() => {
+        await signIn(data.email, data.password)
+            .then((response) => {
+                sessionStorage.setItem(`${process.env.REACT_APP_JWT}`, response.data.accessToken);
                 nav('/');
             })
             .catch((err) => {
@@ -52,9 +51,7 @@ const LoginPage = () => {
             });
     });
 
-    if (token !== '') {
-        return <Navigate to="/" />;
-    }
+   
 
     return (
         <div className="login-container">

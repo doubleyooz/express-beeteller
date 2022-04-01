@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Item from '../../components/Item';
-import AuthContext from '../../context/AuthProvider';
 import { getLast, refreshToken } from '../../services';
 import './styles.scss';
 
@@ -128,8 +127,7 @@ const Items = (props: { currency: string }) => {
 
     const [list, setList] = useState<chewed[]>([]);
     const [loading, setLoading] = useState(true);
-    const [isInc, setIsInc] = useState(5);
-    const { token, setToken } = useContext(AuthContext);
+    const [isInc, setIsInc] = useState(5);   
     const days = 30;
 
     const increasingly = (n: number) => {
@@ -181,14 +179,14 @@ const Items = (props: { currency: string }) => {
 
     const updateList = async () => {
         try {
-            const response = await getLast(props.currency, days, token);           
+            const response = await getLast(props.currency, days, (sessionStorage.getItem(process.env.REACT_APP_JWT!) || ''));           
             setList(response.data.data);
-            if (response.data.metadata) setToken(response.data.metadata);
+            if (response.data.metadata) sessionStorage.setItem(process.env.REACT_APP_JWT!, response.data.metadata);
         } catch (e) {
             try {
                 const temp = await refreshToken();
-
-                setToken(temp.data.accessToken);
+                sessionStorage.setItem(process.env.REACT_APP_JWT!, temp.data.metadata);
+               
                 const response = await getLast(
                     props.currency,
                     days,
@@ -197,7 +195,7 @@ const Items = (props: { currency: string }) => {
 
                 setList(response.data.data);
             } catch (e) {
-                setToken('');
+                sessionStorage.setItem(process.env.REACT_APP_JWT!, '');
                 nav('/login');
             }
         }
