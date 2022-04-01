@@ -22,7 +22,7 @@ const corsOptionsDelegate = (
         ? { origin: true }
         : { origin: false };
 
-    //corsOptions.allowedHeaders = headers;
+    corsOptions.allowedHeaders = headers;
     corsOptions.methods = ['GET', 'PUT', 'POST', 'DELETE'];
     corsOptions.credentials = true;
 
