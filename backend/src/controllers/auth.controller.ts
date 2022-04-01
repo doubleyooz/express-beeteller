@@ -104,7 +104,7 @@ async function revokeRefreshToken(req: Request, res: Response) {
 }
 
 const signIn = async (req: Request, res: Response) => {
-    if(!req.headers.authorization){
+    if (!req.headers.authorization) {
         return res.status(401).json({
             message: getMessage('default.unauthorized'),
         });
@@ -154,6 +154,7 @@ const signIn = async (req: Request, res: Response) => {
 
     res.cookie('jid', refreshToken, {
         httpOnly: true,
+        sameSite: 'none',
     });
 
     return res.status(200).json({
