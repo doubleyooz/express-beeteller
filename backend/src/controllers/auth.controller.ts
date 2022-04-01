@@ -155,6 +155,7 @@ const signIn = async (req: Request, res: Response) => {
     res.cookie('jid', refreshToken, {
         httpOnly: true,
         sameSite: 'none',
+        secure: true
     });
 
     return res.status(200).json({
