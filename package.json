@@ -23,6 +23,7 @@
     },
     "scripts": {
         "build": "tsc",
+        "start": "set NODE_ENV=dev&& ts-node-dev --respawn --transpile-only --exit-child --watch src src/index.ts dotenv_config_path=./.env.dev",
         "start:prod": "set NODE_ENV=dev&& node build/src/index.js dotenv_config_path=./.env.dev",
         "start:dev": "set NODE_ENV=dev&& ts-node-dev --respawn --transpile-only --exit-child --watch src src/index.ts dotenv_config_path=./.env.dev",
         "test": "set NODE_ENV=test&& DOTENV_CONFIG_PATH=./.env.test jest --watch --runInBand",
