@@ -20,7 +20,7 @@ const createUser = (payload: any, statusCode: number) => {
                         response.body !== null,
                 ).toBeTruthy();
                 let data = {};
-
+                console.log(response.body);
                 switch (payload.n) {
                     case 1:
                         USER._id = response.body.data._id;

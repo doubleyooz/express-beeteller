@@ -2,9 +2,8 @@ import { Request, Response } from 'express';
 import User, { IUser } from '../models/user.model';
 import { hashPassword } from '../utils/password.util';
 import { getMessage } from '../utils/message.util';
-import mongoose from 'mongoose';
 
-async function store(req: Request, res: Response) {
+const store = async (req: Request, res: Response) => {
     const { email, password }: IUser = req.body;
 
     const newUser: IUser = new User({
@@ -21,21 +20,18 @@ async function store(req: Request, res: Response) {
             });
         })
         .catch(err => {
-            if (err.name === 'MongoServerError' && err.code === 11000) {
-                //There was a duplicate key error
-                return res.status(400).json({
-                    message: getMessage('user.invalid.email.duplicate'),
-                    err: err,
-                });
-            }
             return res.status(400).json({
-                message: getMessage('default.badRequest'),
+                message: getMessage(
+                    err.name === 'MongoServerError' && err.code === 11000
+                        ? 'user.invalid.email.duplicate'
+                        : 'default.badRequest',
+                ),
                 err: err,
             });
         });
-}
+};
 
-async function list(req: Request, res: Response) {
+const list = async (req: Request, res: Response) => {
     const { skip } = req.body;
 
     User.find()
@@ -56,9 +52,9 @@ async function list(req: Request, res: Response) {
                 metadata: req.new_token,
             });
         });
-}
+};
 
-async function findOne(req: Request, res: Response) {
+const findOne = async (req: Request, res: Response) => {
     const { _id } = req.query;
 
     User.findById(_id)
@@ -81,9 +77,9 @@ async function findOne(req: Request, res: Response) {
                 .status(500)
                 .json({ err: err, message: getMessage('default.serverError') });
         });
-}
+};
 
-async function remove(req: Request, res: Response) {
+const remove = async (req: Request, res: Response) => {
     const { _id } = req.query;
     if (req.auth !== _id)
         return res.status(401).json({
@@ -117,6 +113,6 @@ async function remove(req: Request, res: Response) {
                 message: getMessage('default.serverError'),
             });
         });
-}
+};
 
 export default { store, findOne, list, remove };

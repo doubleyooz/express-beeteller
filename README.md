@@ -9,6 +9,8 @@ The application is deployed on heroku and is working https://beeteller.herokuapp
     "password": "tesSt233@1"
 }
 ```
+### For the future
+In order to use transaction I need to run the mongodb as standalone server, so that means I would to rethink this strutcure and at least break into a handful of microservices.
 
 ## Backend
 

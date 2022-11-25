@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
-dotenv.config({ path: '.env.dev' });
+dotenv.config({ path: '.env.test' });
 
 async function removeAllCollections() {
     const collections = Object.keys(mongoose.connection.collections);

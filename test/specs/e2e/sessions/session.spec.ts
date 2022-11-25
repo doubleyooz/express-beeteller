@@ -5,6 +5,7 @@ import { createUser } from '../../../helpers/user.helper';
 const itif = (condition: boolean) => (condition ? it : it.skip);
 
 describe('Sessions', () => {
+    console.log(USER);
     createUser({ email: USER.email, password: USER.password, n: 1 }, 200);
     describe('should accept', () => {
         signIn(USER.email, USER.password, 200);
