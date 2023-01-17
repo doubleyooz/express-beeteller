@@ -1,7 +1,8 @@
-# selecao-full-stack
-Desafio para seleção de Desenvolvedor Full Stack
+# BEETELLER
 
-The application is deployed on heroku and is working https://beeteller.herokuapp.com/login https://beeteller-api.herokuapp.com/, since the frontend application does not have a sign up page, I will let here the test credentials.
+The application is deployed and it's working
+front: https://master.d3d4v463tdokoh.amplifyapp.com/
+back: https://plant-quark-antarctopelta.glitch.me/, since the frontend application does not have a sign up page, I will let here the test credentials.
 
 ```js
 {
